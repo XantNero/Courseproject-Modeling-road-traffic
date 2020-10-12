@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.h
+Vector.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+Road.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.h
+
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.h
+vector
+-
+Vector.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.h
+
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/test.cpp
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+Vector.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+Road.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.h
+Car.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.h
+iostream
+-
+fstream
+-
+sstream
+-
+VertexBuffer.h
+/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.h
+

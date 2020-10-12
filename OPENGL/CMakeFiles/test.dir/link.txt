@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/test.dir/test.cpp.o CMakeFiles/test.dir/Vector.cpp.o CMakeFiles/test.dir/Road.cpp.o CMakeFiles/test.dir/Car.cpp.o CMakeFiles/test.dir/VertexBuffer.cpp.o  -o test  -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL -ldl -lGLEW -lGLU -lGL 
