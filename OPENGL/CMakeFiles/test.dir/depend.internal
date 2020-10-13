@@ -6,19 +6,56 @@ CMakeFiles/test.dir/Car.cpp.o
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+CMakeFiles/test.dir/IndexBuffer.cpp.o
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.cpp
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
+CMakeFiles/test.dir/Renderer.cpp.o
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.cpp
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
 CMakeFiles/test.dir/Road.cpp.o
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.cpp
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+CMakeFiles/test.dir/Shader.cpp.o
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.cpp
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
 CMakeFiles/test.dir/Vector.cpp.o
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.cpp
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+CMakeFiles/test.dir/VertexArray.cpp.o
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.cpp
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
 CMakeFiles/test.dir/VertexBuffer.cpp.o
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.cpp
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
+CMakeFiles/test.dir/VertexBufferLayout.cpp.o
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.cpp
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
+CMakeFiles/test.dir/debug.cpp.o
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.cpp
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
 CMakeFiles/test.dir/test.cpp.o
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.h
+ /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.h
  /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/test.cpp

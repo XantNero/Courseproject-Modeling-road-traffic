@@ -150,6 +150,60 @@ Car.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Car.cpp.s
 .PHONY : Car.cpp.s
 
+IndexBuffer.o: IndexBuffer.cpp.o
+
+.PHONY : IndexBuffer.o
+
+# target to build an object file
+IndexBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/IndexBuffer.cpp.o
+.PHONY : IndexBuffer.cpp.o
+
+IndexBuffer.i: IndexBuffer.cpp.i
+
+.PHONY : IndexBuffer.i
+
+# target to preprocess a source file
+IndexBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/IndexBuffer.cpp.i
+.PHONY : IndexBuffer.cpp.i
+
+IndexBuffer.s: IndexBuffer.cpp.s
+
+.PHONY : IndexBuffer.s
+
+# target to generate assembly for a file
+IndexBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/IndexBuffer.cpp.s
+.PHONY : IndexBuffer.cpp.s
+
+Renderer.o: Renderer.cpp.o
+
+.PHONY : Renderer.o
+
+# target to build an object file
+Renderer.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Renderer.cpp.o
+.PHONY : Renderer.cpp.o
+
+Renderer.i: Renderer.cpp.i
+
+.PHONY : Renderer.i
+
+# target to preprocess a source file
+Renderer.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Renderer.cpp.i
+.PHONY : Renderer.cpp.i
+
+Renderer.s: Renderer.cpp.s
+
+.PHONY : Renderer.s
+
+# target to generate assembly for a file
+Renderer.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Renderer.cpp.s
+.PHONY : Renderer.cpp.s
+
 Road.o: Road.cpp.o
 
 .PHONY : Road.o
@@ -176,6 +230,33 @@ Road.s: Road.cpp.s
 Road.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Road.cpp.s
 .PHONY : Road.cpp.s
+
+Shader.o: Shader.cpp.o
+
+.PHONY : Shader.o
+
+# target to build an object file
+Shader.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Shader.cpp.o
+.PHONY : Shader.cpp.o
+
+Shader.i: Shader.cpp.i
+
+.PHONY : Shader.i
+
+# target to preprocess a source file
+Shader.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Shader.cpp.i
+.PHONY : Shader.cpp.i
+
+Shader.s: Shader.cpp.s
+
+.PHONY : Shader.s
+
+# target to generate assembly for a file
+Shader.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Shader.cpp.s
+.PHONY : Shader.cpp.s
 
 Vector.o: Vector.cpp.o
 
@@ -204,6 +285,33 @@ Vector.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Vector.cpp.s
 .PHONY : Vector.cpp.s
 
+VertexArray.o: VertexArray.cpp.o
+
+.PHONY : VertexArray.o
+
+# target to build an object file
+VertexArray.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexArray.cpp.o
+.PHONY : VertexArray.cpp.o
+
+VertexArray.i: VertexArray.cpp.i
+
+.PHONY : VertexArray.i
+
+# target to preprocess a source file
+VertexArray.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexArray.cpp.i
+.PHONY : VertexArray.cpp.i
+
+VertexArray.s: VertexArray.cpp.s
+
+.PHONY : VertexArray.s
+
+# target to generate assembly for a file
+VertexArray.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexArray.cpp.s
+.PHONY : VertexArray.cpp.s
+
 VertexBuffer.o: VertexBuffer.cpp.o
 
 .PHONY : VertexBuffer.o
@@ -230,6 +338,60 @@ VertexBuffer.s: VertexBuffer.cpp.s
 VertexBuffer.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBuffer.cpp.s
 .PHONY : VertexBuffer.cpp.s
+
+VertexBufferLayout.o: VertexBufferLayout.cpp.o
+
+.PHONY : VertexBufferLayout.o
+
+# target to build an object file
+VertexBufferLayout.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBufferLayout.cpp.o
+.PHONY : VertexBufferLayout.cpp.o
+
+VertexBufferLayout.i: VertexBufferLayout.cpp.i
+
+.PHONY : VertexBufferLayout.i
+
+# target to preprocess a source file
+VertexBufferLayout.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBufferLayout.cpp.i
+.PHONY : VertexBufferLayout.cpp.i
+
+VertexBufferLayout.s: VertexBufferLayout.cpp.s
+
+.PHONY : VertexBufferLayout.s
+
+# target to generate assembly for a file
+VertexBufferLayout.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBufferLayout.cpp.s
+.PHONY : VertexBufferLayout.cpp.s
+
+debug.o: debug.cpp.o
+
+.PHONY : debug.o
+
+# target to build an object file
+debug.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/debug.cpp.o
+.PHONY : debug.cpp.o
+
+debug.i: debug.cpp.i
+
+.PHONY : debug.i
+
+# target to preprocess a source file
+debug.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/debug.cpp.i
+.PHONY : debug.cpp.i
+
+debug.s: debug.cpp.s
+
+.PHONY : debug.s
+
+# target to generate assembly for a file
+debug.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/debug.cpp.s
+.PHONY : debug.cpp.s
 
 test.o: test.cpp.o
 
@@ -270,15 +432,33 @@ help:
 	@echo "... Car.o"
 	@echo "... Car.i"
 	@echo "... Car.s"
+	@echo "... IndexBuffer.o"
+	@echo "... IndexBuffer.i"
+	@echo "... IndexBuffer.s"
+	@echo "... Renderer.o"
+	@echo "... Renderer.i"
+	@echo "... Renderer.s"
 	@echo "... Road.o"
 	@echo "... Road.i"
 	@echo "... Road.s"
+	@echo "... Shader.o"
+	@echo "... Shader.i"
+	@echo "... Shader.s"
 	@echo "... Vector.o"
 	@echo "... Vector.i"
 	@echo "... Vector.s"
+	@echo "... VertexArray.o"
+	@echo "... VertexArray.i"
+	@echo "... VertexArray.s"
 	@echo "... VertexBuffer.o"
 	@echo "... VertexBuffer.i"
 	@echo "... VertexBuffer.s"
+	@echo "... VertexBufferLayout.o"
+	@echo "... VertexBufferLayout.i"
+	@echo "... VertexBufferLayout.s"
+	@echo "... debug.o"
+	@echo "... debug.i"
+	@echo "... debug.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"

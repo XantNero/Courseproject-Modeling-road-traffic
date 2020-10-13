@@ -9,6 +9,15 @@ add_executable(test
     Road.h Road.cpp
     Car.h Car.cpp
     VertexBuffer.h VertexBuffer.cpp
+    IndexBuffer.h IndexBuffer.cpp
+    VertexBufferLayout.h VertexBufferLayout.cpp
+    VertexArray.h VertexArray.cpp
+    debug.h debug.cpp
+    Shader.h Shader.cpp
+    Renderer.h Renderer.cpp
 )
 
 target_link_libraries(test -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
+
+set(CMAKE_CXX_FLAGS "-g")
+

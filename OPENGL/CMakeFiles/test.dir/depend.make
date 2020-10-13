@@ -6,19 +6,56 @@ CMakeFiles/test.dir/Car.cpp.o: Car.h
 CMakeFiles/test.dir/Car.cpp.o: Road.h
 CMakeFiles/test.dir/Car.cpp.o: Vector.h
 
+CMakeFiles/test.dir/IndexBuffer.cpp.o: IndexBuffer.cpp
+CMakeFiles/test.dir/IndexBuffer.cpp.o: IndexBuffer.h
+CMakeFiles/test.dir/IndexBuffer.cpp.o: debug.h
+
+CMakeFiles/test.dir/Renderer.cpp.o: IndexBuffer.h
+CMakeFiles/test.dir/Renderer.cpp.o: Renderer.cpp
+CMakeFiles/test.dir/Renderer.cpp.o: Renderer.h
+CMakeFiles/test.dir/Renderer.cpp.o: Shader.h
+CMakeFiles/test.dir/Renderer.cpp.o: VertexArray.h
+CMakeFiles/test.dir/Renderer.cpp.o: VertexBuffer.h
+CMakeFiles/test.dir/Renderer.cpp.o: VertexBufferLayout.h
+CMakeFiles/test.dir/Renderer.cpp.o: debug.h
+
 CMakeFiles/test.dir/Road.cpp.o: Road.cpp
 CMakeFiles/test.dir/Road.cpp.o: Road.h
 CMakeFiles/test.dir/Road.cpp.o: Vector.h
 
+CMakeFiles/test.dir/Shader.cpp.o: Shader.cpp
+CMakeFiles/test.dir/Shader.cpp.o: Shader.h
+CMakeFiles/test.dir/Shader.cpp.o: debug.h
+
 CMakeFiles/test.dir/Vector.cpp.o: Vector.cpp
 CMakeFiles/test.dir/Vector.cpp.o: Vector.h
 
+CMakeFiles/test.dir/VertexArray.cpp.o: VertexArray.cpp
+CMakeFiles/test.dir/VertexArray.cpp.o: VertexArray.h
+CMakeFiles/test.dir/VertexArray.cpp.o: VertexBuffer.h
+CMakeFiles/test.dir/VertexArray.cpp.o: VertexBufferLayout.h
+CMakeFiles/test.dir/VertexArray.cpp.o: debug.h
+
 CMakeFiles/test.dir/VertexBuffer.cpp.o: VertexBuffer.cpp
 CMakeFiles/test.dir/VertexBuffer.cpp.o: VertexBuffer.h
+CMakeFiles/test.dir/VertexBuffer.cpp.o: debug.h
+
+CMakeFiles/test.dir/VertexBufferLayout.cpp.o: VertexBufferLayout.cpp
+CMakeFiles/test.dir/VertexBufferLayout.cpp.o: VertexBufferLayout.h
+CMakeFiles/test.dir/VertexBufferLayout.cpp.o: debug.h
+
+CMakeFiles/test.dir/debug.cpp.o: debug.cpp
+CMakeFiles/test.dir/debug.cpp.o: debug.h
 
 CMakeFiles/test.dir/test.cpp.o: Car.h
+CMakeFiles/test.dir/test.cpp.o: IndexBuffer.h
+CMakeFiles/test.dir/test.cpp.o: Renderer.h
 CMakeFiles/test.dir/test.cpp.o: Road.h
+CMakeFiles/test.dir/test.cpp.o: Shader.h
 CMakeFiles/test.dir/test.cpp.o: Vector.h
+CMakeFiles/test.dir/test.cpp.o: VertexArray.h
 CMakeFiles/test.dir/test.cpp.o: VertexBuffer.h
+CMakeFiles/test.dir/test.cpp.o: VertexBufferLayout.h
+CMakeFiles/test.dir/test.cpp.o: debug.h
 CMakeFiles/test.dir/test.cpp.o: test.cpp
 

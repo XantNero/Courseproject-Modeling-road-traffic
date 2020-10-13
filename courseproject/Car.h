@@ -1,6 +1,7 @@
 #ifndef _CAR_H_
 #define _CAR_H_
 #include "Vector.h"
+#include "Road.h"
 class Car
 {
 private:
