@@ -123,302 +123,383 @@ test/fast:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
-Car.o: Car.cpp.o
+src/Car.o: src/Car.cpp.o
 
-.PHONY : Car.o
-
-# target to build an object file
-Car.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Car.cpp.o
-.PHONY : Car.cpp.o
-
-Car.i: Car.cpp.i
-
-.PHONY : Car.i
-
-# target to preprocess a source file
-Car.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Car.cpp.i
-.PHONY : Car.cpp.i
-
-Car.s: Car.cpp.s
-
-.PHONY : Car.s
-
-# target to generate assembly for a file
-Car.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Car.cpp.s
-.PHONY : Car.cpp.s
-
-IndexBuffer.o: IndexBuffer.cpp.o
-
-.PHONY : IndexBuffer.o
+.PHONY : src/Car.o
 
 # target to build an object file
-IndexBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/IndexBuffer.cpp.o
-.PHONY : IndexBuffer.cpp.o
+src/Car.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Car.cpp.o
+.PHONY : src/Car.cpp.o
 
-IndexBuffer.i: IndexBuffer.cpp.i
+src/Car.i: src/Car.cpp.i
 
-.PHONY : IndexBuffer.i
+.PHONY : src/Car.i
 
 # target to preprocess a source file
-IndexBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/IndexBuffer.cpp.i
-.PHONY : IndexBuffer.cpp.i
+src/Car.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Car.cpp.i
+.PHONY : src/Car.cpp.i
 
-IndexBuffer.s: IndexBuffer.cpp.s
+src/Car.s: src/Car.cpp.s
 
-.PHONY : IndexBuffer.s
+.PHONY : src/Car.s
 
 # target to generate assembly for a file
-IndexBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/IndexBuffer.cpp.s
-.PHONY : IndexBuffer.cpp.s
+src/Car.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Car.cpp.s
+.PHONY : src/Car.cpp.s
 
-Renderer.o: Renderer.cpp.o
+src/CarGenerator.o: src/CarGenerator.cpp.o
 
-.PHONY : Renderer.o
+.PHONY : src/CarGenerator.o
 
 # target to build an object file
-Renderer.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Renderer.cpp.o
-.PHONY : Renderer.cpp.o
+src/CarGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarGenerator.cpp.o
+.PHONY : src/CarGenerator.cpp.o
 
-Renderer.i: Renderer.cpp.i
+src/CarGenerator.i: src/CarGenerator.cpp.i
 
-.PHONY : Renderer.i
+.PHONY : src/CarGenerator.i
 
 # target to preprocess a source file
-Renderer.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Renderer.cpp.i
-.PHONY : Renderer.cpp.i
+src/CarGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarGenerator.cpp.i
+.PHONY : src/CarGenerator.cpp.i
 
-Renderer.s: Renderer.cpp.s
+src/CarGenerator.s: src/CarGenerator.cpp.s
 
-.PHONY : Renderer.s
+.PHONY : src/CarGenerator.s
 
 # target to generate assembly for a file
-Renderer.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Renderer.cpp.s
-.PHONY : Renderer.cpp.s
+src/CarGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarGenerator.cpp.s
+.PHONY : src/CarGenerator.cpp.s
 
-Road.o: Road.cpp.o
+src/IndexBuffer.o: src/IndexBuffer.cpp.o
 
-.PHONY : Road.o
+.PHONY : src/IndexBuffer.o
 
 # target to build an object file
-Road.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Road.cpp.o
-.PHONY : Road.cpp.o
+src/IndexBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/IndexBuffer.cpp.o
+.PHONY : src/IndexBuffer.cpp.o
 
-Road.i: Road.cpp.i
+src/IndexBuffer.i: src/IndexBuffer.cpp.i
 
-.PHONY : Road.i
+.PHONY : src/IndexBuffer.i
 
 # target to preprocess a source file
-Road.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Road.cpp.i
-.PHONY : Road.cpp.i
+src/IndexBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/IndexBuffer.cpp.i
+.PHONY : src/IndexBuffer.cpp.i
 
-Road.s: Road.cpp.s
+src/IndexBuffer.s: src/IndexBuffer.cpp.s
 
-.PHONY : Road.s
+.PHONY : src/IndexBuffer.s
 
 # target to generate assembly for a file
-Road.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Road.cpp.s
-.PHONY : Road.cpp.s
+src/IndexBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/IndexBuffer.cpp.s
+.PHONY : src/IndexBuffer.cpp.s
 
-Shader.o: Shader.cpp.o
+src/Renderer.o: src/Renderer.cpp.o
 
-.PHONY : Shader.o
+.PHONY : src/Renderer.o
 
 # target to build an object file
-Shader.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Shader.cpp.o
-.PHONY : Shader.cpp.o
+src/Renderer.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Renderer.cpp.o
+.PHONY : src/Renderer.cpp.o
 
-Shader.i: Shader.cpp.i
+src/Renderer.i: src/Renderer.cpp.i
 
-.PHONY : Shader.i
+.PHONY : src/Renderer.i
 
 # target to preprocess a source file
-Shader.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Shader.cpp.i
-.PHONY : Shader.cpp.i
+src/Renderer.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Renderer.cpp.i
+.PHONY : src/Renderer.cpp.i
 
-Shader.s: Shader.cpp.s
+src/Renderer.s: src/Renderer.cpp.s
 
-.PHONY : Shader.s
+.PHONY : src/Renderer.s
 
 # target to generate assembly for a file
-Shader.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Shader.cpp.s
-.PHONY : Shader.cpp.s
+src/Renderer.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Renderer.cpp.s
+.PHONY : src/Renderer.cpp.s
 
-Vector.o: Vector.cpp.o
+src/Road.o: src/Road.cpp.o
 
-.PHONY : Vector.o
+.PHONY : src/Road.o
 
 # target to build an object file
-Vector.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Vector.cpp.o
-.PHONY : Vector.cpp.o
+src/Road.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Road.cpp.o
+.PHONY : src/Road.cpp.o
 
-Vector.i: Vector.cpp.i
+src/Road.i: src/Road.cpp.i
 
-.PHONY : Vector.i
+.PHONY : src/Road.i
 
 # target to preprocess a source file
-Vector.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Vector.cpp.i
-.PHONY : Vector.cpp.i
+src/Road.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Road.cpp.i
+.PHONY : src/Road.cpp.i
 
-Vector.s: Vector.cpp.s
+src/Road.s: src/Road.cpp.s
 
-.PHONY : Vector.s
+.PHONY : src/Road.s
 
 # target to generate assembly for a file
-Vector.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Vector.cpp.s
-.PHONY : Vector.cpp.s
+src/Road.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Road.cpp.s
+.PHONY : src/Road.cpp.s
 
-VertexArray.o: VertexArray.cpp.o
+src/Shader.o: src/Shader.cpp.o
 
-.PHONY : VertexArray.o
+.PHONY : src/Shader.o
 
 # target to build an object file
-VertexArray.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexArray.cpp.o
-.PHONY : VertexArray.cpp.o
+src/Shader.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Shader.cpp.o
+.PHONY : src/Shader.cpp.o
 
-VertexArray.i: VertexArray.cpp.i
+src/Shader.i: src/Shader.cpp.i
 
-.PHONY : VertexArray.i
+.PHONY : src/Shader.i
 
 # target to preprocess a source file
-VertexArray.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexArray.cpp.i
-.PHONY : VertexArray.cpp.i
+src/Shader.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Shader.cpp.i
+.PHONY : src/Shader.cpp.i
 
-VertexArray.s: VertexArray.cpp.s
+src/Shader.s: src/Shader.cpp.s
 
-.PHONY : VertexArray.s
+.PHONY : src/Shader.s
 
 # target to generate assembly for a file
-VertexArray.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexArray.cpp.s
-.PHONY : VertexArray.cpp.s
+src/Shader.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Shader.cpp.s
+.PHONY : src/Shader.cpp.s
 
-VertexBuffer.o: VertexBuffer.cpp.o
+src/Texture.o: src/Texture.cpp.o
 
-.PHONY : VertexBuffer.o
+.PHONY : src/Texture.o
 
 # target to build an object file
-VertexBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBuffer.cpp.o
-.PHONY : VertexBuffer.cpp.o
+src/Texture.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Texture.cpp.o
+.PHONY : src/Texture.cpp.o
 
-VertexBuffer.i: VertexBuffer.cpp.i
+src/Texture.i: src/Texture.cpp.i
 
-.PHONY : VertexBuffer.i
+.PHONY : src/Texture.i
 
 # target to preprocess a source file
-VertexBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBuffer.cpp.i
-.PHONY : VertexBuffer.cpp.i
+src/Texture.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Texture.cpp.i
+.PHONY : src/Texture.cpp.i
 
-VertexBuffer.s: VertexBuffer.cpp.s
+src/Texture.s: src/Texture.cpp.s
 
-.PHONY : VertexBuffer.s
+.PHONY : src/Texture.s
 
 # target to generate assembly for a file
-VertexBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBuffer.cpp.s
-.PHONY : VertexBuffer.cpp.s
+src/Texture.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Texture.cpp.s
+.PHONY : src/Texture.cpp.s
 
-VertexBufferLayout.o: VertexBufferLayout.cpp.o
+src/Vector.o: src/Vector.cpp.o
 
-.PHONY : VertexBufferLayout.o
+.PHONY : src/Vector.o
 
 # target to build an object file
-VertexBufferLayout.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBufferLayout.cpp.o
-.PHONY : VertexBufferLayout.cpp.o
+src/Vector.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Vector.cpp.o
+.PHONY : src/Vector.cpp.o
 
-VertexBufferLayout.i: VertexBufferLayout.cpp.i
+src/Vector.i: src/Vector.cpp.i
 
-.PHONY : VertexBufferLayout.i
+.PHONY : src/Vector.i
 
 # target to preprocess a source file
-VertexBufferLayout.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBufferLayout.cpp.i
-.PHONY : VertexBufferLayout.cpp.i
+src/Vector.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Vector.cpp.i
+.PHONY : src/Vector.cpp.i
 
-VertexBufferLayout.s: VertexBufferLayout.cpp.s
+src/Vector.s: src/Vector.cpp.s
 
-.PHONY : VertexBufferLayout.s
+.PHONY : src/Vector.s
 
 # target to generate assembly for a file
-VertexBufferLayout.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/VertexBufferLayout.cpp.s
-.PHONY : VertexBufferLayout.cpp.s
+src/Vector.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Vector.cpp.s
+.PHONY : src/Vector.cpp.s
 
-debug.o: debug.cpp.o
+src/VertexArray.o: src/VertexArray.cpp.o
 
-.PHONY : debug.o
+.PHONY : src/VertexArray.o
 
 # target to build an object file
-debug.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/debug.cpp.o
-.PHONY : debug.cpp.o
+src/VertexArray.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexArray.cpp.o
+.PHONY : src/VertexArray.cpp.o
 
-debug.i: debug.cpp.i
+src/VertexArray.i: src/VertexArray.cpp.i
 
-.PHONY : debug.i
+.PHONY : src/VertexArray.i
 
 # target to preprocess a source file
-debug.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/debug.cpp.i
-.PHONY : debug.cpp.i
+src/VertexArray.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexArray.cpp.i
+.PHONY : src/VertexArray.cpp.i
 
-debug.s: debug.cpp.s
+src/VertexArray.s: src/VertexArray.cpp.s
 
-.PHONY : debug.s
+.PHONY : src/VertexArray.s
 
 # target to generate assembly for a file
-debug.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/debug.cpp.s
-.PHONY : debug.cpp.s
+src/VertexArray.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexArray.cpp.s
+.PHONY : src/VertexArray.cpp.s
 
-test.o: test.cpp.o
+src/VertexBuffer.o: src/VertexBuffer.cpp.o
 
-.PHONY : test.o
+.PHONY : src/VertexBuffer.o
 
 # target to build an object file
-test.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.o
-.PHONY : test.cpp.o
+src/VertexBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexBuffer.cpp.o
+.PHONY : src/VertexBuffer.cpp.o
 
-test.i: test.cpp.i
+src/VertexBuffer.i: src/VertexBuffer.cpp.i
 
-.PHONY : test.i
+.PHONY : src/VertexBuffer.i
 
 # target to preprocess a source file
-test.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.i
-.PHONY : test.cpp.i
+src/VertexBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexBuffer.cpp.i
+.PHONY : src/VertexBuffer.cpp.i
 
-test.s: test.cpp.s
+src/VertexBuffer.s: src/VertexBuffer.cpp.s
 
-.PHONY : test.s
+.PHONY : src/VertexBuffer.s
 
 # target to generate assembly for a file
-test.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
-.PHONY : test.cpp.s
+src/VertexBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexBuffer.cpp.s
+.PHONY : src/VertexBuffer.cpp.s
+
+src/VertexBufferLayout.o: src/VertexBufferLayout.cpp.o
+
+.PHONY : src/VertexBufferLayout.o
+
+# target to build an object file
+src/VertexBufferLayout.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o
+.PHONY : src/VertexBufferLayout.cpp.o
+
+src/VertexBufferLayout.i: src/VertexBufferLayout.cpp.i
+
+.PHONY : src/VertexBufferLayout.i
+
+# target to preprocess a source file
+src/VertexBufferLayout.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexBufferLayout.cpp.i
+.PHONY : src/VertexBufferLayout.cpp.i
+
+src/VertexBufferLayout.s: src/VertexBufferLayout.cpp.s
+
+.PHONY : src/VertexBufferLayout.s
+
+# target to generate assembly for a file
+src/VertexBufferLayout.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/VertexBufferLayout.cpp.s
+.PHONY : src/VertexBufferLayout.cpp.s
+
+src/debug.o: src/debug.cpp.o
+
+.PHONY : src/debug.o
+
+# target to build an object file
+src/debug.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/debug.cpp.o
+.PHONY : src/debug.cpp.o
+
+src/debug.i: src/debug.cpp.i
+
+.PHONY : src/debug.i
+
+# target to preprocess a source file
+src/debug.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/debug.cpp.i
+.PHONY : src/debug.cpp.i
+
+src/debug.s: src/debug.cpp.s
+
+.PHONY : src/debug.s
+
+# target to generate assembly for a file
+src/debug.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/debug.cpp.s
+.PHONY : src/debug.cpp.s
+
+src/test.o: src/test.cpp.o
+
+.PHONY : src/test.o
+
+# target to build an object file
+src/test.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/test.cpp.o
+.PHONY : src/test.cpp.o
+
+src/test.i: src/test.cpp.i
+
+.PHONY : src/test.i
+
+# target to preprocess a source file
+src/test.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/test.cpp.i
+.PHONY : src/test.cpp.i
+
+src/test.s: src/test.cpp.s
+
+.PHONY : src/test.s
+
+# target to generate assembly for a file
+src/test.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/test.cpp.s
+.PHONY : src/test.cpp.s
+
+src/vendor/stb_image/stb_image.o: src/vendor/stb_image/stb_image.cpp.o
+
+.PHONY : src/vendor/stb_image/stb_image.o
+
+# target to build an object file
+src/vendor/stb_image/stb_image.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o
+.PHONY : src/vendor/stb_image/stb_image.cpp.o
+
+src/vendor/stb_image/stb_image.i: src/vendor/stb_image/stb_image.cpp.i
+
+.PHONY : src/vendor/stb_image/stb_image.i
+
+# target to preprocess a source file
+src/vendor/stb_image/stb_image.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.i
+.PHONY : src/vendor/stb_image/stb_image.cpp.i
+
+src/vendor/stb_image/stb_image.s: src/vendor/stb_image/stb_image.cpp.s
+
+.PHONY : src/vendor/stb_image/stb_image.s
+
+# target to generate assembly for a file
+src/vendor/stb_image/stb_image.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.s
+.PHONY : src/vendor/stb_image/stb_image.cpp.s
 
 # Help Target
 help:
@@ -429,39 +510,48 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... Car.o"
-	@echo "... Car.i"
-	@echo "... Car.s"
-	@echo "... IndexBuffer.o"
-	@echo "... IndexBuffer.i"
-	@echo "... IndexBuffer.s"
-	@echo "... Renderer.o"
-	@echo "... Renderer.i"
-	@echo "... Renderer.s"
-	@echo "... Road.o"
-	@echo "... Road.i"
-	@echo "... Road.s"
-	@echo "... Shader.o"
-	@echo "... Shader.i"
-	@echo "... Shader.s"
-	@echo "... Vector.o"
-	@echo "... Vector.i"
-	@echo "... Vector.s"
-	@echo "... VertexArray.o"
-	@echo "... VertexArray.i"
-	@echo "... VertexArray.s"
-	@echo "... VertexBuffer.o"
-	@echo "... VertexBuffer.i"
-	@echo "... VertexBuffer.s"
-	@echo "... VertexBufferLayout.o"
-	@echo "... VertexBufferLayout.i"
-	@echo "... VertexBufferLayout.s"
-	@echo "... debug.o"
-	@echo "... debug.i"
-	@echo "... debug.s"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
+	@echo "... src/Car.o"
+	@echo "... src/Car.i"
+	@echo "... src/Car.s"
+	@echo "... src/CarGenerator.o"
+	@echo "... src/CarGenerator.i"
+	@echo "... src/CarGenerator.s"
+	@echo "... src/IndexBuffer.o"
+	@echo "... src/IndexBuffer.i"
+	@echo "... src/IndexBuffer.s"
+	@echo "... src/Renderer.o"
+	@echo "... src/Renderer.i"
+	@echo "... src/Renderer.s"
+	@echo "... src/Road.o"
+	@echo "... src/Road.i"
+	@echo "... src/Road.s"
+	@echo "... src/Shader.o"
+	@echo "... src/Shader.i"
+	@echo "... src/Shader.s"
+	@echo "... src/Texture.o"
+	@echo "... src/Texture.i"
+	@echo "... src/Texture.s"
+	@echo "... src/Vector.o"
+	@echo "... src/Vector.i"
+	@echo "... src/Vector.s"
+	@echo "... src/VertexArray.o"
+	@echo "... src/VertexArray.i"
+	@echo "... src/VertexArray.s"
+	@echo "... src/VertexBuffer.o"
+	@echo "... src/VertexBuffer.i"
+	@echo "... src/VertexBuffer.s"
+	@echo "... src/VertexBufferLayout.o"
+	@echo "... src/VertexBufferLayout.i"
+	@echo "... src/VertexBufferLayout.s"
+	@echo "... src/debug.o"
+	@echo "... src/debug.i"
+	@echo "... src/debug.s"
+	@echo "... src/test.o"
+	@echo "... src/test.i"
+	@echo "... src/test.s"
+	@echo "... src/vendor/stb_image/stb_image.o"
+	@echo "... src/vendor/stb_image/stb_image.i"
+	@echo "... src/vendor/stb_image/stb_image.s"
 .PHONY : help
 
 

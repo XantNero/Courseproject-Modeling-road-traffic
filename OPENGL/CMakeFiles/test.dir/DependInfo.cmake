@@ -4,17 +4,20 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/Car.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/IndexBuffer.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/Renderer.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/Road.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/Shader.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/Vector.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/VertexArray.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/VertexBuffer.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/VertexBufferLayout.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/debug.cpp.o"
-  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/test.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/test.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Car.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Car.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/CarGenerator.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/CarGenerator.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/IndexBuffer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/IndexBuffer.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Renderer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Renderer.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Road.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Road.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Shader.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Shader.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Texture.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Texture.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Vector.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Vector.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexArray.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/VertexArray.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBuffer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/VertexBuffer.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBufferLayout.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/debug.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/debug.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/test.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/test.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/vendor/stb_image/stb_image.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

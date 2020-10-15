@@ -57,180 +57,225 @@ include CMakeFiles/test.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test.dir/flags.make
 
-CMakeFiles/test.dir/test.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/test.cpp.o: test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/test.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/test.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/test.cpp
+CMakeFiles/test.dir/src/test.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/test.cpp.o: src/test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/src/test.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/test.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/test.cpp
 
-CMakeFiles/test.dir/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/test.cpp > CMakeFiles/test.dir/test.cpp.i
+CMakeFiles/test.dir/src/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/test.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/test.cpp > CMakeFiles/test.dir/src/test.cpp.i
 
-CMakeFiles/test.dir/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/test.cpp -o CMakeFiles/test.dir/test.cpp.s
+CMakeFiles/test.dir/src/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/test.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/test.cpp -o CMakeFiles/test.dir/src/test.cpp.s
 
-CMakeFiles/test.dir/Vector.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/Vector.cpp.o: Vector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/Vector.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/Vector.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.cpp
+CMakeFiles/test.dir/src/Vector.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/Vector.cpp.o: src/Vector.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/src/Vector.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/Vector.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Vector.cpp
 
-CMakeFiles/test.dir/Vector.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/Vector.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.cpp > CMakeFiles/test.dir/Vector.cpp.i
+CMakeFiles/test.dir/src/Vector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Vector.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Vector.cpp > CMakeFiles/test.dir/src/Vector.cpp.i
 
-CMakeFiles/test.dir/Vector.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Vector.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Vector.cpp -o CMakeFiles/test.dir/Vector.cpp.s
+CMakeFiles/test.dir/src/Vector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Vector.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Vector.cpp -o CMakeFiles/test.dir/src/Vector.cpp.s
 
-CMakeFiles/test.dir/Road.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/Road.cpp.o: Road.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test.dir/Road.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/Road.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.cpp
+CMakeFiles/test.dir/src/Road.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/Road.cpp.o: src/Road.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test.dir/src/Road.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/Road.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Road.cpp
 
-CMakeFiles/test.dir/Road.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/Road.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.cpp > CMakeFiles/test.dir/Road.cpp.i
+CMakeFiles/test.dir/src/Road.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Road.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Road.cpp > CMakeFiles/test.dir/src/Road.cpp.i
 
-CMakeFiles/test.dir/Road.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Road.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Road.cpp -o CMakeFiles/test.dir/Road.cpp.s
+CMakeFiles/test.dir/src/Road.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Road.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Road.cpp -o CMakeFiles/test.dir/src/Road.cpp.s
 
-CMakeFiles/test.dir/Car.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/Car.cpp.o: Car.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test.dir/Car.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/Car.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.cpp
+CMakeFiles/test.dir/src/Car.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/Car.cpp.o: src/Car.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test.dir/src/Car.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/Car.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Car.cpp
 
-CMakeFiles/test.dir/Car.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/Car.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.cpp > CMakeFiles/test.dir/Car.cpp.i
+CMakeFiles/test.dir/src/Car.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Car.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Car.cpp > CMakeFiles/test.dir/src/Car.cpp.i
 
-CMakeFiles/test.dir/Car.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Car.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Car.cpp -o CMakeFiles/test.dir/Car.cpp.s
+CMakeFiles/test.dir/src/Car.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Car.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Car.cpp -o CMakeFiles/test.dir/src/Car.cpp.s
 
-CMakeFiles/test.dir/VertexBuffer.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/VertexBuffer.cpp.o: VertexBuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test.dir/VertexBuffer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/VertexBuffer.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.cpp
+CMakeFiles/test.dir/src/VertexBuffer.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/VertexBuffer.cpp.o: src/VertexBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test.dir/src/VertexBuffer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/VertexBuffer.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBuffer.cpp
 
-CMakeFiles/test.dir/VertexBuffer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/VertexBuffer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.cpp > CMakeFiles/test.dir/VertexBuffer.cpp.i
+CMakeFiles/test.dir/src/VertexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/VertexBuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBuffer.cpp > CMakeFiles/test.dir/src/VertexBuffer.cpp.i
 
-CMakeFiles/test.dir/VertexBuffer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/VertexBuffer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBuffer.cpp -o CMakeFiles/test.dir/VertexBuffer.cpp.s
+CMakeFiles/test.dir/src/VertexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/VertexBuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBuffer.cpp -o CMakeFiles/test.dir/src/VertexBuffer.cpp.s
 
-CMakeFiles/test.dir/IndexBuffer.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/IndexBuffer.cpp.o: IndexBuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test.dir/IndexBuffer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/IndexBuffer.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.cpp
+CMakeFiles/test.dir/src/IndexBuffer.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/IndexBuffer.cpp.o: src/IndexBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test.dir/src/IndexBuffer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/IndexBuffer.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/IndexBuffer.cpp
 
-CMakeFiles/test.dir/IndexBuffer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/IndexBuffer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.cpp > CMakeFiles/test.dir/IndexBuffer.cpp.i
+CMakeFiles/test.dir/src/IndexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/IndexBuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/IndexBuffer.cpp > CMakeFiles/test.dir/src/IndexBuffer.cpp.i
 
-CMakeFiles/test.dir/IndexBuffer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/IndexBuffer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/IndexBuffer.cpp -o CMakeFiles/test.dir/IndexBuffer.cpp.s
+CMakeFiles/test.dir/src/IndexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/IndexBuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/IndexBuffer.cpp -o CMakeFiles/test.dir/src/IndexBuffer.cpp.s
 
-CMakeFiles/test.dir/VertexBufferLayout.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/VertexBufferLayout.cpp.o: VertexBufferLayout.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test.dir/VertexBufferLayout.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/VertexBufferLayout.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.cpp
+CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o: src/VertexBufferLayout.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBufferLayout.cpp
 
-CMakeFiles/test.dir/VertexBufferLayout.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/VertexBufferLayout.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.cpp > CMakeFiles/test.dir/VertexBufferLayout.cpp.i
+CMakeFiles/test.dir/src/VertexBufferLayout.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/VertexBufferLayout.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBufferLayout.cpp > CMakeFiles/test.dir/src/VertexBufferLayout.cpp.i
 
-CMakeFiles/test.dir/VertexBufferLayout.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/VertexBufferLayout.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexBufferLayout.cpp -o CMakeFiles/test.dir/VertexBufferLayout.cpp.s
+CMakeFiles/test.dir/src/VertexBufferLayout.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/VertexBufferLayout.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexBufferLayout.cpp -o CMakeFiles/test.dir/src/VertexBufferLayout.cpp.s
 
-CMakeFiles/test.dir/VertexArray.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/VertexArray.cpp.o: VertexArray.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test.dir/VertexArray.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/VertexArray.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.cpp
+CMakeFiles/test.dir/src/VertexArray.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/VertexArray.cpp.o: src/VertexArray.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test.dir/src/VertexArray.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/VertexArray.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexArray.cpp
 
-CMakeFiles/test.dir/VertexArray.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/VertexArray.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.cpp > CMakeFiles/test.dir/VertexArray.cpp.i
+CMakeFiles/test.dir/src/VertexArray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/VertexArray.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexArray.cpp > CMakeFiles/test.dir/src/VertexArray.cpp.i
 
-CMakeFiles/test.dir/VertexArray.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/VertexArray.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/VertexArray.cpp -o CMakeFiles/test.dir/VertexArray.cpp.s
+CMakeFiles/test.dir/src/VertexArray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/VertexArray.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/VertexArray.cpp -o CMakeFiles/test.dir/src/VertexArray.cpp.s
 
-CMakeFiles/test.dir/debug.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/debug.cpp.o: debug.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test.dir/debug.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/debug.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.cpp
+CMakeFiles/test.dir/src/debug.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/debug.cpp.o: src/debug.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test.dir/src/debug.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/debug.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/debug.cpp
 
-CMakeFiles/test.dir/debug.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/debug.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.cpp > CMakeFiles/test.dir/debug.cpp.i
+CMakeFiles/test.dir/src/debug.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/debug.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/debug.cpp > CMakeFiles/test.dir/src/debug.cpp.i
 
-CMakeFiles/test.dir/debug.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/debug.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/debug.cpp -o CMakeFiles/test.dir/debug.cpp.s
+CMakeFiles/test.dir/src/debug.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/debug.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/debug.cpp -o CMakeFiles/test.dir/src/debug.cpp.s
 
-CMakeFiles/test.dir/Shader.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/Shader.cpp.o: Shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/test.dir/Shader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/Shader.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.cpp
+CMakeFiles/test.dir/src/Shader.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/Shader.cpp.o: src/Shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/test.dir/src/Shader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/Shader.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Shader.cpp
 
-CMakeFiles/test.dir/Shader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/Shader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.cpp > CMakeFiles/test.dir/Shader.cpp.i
+CMakeFiles/test.dir/src/Shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Shader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Shader.cpp > CMakeFiles/test.dir/src/Shader.cpp.i
 
-CMakeFiles/test.dir/Shader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Shader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Shader.cpp -o CMakeFiles/test.dir/Shader.cpp.s
+CMakeFiles/test.dir/src/Shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Shader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Shader.cpp -o CMakeFiles/test.dir/src/Shader.cpp.s
 
-CMakeFiles/test.dir/Renderer.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/Renderer.cpp.o: Renderer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/test.dir/Renderer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/Renderer.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.cpp
+CMakeFiles/test.dir/src/Renderer.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/Renderer.cpp.o: src/Renderer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/test.dir/src/Renderer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/Renderer.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Renderer.cpp
 
-CMakeFiles/test.dir/Renderer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/Renderer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.cpp > CMakeFiles/test.dir/Renderer.cpp.i
+CMakeFiles/test.dir/src/Renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Renderer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Renderer.cpp > CMakeFiles/test.dir/src/Renderer.cpp.i
 
-CMakeFiles/test.dir/Renderer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/Renderer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/Renderer.cpp -o CMakeFiles/test.dir/Renderer.cpp.s
+CMakeFiles/test.dir/src/Renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Renderer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Renderer.cpp -o CMakeFiles/test.dir/src/Renderer.cpp.s
+
+CMakeFiles/test.dir/src/Texture.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/Texture.cpp.o: src/Texture.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/test.dir/src/Texture.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/Texture.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Texture.cpp
+
+CMakeFiles/test.dir/src/Texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Texture.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Texture.cpp > CMakeFiles/test.dir/src/Texture.cpp.i
+
+CMakeFiles/test.dir/src/Texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Texture.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Texture.cpp -o CMakeFiles/test.dir/src/Texture.cpp.s
+
+CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o: src/vendor/stb_image/stb_image.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/vendor/stb_image/stb_image.cpp
+
+CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/vendor/stb_image/stb_image.cpp > CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.i
+
+CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/vendor/stb_image/stb_image.cpp -o CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.s
+
+CMakeFiles/test.dir/src/CarGenerator.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/src/CarGenerator.cpp.o: src/CarGenerator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/test.dir/src/CarGenerator.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test.dir/src/CarGenerator.cpp.o -c /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/CarGenerator.cpp
+
+CMakeFiles/test.dir/src/CarGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/src/CarGenerator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/CarGenerator.cpp > CMakeFiles/test.dir/src/CarGenerator.cpp.i
+
+CMakeFiles/test.dir/src/CarGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/CarGenerator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/CarGenerator.cpp -o CMakeFiles/test.dir/src/CarGenerator.cpp.s
 
 # Object files for target test
 test_OBJECTS = \
-"CMakeFiles/test.dir/test.cpp.o" \
-"CMakeFiles/test.dir/Vector.cpp.o" \
-"CMakeFiles/test.dir/Road.cpp.o" \
-"CMakeFiles/test.dir/Car.cpp.o" \
-"CMakeFiles/test.dir/VertexBuffer.cpp.o" \
-"CMakeFiles/test.dir/IndexBuffer.cpp.o" \
-"CMakeFiles/test.dir/VertexBufferLayout.cpp.o" \
-"CMakeFiles/test.dir/VertexArray.cpp.o" \
-"CMakeFiles/test.dir/debug.cpp.o" \
-"CMakeFiles/test.dir/Shader.cpp.o" \
-"CMakeFiles/test.dir/Renderer.cpp.o"
+"CMakeFiles/test.dir/src/test.cpp.o" \
+"CMakeFiles/test.dir/src/Vector.cpp.o" \
+"CMakeFiles/test.dir/src/Road.cpp.o" \
+"CMakeFiles/test.dir/src/Car.cpp.o" \
+"CMakeFiles/test.dir/src/VertexBuffer.cpp.o" \
+"CMakeFiles/test.dir/src/IndexBuffer.cpp.o" \
+"CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o" \
+"CMakeFiles/test.dir/src/VertexArray.cpp.o" \
+"CMakeFiles/test.dir/src/debug.cpp.o" \
+"CMakeFiles/test.dir/src/Shader.cpp.o" \
+"CMakeFiles/test.dir/src/Renderer.cpp.o" \
+"CMakeFiles/test.dir/src/Texture.cpp.o" \
+"CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o" \
+"CMakeFiles/test.dir/src/CarGenerator.cpp.o"
 
 # External object files for target test
 test_EXTERNAL_OBJECTS =
 
-test: CMakeFiles/test.dir/test.cpp.o
-test: CMakeFiles/test.dir/Vector.cpp.o
-test: CMakeFiles/test.dir/Road.cpp.o
-test: CMakeFiles/test.dir/Car.cpp.o
-test: CMakeFiles/test.dir/VertexBuffer.cpp.o
-test: CMakeFiles/test.dir/IndexBuffer.cpp.o
-test: CMakeFiles/test.dir/VertexBufferLayout.cpp.o
-test: CMakeFiles/test.dir/VertexArray.cpp.o
-test: CMakeFiles/test.dir/debug.cpp.o
-test: CMakeFiles/test.dir/Shader.cpp.o
-test: CMakeFiles/test.dir/Renderer.cpp.o
+test: CMakeFiles/test.dir/src/test.cpp.o
+test: CMakeFiles/test.dir/src/Vector.cpp.o
+test: CMakeFiles/test.dir/src/Road.cpp.o
+test: CMakeFiles/test.dir/src/Car.cpp.o
+test: CMakeFiles/test.dir/src/VertexBuffer.cpp.o
+test: CMakeFiles/test.dir/src/IndexBuffer.cpp.o
+test: CMakeFiles/test.dir/src/VertexBufferLayout.cpp.o
+test: CMakeFiles/test.dir/src/VertexArray.cpp.o
+test: CMakeFiles/test.dir/src/debug.cpp.o
+test: CMakeFiles/test.dir/src/Shader.cpp.o
+test: CMakeFiles/test.dir/src/Renderer.cpp.o
+test: CMakeFiles/test.dir/src/Texture.cpp.o
+test: CMakeFiles/test.dir/src/vendor/stb_image/stb_image.cpp.o
+test: CMakeFiles/test.dir/src/CarGenerator.cpp.o
 test: CMakeFiles/test.dir/build.make
 test: CMakeFiles/test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -4,17 +4,20 @@ project(CourseWork)
 
 
 add_executable(test
-    test.cpp
-    Vector.h Vector.cpp
-    Road.h Road.cpp
-    Car.h Car.cpp
-    VertexBuffer.h VertexBuffer.cpp
-    IndexBuffer.h IndexBuffer.cpp
-    VertexBufferLayout.h VertexBufferLayout.cpp
-    VertexArray.h VertexArray.cpp
-    debug.h debug.cpp
-    Shader.h Shader.cpp
-    Renderer.h Renderer.cpp
+    src/test.cpp
+    src/Vector.h src/Vector.cpp
+    src/Road.h src/Road.cpp
+    src/Car.h src/Car.cpp
+    src/VertexBuffer.h src/VertexBuffer.cpp
+    src/IndexBuffer.h src/IndexBuffer.cpp
+    src/VertexBufferLayout.h src/VertexBufferLayout.cpp
+    src/VertexArray.h src/VertexArray.cpp
+    src/debug.h src/debug.cpp
+    src/Shader.h src/Shader.cpp
+    src/Renderer.h src/Renderer.cpp
+    src/Texture.h src/Texture.cpp
+    src/vendor/stb_image/stb_image.h src/vendor/stb_image/stb_image.cpp
+    src/CarGenerator.h src/CarGenerator.cpp
 )
 
 target_link_libraries(test -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
