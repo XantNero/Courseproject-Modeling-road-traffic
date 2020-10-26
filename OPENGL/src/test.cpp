@@ -15,9 +15,18 @@
 #include "Renderer.h"
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
+//#include "vendor/glm/ext.hpp"
 #include "Texture.h"
 #include "CarGenerator.h"
+#include "RoadRegistry.h"
+#include "CarRegistry.h"
 
+
+//play with count of cars rendering
+
+static const int MaxCars = 1000;
+static const int MaxVertexBufferSize = MaxCars * 16 * sizeof(float);
+static const int MaxIndexBufferCount = MaxCars * 6;
 
 
 int main(void)
@@ -40,7 +49,7 @@ int main(void)
         return -1;
     }
 
-    //glfwSwapInterval(1);
+    glfwSwapInterval(1);
 
     int width, height;
     glfwGetWindowSize(window, &width, &height);
@@ -52,68 +61,110 @@ int main(void)
         return -1;
     }
 
+      glm::mat4 proj = glm::ortho(0.0f, 1080.0f, 720.0f, 0.0f, -1.0f, 1.0f);
+    glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
+    glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
+    
+    glm::mat4 MVP = proj * view * model;
+
+
+    RoadRegistry roads;
+    
     float roadVertices[] = {
-        320.0f, 84.0f,
-        128.0f, 120.0f,
-        129.0f, 216.0f,
-        514.0f, 310.0f,
-        524.0f, 320.0f,
-        880.0f, 120.0f,
-        900.0f, 140.0f,
-        900.0f, 600.0f,
-        200.0f, 460.0f
+        540.0f, 720.0f,
+        540.0f, 360.0f,
+        0.0f, 0.0f,
+        1080.0f, 0.0f,
+        540.0f, 0.0f
     };
+
+   
 
     unsigned int roadIndices[] = {
         0, 1,
         1, 2,
-        2, 3,
-        3, 4,
-        4, 5,
-        5, 6,
-        6, 7,
-        7, 8
+        1, 3,
+        1, 4
     };
 
 
-    Road road;
-    for (int i = 0; i < sizeof(roadVertices) / (2 * sizeof(float)); ++i) {
-        road.addPoint(roadVertices[2 * i], roadVertices[2 * i + 1]);
-    }
+    Road road1;
+    Road road2;
+    Road road3;
+    Road road4;
+    road1.addPoint(roadVertices[0], roadVertices[1]);
+    road1.addPoint(roadVertices[2], roadVertices[3]);
+    road2.addPoint(roadVertices[2], roadVertices[3]);
+    road2.addPoint(roadVertices[4], roadVertices[5]);
+    road3.addPoint(roadVertices[2], roadVertices[3]);
+    road3.addPoint(roadVertices[6], roadVertices[7]);
+    road4.addPoint(roadVertices[2], roadVertices[3]);
+    road4.addPoint(roadVertices[8], roadVertices[9]);
+    roads.addRoad(road1);
+    roads.addRoad(road2);
+    roads.addRoad(road3);
+    roads.addRoad(road4);
+    roads.connectRoads(roads.getRoadIndex(&road1), roads.getRoadIndex(&road2));
+    roads.connectRoads(roads.getRoadIndex(&road1), roads.getRoadIndex(&road3));
+    roads.connectRoads(roads.getRoadIndex(&road1), roads.getRoadIndex(&road4));
 
-    CarGenerator CarGenerator(Vector(rand() % width, rand() % height));
-    Car car(Vector(rand() % width, rand() % height));
+    //  for (int i = 0; i < sizeof(roadVertices) / (2 *sizeof(float)); ++i) {
+    //     glm::vec4 pos = glm::vec4(roadVertices[2 * i], roadVertices[2 * i + 1], 0.0f, 1.0f);
+    //     pos = proj * pos;
+    //     roadVertices[2 * i] = pos.x;
+    //     roadVertices[2 * i + 1] = pos.y;
+    // }
 
+    CarGenerator CarGenerator(Vector(540, 720));
+    CarRegistry carRegistry;
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 
      VertexArray vao;
      vao.bind();
-    VertexBuffer roadBuffer((void*)roadVertices, 9 * 2 * sizeof(float));
+    VertexBuffer roadBuffer(5 * 2 * sizeof(float), (void*)roadVertices);
     VertexBufferLayout layout;
     layout.push(GL_FLOAT, 2, 2 * sizeof(float));
     vao.addBuffer(roadBuffer, layout);
-    IndexBuffer ibo(roadIndices, 16);
+    IndexBuffer ibo(8, roadIndices);
     vao.unbind();
     Shader shader("res/shaders/basic.shader");
     shader.bind();
 
     roadBuffer.unbind();
     ibo.unbind();
+    // vao.unbind();
 
 
 
-
-    glm::mat4 proj = glm::ortho(0.0f, 1080.0f, 720.0f, 0.0f, -1.0f, 1.0f);
-    glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
-    glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
-    
-    glm::mat4 MVP = proj * view * model;
-
+  
     shader.setUnifromMat4f("u_MVP", proj);
     Renderer renderer;
 
+
+    VertexArray vaoCar;
+    vaoCar.bind();
+
+    VertexBuffer carBuffer(MaxVertexBufferSize, nullptr);   
+    VertexBufferLayout lay;
+    lay.push(GL_FLOAT, 2, 2 * sizeof(float));
+    lay.push(GL_FLOAT, 2, 2 * sizeof(float));
+    vaoCar.addBuffer(carBuffer, lay);
+    
+    IndexBuffer IndexBufferCar(MaxIndexBufferCount, nullptr);
+
+    Texture carTexture("res/textures/c.png");
+    carTexture.bind(0);
+
+    Shader carShader("res/shaders/tr.shader");
+    carShader.bind();
+    carShader.setUniform1i("u_Texture", 0);
+    carShader.setUnifromMat4f("u_MVP", MVP);
+    vaoCar.unbind();
+    carBuffer.unbind();
+    IndexBufferCar.unbind();
+   
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
@@ -126,12 +177,20 @@ int main(void)
         renderer.draw(GL_LINES, vao, ibo, shader);
        
 
-        CarGenerator.update(road);
-        std::vector<Car> Cars = CarGenerator.getCars();
+       // CarGenerator.avoidColision();
+        CarGenerator.update(carRegistry);
+        carRegistry.update(roads);
+        std::vector<Car> Cars = carRegistry.getCars();
+
+        carBuffer.resetData();
+        IndexBufferCar.ResetData();
+
 
         // car.followPath(road);
         // car.move();
-        for (auto car : Cars) {
+        for (int i = 0; i < Cars.size(); ++i) {
+            Car car = Cars[i];
+
             Vector pos = car.getPos();
             Vector vel = car.getVel();
             vel.setMagnitude(20);
@@ -143,10 +202,10 @@ int main(void)
             vel3.rotate(53 * 3.14 / 180.0);
             Vector vel4 = vel3;
             vel4.rotate(127 * 3.14 / 180.0);
-            vel1.setMagnitude(50);
-            vel2.setMagnitude(50);
-            vel3.setMagnitude(50);
-            vel4.setMagnitude(50);
+            vel1.setMagnitude(20);
+            vel2.setMagnitude(20);
+            vel3.setMagnitude(20);
+            vel4.setMagnitude(20);
 
             float carTrig[] = {
                 pos.getX() + vel1.getX(), pos.getY() + vel1.getY(), 0.0f, 1.0f,
@@ -154,30 +213,46 @@ int main(void)
                 pos.getX() + vel3.getX(), pos.getY() + vel3.getY(), 1.0f, 0.0f,
                 pos.getX() + vel4.getX(), pos.getY() + vel4.getY(), 1.0f, 1.0f 
             };
-            VertexArray vaoCar;
-            vaoCar.bind();
 
-           Texture carTexture("res/textures/c.png");
-           carTexture.bind(0);
-            VertexBuffer carBuffer(carTrig, 4 * 4 * sizeof(float));
-            
-            VertexBufferLayout lay;
-            lay.push(GL_FLOAT, 2, 2 * sizeof(float));
-           lay.push(GL_FLOAT, 2, 2 * sizeof(float));
-            vaoCar.addBuffer(carBuffer, lay);
-        
+
             unsigned int carIn[] = {
-                0, 1, 2,
-                2, 3, 0
+                0 + i * 4, 1 + i * 4, 2 + i * 4,
+                2 + i * 4, 3 + i * 4, 0 + i * 4
             };
-            IndexBuffer IndexBufferCar(carIn, 6);
-            Shader carShader("res/shaders/tr.shader");
-            carShader.bind();
-           carShader.setUniform1i("u_Texture", 0);
-            carShader.setUnifromMat4f("u_MVP", MVP);
-            renderer.draw(GL_TRIANGLES, vaoCar, ibo, carShader);
+
+            // int width = 20, height = 40;
+            // Vector initialDir(-1.0f, 0.0f);
+            // float carTrig[] = {
+            //     pos.getX() + width / 2, pos.getY() - height / 2, 0.0f, 1.0f,
+            //     pos.getX() + width / 2, pos.getY() + height / 2, 0.0f, 0.0f, 
+            //     pos.getX() - width / 2, pos.getY() + height / 2, 1.0f, 0.0f,
+            //     pos.getX() - width / 2, pos.getY() - height / 2, 1.0f, 1.0f 
+            // };
+
+            // for (int i = 0; i < 4 * 4; i += 4) {
+            //     glm::vec4 pos = glm::vec4(carTrig[i], carTrig[i + 1], 0.0f, 1.0f);
+            //     glm::mat4 rot = glm::rotate(glm::mat4(1.0f), /*(float)vel.getAngle(initialDir)*/ 3.14f, glm::vec3(0.0f, 0.0f, 1.0f));
+
+  
+            //     pos =  proj * pos;
+            //     pos = rot * pos;
+            //     carTrig[i] = pos.x;
+            //     carTrig[i + 1] = pos.y;
+            // }
+
+
+           
+            vaoCar.bind();
+            carBuffer.bind();
+            IndexBufferCar.bind();
+            carBuffer.addData(4 * 4 * sizeof(float), carTrig);
+            IndexBufferCar.addData(6, carIn);
+            vaoCar.unbind();
+            
         }
         
+        renderer.draw(GL_TRIANGLES, vaoCar, IndexBufferCar, carShader);
+
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 

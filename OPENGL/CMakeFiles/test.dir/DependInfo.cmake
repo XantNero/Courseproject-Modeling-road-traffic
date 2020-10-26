@@ -6,9 +6,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Car.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Car.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/CarGenerator.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/CarGenerator.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/CarRegistry.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/CarRegistry.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/IndexBuffer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/IndexBuffer.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Renderer.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Renderer.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Road.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Road.cpp.o"
+  "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/RoadRegistry.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/RoadRegistry.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Shader.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Shader.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Texture.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Texture.cpp.o"
   "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/src/Vector.cpp" "/home/dmitry/Courseproject-Modelling-road-traffic/OPENGL/CMakeFiles/test.dir/src/Vector.cpp.o"

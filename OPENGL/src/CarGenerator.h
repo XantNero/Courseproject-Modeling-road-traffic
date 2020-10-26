@@ -6,19 +6,19 @@
 #include <list>
 #include <chrono>
 #include <vector>
+#include "CarRegistry.h"
 
 class CarGenerator
 {
 private:
     Vector* position;
-    std::list <Car> Cars;
     int rate;
     std::chrono::time_point<std::chrono::steady_clock> time;
 public:
-    CarGenerator(const Vector &pos, const int rate = 2000);
+    CarGenerator(const Vector &pos, const int rate = 300);
     ~CarGenerator();
-    void update(const Road &road); //change to array of roads, roads connections
-    std::vector<Car> getCars() const;
+    void update(CarRegistry &cars); //change to array of roads, roads connections
+   // void avoidColision(); //change name
 };
 
 #endif

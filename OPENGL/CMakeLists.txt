@@ -17,7 +17,10 @@ add_executable(test
     src/Renderer.h src/Renderer.cpp
     src/Texture.h src/Texture.cpp
     src/vendor/stb_image/stb_image.h src/vendor/stb_image/stb_image.cpp
+    src/vendor/glm/glm.hpp src/vendor/glm/gtc/matrix_transform.hpp
     src/CarGenerator.h src/CarGenerator.cpp
+    src/RoadRegistry.h src/RoadRegistry.cpp
+    src/CarRegistry.h src/CarRegistry.cpp
 )
 
 target_link_libraries(test -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)

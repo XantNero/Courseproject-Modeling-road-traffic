@@ -5,9 +5,13 @@ class VertexBuffer
 {
 private:
     unsigned int m_RendererID;
+    int m_Offset;
+    unsigned int m_MaxSize;
 public:
-    VertexBuffer(const void* data, unsigned int size);
+    VertexBuffer(unsigned int size, const void* data = nullptr);
     ~VertexBuffer();
+    void addData(unsigned int size, const void* data);
+    void resetData();
 
     void bind() const;
     void unbind() const;

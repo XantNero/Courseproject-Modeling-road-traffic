@@ -6,7 +6,6 @@ class Vector
 private:
     double x;
     double y;
-    double limit;
 public:
     Vector(double x = .0, double y = .0);
     ~Vector();
@@ -27,6 +26,8 @@ public:
     Vector& operator*(const double);
     friend Vector operator*(const double, const Vector&);
     friend double operator*(const Vector&, const Vector&);
+    friend bool operator==(const Vector&, const Vector&);
+
     double getMagnitude() const;
     void normalize();
     void setMagnitude(double magnitude);
@@ -38,9 +39,7 @@ public:
     void setX(double);
     void setY(double);
     double distance(const Vector &);
-private:
-    double getLimit() const;
-    void checkLimit();
+    double getAngle(const Vector &);
 };
 
 

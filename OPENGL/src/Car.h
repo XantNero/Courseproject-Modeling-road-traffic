@@ -2,14 +2,15 @@
 #define _CAR_H_
 #include "Vector.h"
 #include "Road.h"
+
 class Car
 {
-private:
-    Vector* location;
-    Vector* velocity;
-    Vector* acceleration;
-    double maxSpeed;
-    bool live;
+public:
+    enum State{
+            LIVE,
+            TURN,
+            DEAD
+    };
 public:
     Car(Vector loc);
     ~Car();
@@ -20,9 +21,18 @@ public:
     void followPath(const Road &);
     Vector getPos() const;
     Vector getVel() const;
-    bool getLive() const;
+    State getState() const;
+    void setState(State state);
+    double getMaxSpeed() const;
+    bool view(const Car &car) const;
 private:
     Vector getNormalPoint(Vector&, Vector&, Vector&);
+private:
+    Vector* location;
+    Vector* velocity;
+    Vector* acceleration;
+    double maxSpeed;
+    State state;
 };
 
 #endif

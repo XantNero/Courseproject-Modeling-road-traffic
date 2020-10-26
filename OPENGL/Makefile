@@ -177,6 +177,33 @@ src/CarGenerator.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarGenerator.cpp.s
 .PHONY : src/CarGenerator.cpp.s
 
+src/CarRegistry.o: src/CarRegistry.cpp.o
+
+.PHONY : src/CarRegistry.o
+
+# target to build an object file
+src/CarRegistry.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarRegistry.cpp.o
+.PHONY : src/CarRegistry.cpp.o
+
+src/CarRegistry.i: src/CarRegistry.cpp.i
+
+.PHONY : src/CarRegistry.i
+
+# target to preprocess a source file
+src/CarRegistry.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarRegistry.cpp.i
+.PHONY : src/CarRegistry.cpp.i
+
+src/CarRegistry.s: src/CarRegistry.cpp.s
+
+.PHONY : src/CarRegistry.s
+
+# target to generate assembly for a file
+src/CarRegistry.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/CarRegistry.cpp.s
+.PHONY : src/CarRegistry.cpp.s
+
 src/IndexBuffer.o: src/IndexBuffer.cpp.o
 
 .PHONY : src/IndexBuffer.o
@@ -257,6 +284,33 @@ src/Road.s: src/Road.cpp.s
 src/Road.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Road.cpp.s
 .PHONY : src/Road.cpp.s
+
+src/RoadRegistry.o: src/RoadRegistry.cpp.o
+
+.PHONY : src/RoadRegistry.o
+
+# target to build an object file
+src/RoadRegistry.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RoadRegistry.cpp.o
+.PHONY : src/RoadRegistry.cpp.o
+
+src/RoadRegistry.i: src/RoadRegistry.cpp.i
+
+.PHONY : src/RoadRegistry.i
+
+# target to preprocess a source file
+src/RoadRegistry.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RoadRegistry.cpp.i
+.PHONY : src/RoadRegistry.cpp.i
+
+src/RoadRegistry.s: src/RoadRegistry.cpp.s
+
+.PHONY : src/RoadRegistry.s
+
+# target to generate assembly for a file
+src/RoadRegistry.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/RoadRegistry.cpp.s
+.PHONY : src/RoadRegistry.cpp.s
 
 src/Shader.o: src/Shader.cpp.o
 
@@ -516,6 +570,9 @@ help:
 	@echo "... src/CarGenerator.o"
 	@echo "... src/CarGenerator.i"
 	@echo "... src/CarGenerator.s"
+	@echo "... src/CarRegistry.o"
+	@echo "... src/CarRegistry.i"
+	@echo "... src/CarRegistry.s"
 	@echo "... src/IndexBuffer.o"
 	@echo "... src/IndexBuffer.i"
 	@echo "... src/IndexBuffer.s"
@@ -525,6 +582,9 @@ help:
 	@echo "... src/Road.o"
 	@echo "... src/Road.i"
 	@echo "... src/Road.s"
+	@echo "... src/RoadRegistry.o"
+	@echo "... src/RoadRegistry.i"
+	@echo "... src/RoadRegistry.s"
 	@echo "... src/Shader.o"
 	@echo "... src/Shader.i"
 	@echo "... src/Shader.s"

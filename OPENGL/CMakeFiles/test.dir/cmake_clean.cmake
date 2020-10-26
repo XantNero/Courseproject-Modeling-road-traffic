@@ -1,9 +1,11 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test.dir/src/Car.cpp.o"
   "CMakeFiles/test.dir/src/CarGenerator.cpp.o"
+  "CMakeFiles/test.dir/src/CarRegistry.cpp.o"
   "CMakeFiles/test.dir/src/IndexBuffer.cpp.o"
   "CMakeFiles/test.dir/src/Renderer.cpp.o"
   "CMakeFiles/test.dir/src/Road.cpp.o"
+  "CMakeFiles/test.dir/src/RoadRegistry.cpp.o"
   "CMakeFiles/test.dir/src/Shader.cpp.o"
   "CMakeFiles/test.dir/src/Texture.cpp.o"
   "CMakeFiles/test.dir/src/Vector.cpp.o"
