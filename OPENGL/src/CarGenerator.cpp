@@ -1,6 +1,5 @@
 #include "CarGenerator.h"
 #include <math.h>
-
 CarGenerator::CarGenerator(const Vector &pos, const int rate)
     :position(new Vector(pos)), rate(rate)
 {
@@ -22,6 +21,16 @@ void CarGenerator::update(CarRegistry& cars)
         time = std::chrono::steady_clock::now();
     }
 }
+
+void CarGenerator::setRate(int rate)
+{
+    this->rate = rate;
+}
+
+int CarGenerator::getRate() const
+{
+    return rate;
+} 
 
 // void CarGenerator::avoidColision() //change name
 // {

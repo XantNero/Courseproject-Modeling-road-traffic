@@ -81,7 +81,7 @@ void Car::followPath(const Road &road)
 
 
             
-                if (normal == road.getPoint(road.getRoadSize() - 1) && normal.distance(getPos()) < 10)
+                if (normal == road.getPoint(road.getRoadSize() - 1) && normal.distance(getPos()) < 50)
                     setState(TURN);
             }
         }
@@ -137,11 +137,11 @@ void Car::followPath(const Road &road)
     // }
 }
 
-void Car::move()
+void Car::move(float time)
 {
-    (*velocity) += (*acceleration);
-    velocity->limitMagnitude(maxSpeed);
-    (*location) += (*velocity);
+    (*velocity) += (*acceleration) * time;
+    velocity->limitMagnitude(maxSpeed * time);
+    (*location) += (*velocity) * time;
     (*acceleration) *= 0;
 }
 

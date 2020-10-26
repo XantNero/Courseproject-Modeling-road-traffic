@@ -17,7 +17,7 @@ public:
     ~CarRegistry();
 
     void addCar(const Car &car, int start_road_index);
-    void update(const RoadRegistry &roads);
+    void update(const RoadRegistry &roads, float time);
     std::vector<Car> getCars();
 private:
     std::list<CarInformation> cars;

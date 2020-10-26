@@ -15,7 +15,7 @@ void CarRegistry::addCar(const Car &car, int start_road_index)
 {
     cars.push_back({car, start_road_index});
 }
-void CarRegistry::update(const RoadRegistry &roads)
+void CarRegistry::update(const RoadRegistry &roads, float time)
 {   
     std::list<CarInformation>::iterator it = cars.begin();
     while(it != cars.end()) {
@@ -42,7 +42,7 @@ void CarRegistry::update(const RoadRegistry &roads)
         if (it == cars.end())
             break;
         it->car.followPath(roads.getRoad(it->roadIndex));
-        it->car.move();
+        it->car.move(time);
         ++it;
     }
 }

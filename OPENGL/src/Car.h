@@ -16,7 +16,7 @@ public:
     ~Car();
     Car(const Car& );
     void applyForce(Vector &force);
-    void move();
+    void move(float time);
     void seek(Vector &target);
     void followPath(const Road &);
     Vector getPos() const;

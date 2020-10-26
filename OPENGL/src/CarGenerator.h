@@ -16,6 +16,8 @@ private:
     std::chrono::time_point<std::chrono::steady_clock> time;
 public:
     CarGenerator(const Vector &pos, const int rate = 300);
+    int getRate() const;
+    void setRate(int rate);
     ~CarGenerator();
     void update(CarRegistry &cars); //change to array of roads, roads connections
    // void avoidColision(); //change name

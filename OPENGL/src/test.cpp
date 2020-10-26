@@ -15,6 +15,9 @@
 #include "Renderer.h"
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
+#include "vendor/imgui/imgui.h"
+#include "vendor/imgui/imgui_impl_glfw.h"
+#include "vendor/imgui/imgui_impl_opengl3.h"
 //#include "vendor/glm/ext.hpp"
 #include "Texture.h"
 #include "CarGenerator.h"
@@ -37,7 +40,7 @@ int main(void)
     /* Initialize the library */
     if (!glfwInit())
         return -1;
-
+    const char* glsl_version = "#version 130";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -60,6 +63,17 @@ int main(void)
     if(glewInit() != GLEW_OK) {
         return -1;
     }
+
+
+    ImGui::CreateContext();
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+
+
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
       glm::mat4 proj = glm::ortho(0.0f, 1080.0f, 720.0f, 0.0f, -1.0f, 1.0f);
     glm::mat4 view = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
@@ -165,11 +179,13 @@ int main(void)
     carBuffer.unbind();
     IndexBufferCar.unbind();
    
-
+    glm::vec3 cl(0.3f, 0.1f, 0.3f);
+    int genRate = 300;
+    float time = 1.0f;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
-        GLCall(glClearColor(0.3f, 0.1f, 0.3f, 1.0f));
+        GLCall(glClearColor(cl.x, cl.y, cl.z, 1.0f));
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
         
         shader.bind();
@@ -178,8 +194,9 @@ int main(void)
        
 
        // CarGenerator.avoidColision();
+       CarGenerator.setRate((float)genRate / time);
         CarGenerator.update(carRegistry);
-        carRegistry.update(roads);
+        carRegistry.update(roads, time);
         std::vector<Car> Cars = carRegistry.getCars();
 
         carBuffer.resetData();
@@ -253,12 +270,43 @@ int main(void)
         
         renderer.draw(GL_TRIANGLES, vaoCar, IndexBufferCar, carShader);
 
-        /* Swap front and back buffers */
+      
+
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+         if (show_demo_window)
+            ImGui::ShowDemoWindow(&show_demo_window);
+
+        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+        {
+            static float f = 0.0f;
+            static int counter = 0;
+
+            ImGui::SliderFloat3("COLOR", &cl.x, 0.0f, 1.0f);
+            ImGui::SliderInt("gen speed", &genRate, 10, 2000);
+            ImGui::SliderFloat("time speed", &time, 0.1f, 10.0f);
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        }
+
+
+
+          /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
         /* Poll for and process events */
         glfwPollEvents();
+
     }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    //ImGui::DestroyContext();
 
     glfwTerminate();
     return 0;
