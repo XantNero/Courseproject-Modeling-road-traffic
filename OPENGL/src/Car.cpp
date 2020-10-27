@@ -3,50 +3,59 @@
 #include "Road.h"
 #include <iostream>
 #include <math.h>
-Car::Car(Vector loc)
-    : location(new Vector(loc)), velocity(new Vector),
-    acceleration(new Vector), maxSpeed(5 + rand() % 4 - 2), state(LIVE) { }
+Car::Car(const Vector& pos)
+    : Particle2D(pos), maxSpeed(5 + rand() % 4 - 2), state(LIVE)
+{
+    position = pos;
+}
+
+Car::Car(const float x, const float y)
+    : Particle2D(x, y),  maxSpeed(5 + rand() % 4 - 2), state(LIVE)
+{
+    position = Vector(x, y);
+}
+
+
 
 Car::~Car()
 {
-    delete location;
-    delete velocity;
-    delete acceleration;
 }
 
 
-void Car::applyForce(Vector &force)
+void Car::applyForce(const Vector &force)
 {
-    (*acceleration) += force;
+    forceAccumulator += force;
 }
 
 Car::Car(const Car& copy)
+    : Particle2D(copy.position), maxSpeed(copy.maxSpeed), state(copy.state)
 {
-    location = new Vector(*(copy.location));
-    acceleration = new Vector(*(copy.acceleration));
-    velocity = new Vector(*(copy.velocity));
-    maxSpeed = copy.maxSpeed;
-    state = copy.state;
+    //position = copy.position;
+    acceleration = copy.acceleration;
+    velocity = copy.velocity;
+    forceAccumulator = copy.forceAccumulator;
+    inverseMass = copy.inverseMass;
+    damping = copy.damping;
 }
 
 void Car::seek(Vector &target) // make new seek
 {
-    Vector desired = target - (*location);
+    Vector desired = target - position;
 
     if (desired.getMagnitude() == 0)  
         return;
     desired.setMagnitude(getMaxSpeed());
-    Vector steer = desired - (*velocity);
+    Vector steer = desired - velocity;
     steer.limitMagnitude(maxSpeed);
     applyForce(steer);
 }
 
 void Car::followPath(const Road &road)
 {  
-    Vector predict = (*velocity);
+    Vector predict = velocity;
     predict.setMagnitude(30);
-    Vector predictPos = predict + (*location);
-    Vector pos = getPos();
+    Vector predictPos = predict + position;
+    Vector pos = getPosition();
     double worldRecord = 10000000.;
     Vector normal;
     Vector target;
@@ -72,7 +81,7 @@ void Car::followPath(const Road &road)
                 dir.setMagnitude(getMaxSpeed());
                 Vector temp = target;
                 target = normal + dir;
-                Vector mov = target - getPos();
+                Vector mov = target - getPosition();
                 // if (getVel() * mov == -1.0) {
                 //     target = temp;
                 // }
@@ -81,7 +90,7 @@ void Car::followPath(const Road &road)
 
 
             
-                if (normal == road.getPoint(road.getRoadSize() - 1) && normal.distance(getPos()) < 50)
+                if (normal == road.getPoint(road.getRoadSize() - 1) && normal.distance(getPosition()) < 50)
                     setState(TURN);
             }
         }
@@ -139,10 +148,17 @@ void Car::followPath(const Road &road)
 
 void Car::move(float time)
 {
-    (*velocity) += (*acceleration) * time;
-    velocity->limitMagnitude(maxSpeed * time);
-    (*location) += (*velocity) * time;
-    (*acceleration) *= 0;
+    acceleration *= 0;
+    acceleration += forceAccumulator;
+    velocity += acceleration * time;
+    velocity.limitMagnitude(maxSpeed * time);
+    position += velocity * time;
+    clearAccumulator();    
+}
+
+void Car::clearAccumulator()
+{
+    forceAccumulator *= 0;
 }
 
 Vector Car::getNormalPoint(Vector&p, Vector&a, Vector&b) 
@@ -154,14 +170,19 @@ Vector Car::getNormalPoint(Vector&p, Vector&a, Vector&b)
     return ab + a;
 }
 
-Vector Car::getPos() const
+Vector Car::getPosition() const
 {
-    return *location;
+    return position;
 }
 
-Vector Car::getVel() const
+Vector Car::getVelocity() const
 {
-    return *velocity;
+    return velocity;
+}
+
+Vector Car::getAcceleration() const
+{
+    return acceleration;
 }
 
 Car::State Car::getState() const
@@ -181,10 +202,10 @@ double Car::getMaxSpeed() const
 
 bool Car::view(const Car &car) const
 {
-    Vector dist = car.getPos() - getPos();
+    Vector dist = car.getPosition() - getPosition();
     double d = 75;
     double angle = 3.14 / 6.;
-    Vector vel = getVel();
+    Vector vel = getVelocity();
     vel *= -1;
     double a = dist.getAngle(vel);
     if (dist.getMagnitude() > 0 && dist.getMagnitude() < d && a > angle)

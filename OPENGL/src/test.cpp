@@ -208,8 +208,8 @@ int main(void)
         for (int i = 0; i < Cars.size(); ++i) {
             Car car = Cars[i];
 
-            Vector pos = car.getPos();
-            Vector vel = car.getVel();
+            Vector pos = car.getPosition();
+            Vector vel = car.getVelocity();
             vel.setMagnitude(20);
             Vector vel1 = vel;
             vel1.rotate(26.5 * 3.14 / 180.0);

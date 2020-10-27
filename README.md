@@ -2,6 +2,13 @@
 
 Change Log
 
+Version 0.0.5.2:
+
+-add abstract class Particle
+
+-Car is deriving from Particle
+
+
 Version 0.0.5.1:
 
 -Add imgui

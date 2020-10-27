@@ -231,6 +231,33 @@ src/IndexBuffer.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/IndexBuffer.cpp.s
 .PHONY : src/IndexBuffer.cpp.s
 
+src/Particle.o: src/Particle.cpp.o
+
+.PHONY : src/Particle.o
+
+# target to build an object file
+src/Particle.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Particle.cpp.o
+.PHONY : src/Particle.cpp.o
+
+src/Particle.i: src/Particle.cpp.i
+
+.PHONY : src/Particle.i
+
+# target to preprocess a source file
+src/Particle.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Particle.cpp.i
+.PHONY : src/Particle.cpp.i
+
+src/Particle.s: src/Particle.cpp.s
+
+.PHONY : src/Particle.s
+
+# target to generate assembly for a file
+src/Particle.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Particle.cpp.s
+.PHONY : src/Particle.cpp.s
+
 src/Renderer.o: src/Renderer.cpp.o
 
 .PHONY : src/Renderer.o
@@ -738,6 +765,9 @@ help:
 	@echo "... src/IndexBuffer.o"
 	@echo "... src/IndexBuffer.i"
 	@echo "... src/IndexBuffer.s"
+	@echo "... src/Particle.o"
+	@echo "... src/Particle.i"
+	@echo "... src/Particle.s"
 	@echo "... src/Renderer.o"
 	@echo "... src/Renderer.i"
 	@echo "... src/Renderer.s"
