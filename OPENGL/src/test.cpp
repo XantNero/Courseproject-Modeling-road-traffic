@@ -129,7 +129,7 @@ int main(void)
     //     roadVertices[2 * i + 1] = pos.y;
     // }
 
-    CarGenerator CarGenerator(Vector(540, 720));
+    CarGenerator CarGenerator(Vector(540, 710));
     CarRegistry carRegistry;
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
@@ -180,7 +180,7 @@ int main(void)
     IndexBufferCar.unbind();
    
     glm::vec3 cl(0.3f, 0.1f, 0.3f);
-    int genRate = 300;
+    int genRate = 500;
     float time = 1.0f;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
@@ -288,13 +288,10 @@ int main(void)
             ImGui::SliderInt("gen speed", &genRate, 10, 2000);
             ImGui::SliderFloat("time speed", &time, 0.1f, 10.0f);
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         }
-
-
 
           /* Swap front and back buffers */
         glfwSwapBuffers(window);

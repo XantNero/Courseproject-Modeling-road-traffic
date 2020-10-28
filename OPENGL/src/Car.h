@@ -52,8 +52,7 @@ public:
     Car(const Car& );
     virtual void applyForce(const Vector &force) override;
     virtual void move(float time) override;
-    void seek(Vector &target);
-    void followPath(const Road &);
+    bool followPath(const Road &, Vector*);
     virtual Vector getPosition() const override;
     virtual Vector getVelocity() const override;
     virtual Vector getAcceleration() const override;
@@ -61,8 +60,11 @@ public:
     void setState(State state);
     double getMaxSpeed() const;
     bool view(const Car &car) const;
+    virtual Vector getForceAccumulator() const override;
+    inline void setVel(const Vector& vel) {velocity = vel;}
+    inline void setMaxSpeed(const double spe) { maxSpeed = spe; }
     virtual void clearAccumulator() override;
-     virtual float getMass() const override { return 0; }
+    virtual float getMass() const override { return 0; }
     virtual float getInverseMass() const override { return 0;}
     virtual bool hasFiniteMass() const override { return 0;}
     virtual void setDamping(float damping) override { }

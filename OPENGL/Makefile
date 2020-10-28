@@ -123,6 +123,33 @@ test/fast:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+src/BrakeForceGenerator.o: src/BrakeForceGenerator.cpp.o
+
+.PHONY : src/BrakeForceGenerator.o
+
+# target to build an object file
+src/BrakeForceGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/BrakeForceGenerator.cpp.o
+.PHONY : src/BrakeForceGenerator.cpp.o
+
+src/BrakeForceGenerator.i: src/BrakeForceGenerator.cpp.i
+
+.PHONY : src/BrakeForceGenerator.i
+
+# target to preprocess a source file
+src/BrakeForceGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/BrakeForceGenerator.cpp.i
+.PHONY : src/BrakeForceGenerator.cpp.i
+
+src/BrakeForceGenerator.s: src/BrakeForceGenerator.cpp.s
+
+.PHONY : src/BrakeForceGenerator.s
+
+# target to generate assembly for a file
+src/BrakeForceGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/BrakeForceGenerator.cpp.s
+.PHONY : src/BrakeForceGenerator.cpp.s
+
 src/Car.o: src/Car.cpp.o
 
 .PHONY : src/Car.o
@@ -365,6 +392,33 @@ src/Shader.s: src/Shader.cpp.s
 src/Shader.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Shader.cpp.s
 .PHONY : src/Shader.cpp.s
+
+src/SteerForceGenerator.o: src/SteerForceGenerator.cpp.o
+
+.PHONY : src/SteerForceGenerator.o
+
+# target to build an object file
+src/SteerForceGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/SteerForceGenerator.cpp.o
+.PHONY : src/SteerForceGenerator.cpp.o
+
+src/SteerForceGenerator.i: src/SteerForceGenerator.cpp.i
+
+.PHONY : src/SteerForceGenerator.i
+
+# target to preprocess a source file
+src/SteerForceGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/SteerForceGenerator.cpp.i
+.PHONY : src/SteerForceGenerator.cpp.i
+
+src/SteerForceGenerator.s: src/SteerForceGenerator.cpp.s
+
+.PHONY : src/SteerForceGenerator.s
+
+# target to generate assembly for a file
+src/SteerForceGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/SteerForceGenerator.cpp.s
+.PHONY : src/SteerForceGenerator.cpp.s
 
 src/Texture.o: src/Texture.cpp.o
 
@@ -753,6 +807,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... src/BrakeForceGenerator.o"
+	@echo "... src/BrakeForceGenerator.i"
+	@echo "... src/BrakeForceGenerator.s"
 	@echo "... src/Car.o"
 	@echo "... src/Car.i"
 	@echo "... src/Car.s"
@@ -780,6 +837,9 @@ help:
 	@echo "... src/Shader.o"
 	@echo "... src/Shader.i"
 	@echo "... src/Shader.s"
+	@echo "... src/SteerForceGenerator.o"
+	@echo "... src/SteerForceGenerator.i"
+	@echo "... src/SteerForceGenerator.s"
 	@echo "... src/Texture.o"
 	@echo "... src/Texture.i"
 	@echo "... src/Texture.s"

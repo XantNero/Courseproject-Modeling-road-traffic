@@ -191,5 +191,10 @@ void Vector::limitMagnitude(double limit)
 
 double Vector::getAngle(const Vector& v)
 {
-    return acos((*this) * v /( getMagnitude() * v.getMagnitude()));
+    double angle = (*this) * v /(getMagnitude() * v.getMagnitude());
+    if (angle > 1.0f)
+        angle = 1.0f;
+    else if (angle < -1.0f)
+        angle ==-1.0f;
+    return acos(angle);
 }

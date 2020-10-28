@@ -38,27 +38,15 @@ Car::Car(const Car& copy)
     damping = copy.damping;
 }
 
-void Car::seek(Vector &target) // make new seek
-{
-    Vector desired = target - position;
-
-    if (desired.getMagnitude() == 0)  
-        return;
-    desired.setMagnitude(getMaxSpeed());
-    Vector steer = desired - velocity;
-    steer.limitMagnitude(maxSpeed);
-    applyForce(steer);
-}
-
-void Car::followPath(const Road &road)
+bool Car::followPath(const Road &road, Vector* target)
 {  
     Vector predict = velocity;
-    predict.setMagnitude(30);
+    predict.setMagnitude(getMaxSpeed());
     Vector predictPos = predict + position;
     Vector pos = getPosition();
     double worldRecord = 10000000.;
     Vector normal;
-    Vector target;
+    double distance = 0;
 
     // if (nowRoadStart == -1) {
          for (int i = 0; i < road.getRoadSize() - 1; ++i) {
@@ -71,7 +59,7 @@ void Car::followPath(const Road &road)
                 normalPoint = b;
             } 
 
-            double distance = predictPos.distance(normalPoint);
+            distance = predictPos.distance(normalPoint);
 
             if (distance < worldRecord) {
                 
@@ -79,17 +67,15 @@ void Car::followPath(const Road &road)
 
                 Vector dir = b - a;
                 dir.setMagnitude(getMaxSpeed());
-                Vector temp = target;
-                target = normal + dir;
-                Vector mov = target - getPosition();
+                Vector temp = *target;
+                (*target) = normal + dir;
+                Vector mov = *target - getPosition();
                 // if (getVel() * mov == -1.0) {
                 //     target = temp;
                 // }
                     
                 worldRecord = distance; 
 
-
-            
                 if (normal == road.getPoint(road.getRoadSize() - 1) && normal.distance(getPosition()) < 50)
                     setState(TURN);
             }
@@ -138,8 +124,9 @@ void Car::followPath(const Road &road)
     //         turning = true;
     //     } 
     // }
-   
-    seek(target);
+    // if (worldRecord > road.getRadius() || getVelocity().getMagnitude() == 0.0)
+    //     return true;
+    return true;
     // else {
     //     Vector target = getPos() + getVel();
     //     seek(target);
@@ -153,6 +140,7 @@ void Car::move(float time)
     velocity += acceleration * time;
     velocity.limitMagnitude(maxSpeed * time);
     position += velocity * time;
+    // acceleration *= damping;
     clearAccumulator();    
 }
 
@@ -203,13 +191,16 @@ double Car::getMaxSpeed() const
 bool Car::view(const Car &car) const
 {
     Vector dist = car.getPosition() - getPosition();
-    double d = 75;
-    double angle = 3.14 / 6.;
+    double d = 50;
+    double angle = 4 * 3.14 / 6.0;
     Vector vel = getVelocity();
-    vel *= -1;
     double a = dist.getAngle(vel);
-    if (dist.getMagnitude() > 0 && dist.getMagnitude() < d && a > angle)
+    if (dist.getMagnitude() < d && a < angle)
         return true;
     return false;
+}
 
+Vector Car::getForceAccumulator() const
+{
+    return forceAccumulator;
 }

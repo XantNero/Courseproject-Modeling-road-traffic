@@ -8,7 +8,10 @@ add_executable(test
     src/Vector.h src/Vector.cpp
     src/Road.h src/Road.cpp
     src/Car.h src/Car.cpp
+    src/ForceGenerator.h
     src/Particle.h src/Particle.cpp
+    src/SteerForceGenerator.h src/SteerForceGenerator.cpp
+    src/BrakeForceGenerator.h src/BrakeForceGenerator.cpp
     src/VertexBuffer.h src/VertexBuffer.cpp
     src/IndexBuffer.h src/IndexBuffer.cpp
     src/VertexBufferLayout.h src/VertexBufferLayout.cpp

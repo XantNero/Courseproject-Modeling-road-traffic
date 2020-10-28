@@ -6,8 +6,8 @@ class Particle2D
 {
 public:
     //Particle2D();
-    Particle2D(const Vector& position, float mass = 1.0f, float damping = 1.0f);
-    Particle2D(const float x, const float y, float mass = 1.0f, float damping = 1.0f);
+    Particle2D(const Vector& position, float mass = 1.0f, float damping = 0.98f);
+    Particle2D(const float x, const float y, float mass = 1.0f, float damping = 0.98f);
     virtual ~Particle2D() { };
     virtual void move(float duration) = 0;
     //virtual void setMass(float mass) = 0;
@@ -24,6 +24,7 @@ public:
     virtual Vector getVelocity() const = 0;
     // virtual void setAcceleration(const Vector& acceleration) = 0;
     virtual Vector getAcceleration() const = 0;
+    virtual Vector getForceAccumulator() const = 0;
     virtual void clearAccumulator() = 0;
     virtual void applyForce(const Vector& force) = 0;
 protected:
