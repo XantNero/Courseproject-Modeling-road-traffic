@@ -1,28 +1,28 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Vector.h"
-#include "Road.h"
-#include "Car.h"
+#include "core/Vector.h"
+#include "core/Road.h"
+#include "core/Car.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "debug.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "VertexBufferLayout.h"
-#include "VertexArray.h"
-#include "Shader.h"
-#include "Renderer.h"
+#include "opengl/debug.h"
+#include "opengl/VertexBuffer.h"
+#include "opengl/IndexBuffer.h"
+#include "opengl/VertexBufferLayout.h"
+#include "opengl/VertexArray.h"
+#include "opengl/Shader.h"
+#include "opengl/Renderer.h"
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_glfw.h"
 #include "vendor/imgui/imgui_impl_opengl3.h"
 //#include "vendor/glm/ext.hpp"
-#include "Texture.h"
-#include "CarGenerator.h"
-#include "RoadRegistry.h"
-#include "CarRegistry.h"
+#include "opengl/Texture.h"
+#include "core/CarGenerator.h"
+#include "core/RoadRegistry.h"
+#include "core/CarRegistry.h"
 
 
 //play with count of cars rendering

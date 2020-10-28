@@ -2,8 +2,8 @@
 #define _SHADER_H_
 #include <string>
 #include <unordered_map>
-#include "vendor/glm/glm.hpp"
-#include "vendor/glm/gtc/matrix_transform.hpp"
+#include "../vendor/glm/glm.hpp"
+#include "../vendor/glm/gtc/matrix_transform.hpp"
 
 struct ShaderProgramSource {
     std::string VertexSource;
