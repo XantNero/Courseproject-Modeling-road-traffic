@@ -3,11 +3,11 @@
 
 layout(location = 0) in vec4 position;
 
-uniform mat4 u_MVP;
+uniform mat4 u_ViewProjectionMatrix;
 
 void main()
 {
-    gl_Position = u_MVP * position;
+    gl_Position = u_ViewProjectionMatrix * position;
 }
 
 #shader fragment

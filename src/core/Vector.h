@@ -28,6 +28,8 @@ public:
     friend double operator*(const Vector&, const Vector&);
     friend bool operator==(const Vector&, const Vector&);
 
+    friend double scalarDotProduct(const Vector&, const Vector&);
+
     double getMagnitude() const;
     void normalize();
     void setMagnitude(double magnitude);

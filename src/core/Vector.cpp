@@ -122,6 +122,9 @@ double operator*(const Vector &left, const Vector &right)
     return left.getX() * right.getX() + left.getY() * right.getY();
 }
 
+double scalarDotProduct(const Vector& left, const Vector& right){
+    return left.getX() * right.getY() - left.getY() * right.getX();
+}
 bool operator==(const Vector& left, const Vector& right)
 {
     return (left.getX() == right.getX() && left.getY() == right.getY());

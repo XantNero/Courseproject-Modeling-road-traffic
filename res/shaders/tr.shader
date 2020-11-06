@@ -4,13 +4,13 @@
 layout(location = 0) in vec4 position;
 layout(location = 1) in vec2 texCoord;
 
-uniform mat4 u_MVP;
+uniform mat4 u_ViewProjectionMatrix;
 
 out vec2 v_texCoord;
 
 void main()
 {
-    gl_Position = u_MVP * position;
+    gl_Position = u_ViewProjectionMatrix * position;
     v_texCoord = texCoord;
 }
 

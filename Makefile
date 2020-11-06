@@ -123,6 +123,33 @@ test/fast:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+src/Window.o: src/Window.cpp.o
+
+.PHONY : src/Window.o
+
+# target to build an object file
+src/Window.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Window.cpp.o
+.PHONY : src/Window.cpp.o
+
+src/Window.i: src/Window.cpp.i
+
+.PHONY : src/Window.i
+
+# target to preprocess a source file
+src/Window.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Window.cpp.i
+.PHONY : src/Window.cpp.i
+
+src/Window.s: src/Window.cpp.s
+
+.PHONY : src/Window.s
+
+# target to generate assembly for a file
+src/Window.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Window.cpp.s
+.PHONY : src/Window.cpp.s
+
 src/core/BrakeForceGenerator.o: src/core/BrakeForceGenerator.cpp.o
 
 .PHONY : src/core/BrakeForceGenerator.o
@@ -419,6 +446,33 @@ src/opengl/IndexBuffer.s: src/opengl/IndexBuffer.cpp.s
 src/opengl/IndexBuffer.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/IndexBuffer.cpp.s
 .PHONY : src/opengl/IndexBuffer.cpp.s
+
+src/opengl/OrtographicCamera.o: src/opengl/OrtographicCamera.cpp.o
+
+.PHONY : src/opengl/OrtographicCamera.o
+
+# target to build an object file
+src/opengl/OrtographicCamera.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/OrtographicCamera.cpp.o
+.PHONY : src/opengl/OrtographicCamera.cpp.o
+
+src/opengl/OrtographicCamera.i: src/opengl/OrtographicCamera.cpp.i
+
+.PHONY : src/opengl/OrtographicCamera.i
+
+# target to preprocess a source file
+src/opengl/OrtographicCamera.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/OrtographicCamera.cpp.i
+.PHONY : src/opengl/OrtographicCamera.cpp.i
+
+src/opengl/OrtographicCamera.s: src/opengl/OrtographicCamera.cpp.s
+
+.PHONY : src/opengl/OrtographicCamera.s
+
+# target to generate assembly for a file
+src/opengl/OrtographicCamera.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/OrtographicCamera.cpp.s
+.PHONY : src/opengl/OrtographicCamera.cpp.s
 
 src/opengl/Renderer.o: src/opengl/Renderer.cpp.o
 
@@ -807,6 +861,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... src/Window.o"
+	@echo "... src/Window.i"
+	@echo "... src/Window.s"
 	@echo "... src/core/BrakeForceGenerator.o"
 	@echo "... src/core/BrakeForceGenerator.i"
 	@echo "... src/core/BrakeForceGenerator.s"
@@ -840,6 +897,9 @@ help:
 	@echo "... src/opengl/IndexBuffer.o"
 	@echo "... src/opengl/IndexBuffer.i"
 	@echo "... src/opengl/IndexBuffer.s"
+	@echo "... src/opengl/OrtographicCamera.o"
+	@echo "... src/opengl/OrtographicCamera.i"
+	@echo "... src/opengl/OrtographicCamera.s"
 	@echo "... src/opengl/Renderer.o"
 	@echo "... src/opengl/Renderer.i"
 	@echo "... src/opengl/Renderer.s"

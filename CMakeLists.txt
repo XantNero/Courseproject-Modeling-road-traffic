@@ -16,6 +16,8 @@ add_executable(test
     src/core/RoadRegistry.h src/core/RoadRegistry.cpp
     src/core/CarRegistry.h src/core/CarRegistry.cpp
 
+    src/Window.h src/Window.cpp
+
     src/opengl/VertexBuffer.h src/opengl/VertexBuffer.cpp
     src/opengl/IndexBuffer.h src/opengl/IndexBuffer.cpp
     src/opengl/VertexBufferLayout.h src/opengl/VertexBufferLayout.cpp
@@ -24,6 +26,7 @@ add_executable(test
     src/opengl/Shader.h src/opengl/Shader.cpp
     src/opengl/Renderer.h src/opengl/Renderer.cpp
     src/opengl/Texture.h src/opengl/Texture.cpp
+    src/opengl/OrtographicCamera.h src/opengl/OrtographicCamera.cpp
   
     src/vendor/stb_image/stb_image.h src/vendor/stb_image/stb_image.cpp
     src/vendor/glm/glm.hpp src/vendor/glm/gtc/matrix_transform.hpp

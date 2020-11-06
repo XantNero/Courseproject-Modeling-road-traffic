@@ -12,7 +12,6 @@ public:
     Renderer();
     ~Renderer();
     void draw(const unsigned int type, const VertexArray &, const IndexBuffer &, const  Shader &) const;
-public:
 };
 
 
