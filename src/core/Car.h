@@ -52,7 +52,7 @@ public:
     Car(const Car& );
     virtual void applyForce(const Vector &force) override;
     virtual void move(float time) override;
-    bool followPath(const Road &, Vector*);
+    bool followPath(const Road* , Vector*);
     virtual Vector getPosition() const override;
     virtual Vector getVelocity() const override;
     virtual Vector getAcceleration() const override;

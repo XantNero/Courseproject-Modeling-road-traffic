@@ -1,8 +1,8 @@
+#include "../pch.h"
+
 #include "Car.h"
 #include "Vector.h"
 #include "Road.h"
-#include <iostream>
-#include <math.h>
 Car::Car(const Vector& pos)
     : Particle2D(pos), maxSpeed(5 + rand() % 4 - 2), state(LIVE)
 {
@@ -38,7 +38,7 @@ Car::Car(const Car& copy)
     damping = copy.damping;
 }
 
-bool Car::followPath(const Road &road, Vector* target)
+bool Car::followPath(const Road* road, Vector* target)
 {  
     Vector predict = velocity;
     predict.setMagnitude(getMaxSpeed());
@@ -49,13 +49,13 @@ bool Car::followPath(const Road &road, Vector* target)
     double distance = 0;
 
     // if (nowRoadStart == -1) {
-         for (int i = 0; i < road.getRoadSize() - 1; ++i) {
-            Vector a = road.getPoint(i);
-            Vector b = road.getPoint(i + 1);
+         for (int i = 0; i < road->getRoadSize() - 1; ++i) {
+            Vector a = road->getPoint(i);
+            Vector b = road->getPoint(i + 1);
 
             Vector normalPoint = getNormalPoint(predictPos, a, b);
-            if (!(normalPoint.getX() + road.getRadius() > std::min(a.getX(), b.getX()) && normalPoint.getX() - road.getRadius() < std::max(a.getX(), b.getX())
-                && normalPoint.getY() + road.getRadius() > std::min(a.getY(), b.getY()) && normalPoint.getY() - road.getRadius() < std::max(a.getY(), b.getY()))) {
+            if (!(normalPoint.getX() + road->getRadius() > std::min(a.getX(), b.getX()) && normalPoint.getX() - road->getRadius() < std::max(a.getX(), b.getX())
+                && normalPoint.getY() + road->getRadius() > std::min(a.getY(), b.getY()) && normalPoint.getY() - road->getRadius() < std::max(a.getY(), b.getY()))) {
                 normalPoint = b;
             } 
 
@@ -76,7 +76,7 @@ bool Car::followPath(const Road &road, Vector* target)
                     
                 worldRecord = distance; 
 
-                if (normal == road.getPoint(road.getRoadSize() - 1) && normal.distance(getPosition()) < 50)
+                if (normal == road->getPoint(road->getRoadSize() - 1) && normal.distance(getPosition()) < 50)
                     setState(TURN);
             }
         }

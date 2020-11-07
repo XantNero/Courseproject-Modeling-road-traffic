@@ -1,7 +1,6 @@
 #ifndef _VERTEXBUFFERLAYOUT_H_
 #define _VERTEXBUFFERLAYOUT_H_
 #include <vector>
-#include <GL/glew.h>
 
 struct VertexBufferElement
 {

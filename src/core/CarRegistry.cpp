@@ -1,5 +1,7 @@
+#include "../pch.h"
+
 #include "CarRegistry.h"
-#include <iostream>
+
 
 CarRegistry::CarRegistry()
     :cars()
@@ -11,9 +13,9 @@ CarRegistry::~CarRegistry()
 
 }
 
-void CarRegistry::addCar(const Car &car, int start_road_index)
+void CarRegistry::addCar(const Car &car, const unsigned int start_roadID)
 {
-    cars.push_back({car, SteerForceGenerator(), BrakeForceGenerator(), start_road_index});
+    cars.push_back({car, SteerForceGenerator(), BrakeForceGenerator(), start_roadID});
 }
 void CarRegistry::update(const RoadRegistry &roads, float time)
 {   
@@ -21,7 +23,7 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
     while(it != cars.end()) {
         
         if (it->car.getState() == Car::TURN) {
-            std::vector<int> conn = roads.getRoadConnections(it->roadIndex);
+            std::vector<unsigned int> conn = roads.getRoadConnections(it->roadID);
             if (conn.size() != 0) {
                     double prob = (double)(std::rand() % 100) / 100; // change
                 int i = 0;
@@ -29,7 +31,7 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
                     prob -= 1.0f / conn.size();
                     ++i;
                 }
-                it->roadIndex = conn[i];
+                it->roadID = conn[i];
                 it->car.setState(Car::LIVE);
             }
             else {
@@ -42,7 +44,7 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
         if (it == cars.end())
             break;
        
-        applySteerForce(it->car, it->steerForceGenerator, roads.getRoad(it->roadIndex));
+        applySteerForce(it->car, it->steerForceGenerator, roads.getRoad(it->roadID));
         //it->car.move(time);
         applyBrakeForce(it->car, it->brakeForceGenerator);
         //it->car.move(time);
@@ -67,7 +69,7 @@ std::vector<Car> CarRegistry::getCars()
     return ret;
 }
 
-void CarRegistry::applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road& road) //think about ForceGenerator
+void CarRegistry::applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road* road) //think about ForceGenerator
 {
     Vector target;
     if (car.followPath(road, &target)) {

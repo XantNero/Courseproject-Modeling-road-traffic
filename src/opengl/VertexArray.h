@@ -1,18 +1,26 @@
 #ifndef _VERTEXARRAY_H_
 #define _VERTEXARRAY_H_
 #include "VertexBuffer.h"
+#include "IndexBuffer.h"
 #include "VertexBufferLayout.h"
+#include <vector>
+#include <memory>
 class VertexArray
 {
-private:
-    unsigned int m_RendererID;
 public:
     VertexArray();
     ~VertexArray();
 
     void bind() const;
     void unbind() const;
-    void addBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
+    void addVertexBuffer(const std::shared_ptr<VertexBuffer> vb, const VertexBufferLayout& layout);
+    void setIndexBuffer(const std::shared_ptr<IndexBuffer> ib);
+    const std::shared_ptr<IndexBuffer>& getIndexBuffer() const;
+    const std::vector<std::shared_ptr<VertexBuffer>>& getVertexBufferArray() const;
+private:
+    unsigned int m_RendererID;
+    std::vector<std::shared_ptr<VertexBuffer>> m_VertexBuffers;
+    std::shared_ptr<IndexBuffer> m_IndexBuffer;
 };
 
 #endif

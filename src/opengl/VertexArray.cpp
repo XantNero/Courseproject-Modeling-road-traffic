@@ -1,7 +1,6 @@
 #include "VertexArray.h"
 #include <GL/glew.h>
 #include "debug.h"
-#include <iostream>
 
 
 VertexArray::VertexArray() 
@@ -23,10 +22,24 @@ void VertexArray::unbind() const
     //glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexArray::addBuffer(const VertexBuffer &vb, const VertexBufferLayout& layout)
+void VertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer> ib) 
 {
-    bind();
-    vb.bind();
+    m_IndexBuffer = ib;
+}
+
+const std::shared_ptr<IndexBuffer>& VertexArray::getIndexBuffer() const
+{
+    return m_IndexBuffer;
+}
+
+const std::vector<std::shared_ptr<VertexBuffer>>& VertexArray::getVertexBufferArray() const
+{
+    return m_VertexBuffers;
+}
+
+void VertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer> vb, const VertexBufferLayout& layout)
+{
+    vb->bind();
     const auto& elements = layout.getElementArray();
     unsigned int offset = 0;
     for (unsigned int i = 0; i < elements.size(); ++i) {
@@ -39,4 +52,5 @@ void VertexArray::addBuffer(const VertexBuffer &vb, const VertexBufferLayout& la
     }
     // GLCall(glEnableVertexAttribArray(0));
     // GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0));
+    m_VertexBuffers.push_back(vb);
 }

@@ -6,12 +6,11 @@
 
 class Renderer 
 {
-private:
-    unsigned int m_Renderer_ID;
 public:
-    Renderer();
-    ~Renderer();
-    void draw(const unsigned int type, const VertexArray &, const IndexBuffer &, const  Shader &) const;
+    static void draw(const unsigned int type, const VertexArray &, const  Shader &);
+    static void enableBlending();
+    static void setClearColor(const float r, const float g, const float b, const float a);
+    static void clear();
 };
 
 

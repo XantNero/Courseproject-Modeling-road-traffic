@@ -6,7 +6,6 @@ class OrtographicCamera
 {
 public:
 
-    OrtographicCamera();
     OrtographicCamera(const float left, const float right, const float bottom, const float top);
     OrtographicCamera(const glm::mat4& ProjectionMatrix);
     ~OrtographicCamera();

@@ -2,14 +2,9 @@
 
 #include "../vendor/glm/gtc/matrix_transform.hpp"
 
-OrtographicCamera::OrtographicCamera()
-    :m_ProjectionMatrix(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f)), m_ViewMatrix(glm::mat4(1.0f)),
-    m_ViewProjectionMatrix(glm::mat4(1.0f)), m_Position(glm::vec3(0.0f, 0.0f, 0.0f)), m_Rotation(0.0f)
-{
-}
 OrtographicCamera::OrtographicCamera(const float left, const float right, const float bottom, const float top)
     :m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(glm::mat4(1.0f)),
-    m_ViewProjectionMatrix(glm::mat4(1.0f)), m_Position(glm::vec3((right + left) / 2., (top + bottom) / 2.0, 0.0f)), m_Rotation(0.0f)
+    m_ViewProjectionMatrix(glm::mat4(1.0f)), m_Position(glm::vec3(0.0f, 0.0f, 0.0f)), m_Rotation(0.0f)
 {
     recalculateViewMatrix();
 }

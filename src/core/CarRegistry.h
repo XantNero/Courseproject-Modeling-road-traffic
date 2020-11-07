@@ -11,7 +11,7 @@ struct CarInformation
     Car car;
     SteerForceGenerator steerForceGenerator;
     BrakeForceGenerator brakeForceGenerator;
-    int roadIndex;
+    unsigned int roadID;
 };
 
 
@@ -21,11 +21,11 @@ public:
     CarRegistry();
     ~CarRegistry();
 
-    void addCar(const Car &car, int start_road_index);
+    void addCar(const Car &car, const unsigned int start_roadID);
     void update(const RoadRegistry &roads, float time);
     std::vector<Car> getCars();
 private:
-    void applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road& road);
+    void applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road* road);
     void applyBrakeForce(Car &car, BrakeForceGenerator& brakeForceGenerator);
 private:
     std::list<CarInformation> cars;

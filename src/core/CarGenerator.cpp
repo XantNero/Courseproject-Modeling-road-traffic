@@ -1,14 +1,30 @@
 #include "CarGenerator.h"
-#include <math.h>
+
+
+CarGenerator::CarGenerator() 
+    :position(), rate(300)
+{ 
+    time = std::chrono::steady_clock::now();
+}
+
 CarGenerator::CarGenerator(const Vector &pos, const int rate)
-    :position(new Vector(pos)), rate(rate)
+    :position(pos), rate(rate)
 {
     time = std::chrono::steady_clock::now();
 }
 
+void CarGenerator::setPosition(const Vector &pos) 
+{
+    position = pos;
+}
+
+const Vector& CarGenerator::getPosition() const
+{
+    return position;   
+}
+
 CarGenerator::~CarGenerator()
 {
-    delete position;
 }
 
 void CarGenerator::update(CarRegistry& cars)
@@ -19,7 +35,7 @@ void CarGenerator::update(CarRegistry& cars)
     auto end = std::chrono::steady_clock::now();
     auto dif = std::chrono::duration_cast<std::chrono::milliseconds>(end - time);
     if (dif >= std::chrono::milliseconds(rate)/* && i < 2*/) {
-        Car car(*position);
+        Car car(position);
         // if (i == 0)
         //     car.setMaxSpeed(3.0f);
         // else 
@@ -114,3 +130,4 @@ int CarGenerator::getRate() const
 //         ++itCheckCar;
 //     }
 // }
+

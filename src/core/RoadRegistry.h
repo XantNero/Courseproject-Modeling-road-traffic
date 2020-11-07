@@ -1,6 +1,8 @@
 #ifndef _ROADREGISTRY_H_
 #define _ROADREGISTRY_H_
 #include "Road.h"
+#include <memory>
+#include <unordered_map>
 #include <vector>
 
 class RoadRegistry
@@ -9,14 +11,16 @@ public:
     RoadRegistry();
     ~RoadRegistry();
 
-    int getRoadIndex(Road* const) const;
-    Road& getRoad(int index) const;
-    void addRoad(Road&);
-    void connectRoads(int index_from, int index_to);
-    const std::vector<int>& getRoadConnections(int road_index) const;
+    const Road* getRoad(const unsigned int roadID) const;
+    const std::vector<const Road*> getRoads() const;
+    void addRoad(std::unique_ptr<Road> road);
+    void connectRoads(const unsigned int ID_from, const unsigned int ID_to);
+    const std::vector<unsigned int>& getRoadConnections(const unsigned int roadID) const;
+    unsigned int getRoadsCount() const;
 private:
-    std::vector<std::vector<int>> connections;
-    std::vector<Road*> roads;
+    std::vector<std::vector<unsigned int>> connections;
+    std::vector<std::unique_ptr<Road>> roads;
+    mutable std::unordered_map<unsigned int, unsigned int> m_hash;
 };
 
 

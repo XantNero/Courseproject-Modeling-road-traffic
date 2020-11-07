@@ -1,8 +1,10 @@
 #include "Road.h"
 #include "Vector.h"
 
+unsigned int Road::s_LastID = 0;
+
 Road::Road()
-: points(), radius(5) { }
+: points(), radius(5), m_ID(s_LastID++) { }
 
 Road::~Road() { }
 
@@ -24,4 +26,9 @@ Vector Road::getPoint(int i) const
 double Road::getRadius() const
 {
     return radius;
+}
+
+unsigned int Road::getID() const
+{
+    return m_ID;
 }

@@ -16,7 +16,12 @@ add_executable(test
     src/core/RoadRegistry.h src/core/RoadRegistry.cpp
     src/core/CarRegistry.h src/core/CarRegistry.cpp
 
-    src/Window.h src/Window.cpp
+    src/glfw/Window.h src/glfw/Window.cpp
+
+    src/imgui/ImguiLayer.h src/imgui/ImguiLayer.cpp 
+
+    src/OpenglLayer.h src/OpenglLayer.cpp
+    src/ModelApplication.h src/ModelApplication.cpp
 
     src/opengl/VertexBuffer.h src/opengl/VertexBuffer.cpp
     src/opengl/IndexBuffer.h src/opengl/IndexBuffer.cpp

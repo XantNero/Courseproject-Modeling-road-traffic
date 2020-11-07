@@ -1,7 +1,7 @@
+#include "../pch.h"
+
 #include "Shader.h"
 #include "GL/glew.h"
-#include <fstream>
-#include <sstream>
 #include "debug.h"
 
 ShaderProgramSource Shader::ParseShader(const std::string &filePath)

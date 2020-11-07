@@ -1,5 +1,6 @@
+#include "../pch.h"
+
 #include "debug.h"
-#include <iostream>
 
 
 void GLClearError()

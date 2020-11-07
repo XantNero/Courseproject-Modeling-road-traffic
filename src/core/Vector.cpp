@@ -1,5 +1,6 @@
+#include "../pch.h"
+
 #include "Vector.h"
-#include <cmath>
 
 inline Vector::Vector(double x /*= .0*/, double y /*= .0*/)
 : x(x), y(y){ }
