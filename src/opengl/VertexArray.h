@@ -1,8 +1,6 @@
 #ifndef _VERTEXARRAY_H_
 #define _VERTEXARRAY_H_
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "VertexBufferLayout.h"
+#include "Buffer.h"
 #include <vector>
 #include <memory>
 class VertexArray

@@ -4,11 +4,12 @@
 #include "imgui/ImguiLayer.h"
 #include "OpenglLayer.h"
 
-#include "core/CarGenerator.h"
-#include "core/CarRegistry.h"
-#include "core/RoadRegistry.h"
+#include "core/Car.h"
+#include "core/Road.h"
 
 #include <vector>
+#include <memory>
+#include <string>
 
 //TODO THINK: car* --> make carregistry unique_ptr
 
@@ -23,7 +24,7 @@ struct ModelInformation
 class ModelApplication
 {
 public:
-    ModelApplication();
+    ModelApplication(const std::string& filePath);
     ~ModelApplication();
     static const ModelApplication* getApp();
     const Window* getWindow() const;
@@ -34,9 +35,9 @@ private:
     Window* m_Window;
     static ModelApplication *s_App_Instanse;
 
-    RoadRegistry m_Roads;
-    CarRegistry m_CarRegistry;
-    CarGenerator m_CarGenerator;
+    std::unique_ptr<RoadRegistry> m_RoadRegistry;
+    std::unique_ptr<CarRegistry> m_CarRegistry;
+    std::vector<std::unique_ptr<CarGenerator>> m_CarGenerators;
 };
 
 #endif

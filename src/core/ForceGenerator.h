@@ -8,4 +8,36 @@ public:
     virtual void updateForce(Particle2D* Particle2D, const float duration) {}
 };
 
+class SteerForceGenerator : public ForceGenerator
+{
+public:
+    SteerForceGenerator();
+    SteerForceGenerator(const Vector &target);
+    ~SteerForceGenerator();
+    inline void setTarget(const Vector &target) { this->target = target; }
+    inline Vector getTarget() const { return target; }
+    virtual void updateForce(Particle2D* particle, const float time) override;
+private:
+    Vector target;
+};
+
+class BrakeForceGenerator : public ForceGenerator
+{
+public: 
+    BrakeForceGenerator();
+    BrakeForceGenerator(const Vector& desired, const float distance);
+    ~BrakeForceGenerator();
+    void init(const Vector& desired, const float distance);
+    inline void setDesiredVelocity(const Vector& desired) { this->desired = desired; }
+    inline Vector getDesiredVelocity() const { return desired; }
+    inline void setDistance(const float distance) { this->distance = distance; }
+    inline float getDistance() const { return distance; }
+    virtual void updateForce(Particle2D* Particle2D, const float duration) override;
+private:
+    Vector desired;
+    float distance;
+};
+
+
+
 #endif

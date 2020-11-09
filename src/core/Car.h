@@ -1,8 +1,13 @@
 #ifndef _CAR_H_
 #define _CAR_H_
+#include <list>
+#include <chrono>
+
 #include "Vector.h"
 #include "Road.h"
 #include "Particle.h"
+#include "ForceGenerator.h"
+
 
 // class Car
 // {
@@ -35,8 +40,6 @@
 //     double maxSpeed;
 //     State state;
 // };
-
-
 class Car : public Particle2D
 {
 public:
@@ -50,20 +53,20 @@ public:
     Car(const float x, const float y);
     ~Car();
     Car(const Car& );
-    virtual void applyForce(const Vector &force) override;
+    inline virtual void applyForce(const Vector &force) override { forceAccumulator += force; }
     virtual void move(float time) override;
     bool followPath(const Road* , Vector*);
-    virtual Vector getPosition() const override;
-    virtual Vector getVelocity() const override;
-    virtual Vector getAcceleration() const override;
-    State getState() const;
-    void setState(State state);
-    double getMaxSpeed() const;
+    inline virtual Vector getPosition() const override { return position; }
+    inline virtual Vector getVelocity() const override { return velocity; }
+    inline virtual Vector getAcceleration() const override { return acceleration; }
+    inline State getState() const { return state; }
+    inline void setState(State state) { this->state = state; }
+    inline double getMaxSpeed() const { return maxSpeed; }
     bool view(const Car &car) const;
-    virtual Vector getForceAccumulator() const override;
-    inline void setVel(const Vector& vel) {velocity = vel;}
-    inline void setMaxSpeed(const double spe) { maxSpeed = spe; }
-    virtual void clearAccumulator() override;
+    inline virtual Vector getForceAccumulator() const override { return forceAccumulator; }
+    // inline void setVel(const Vector& vel) {velocity = vel;}
+    // inline void setMaxSpeed(const double spe) { maxSpeed = spe; }
+    inline virtual void clearAccumulator() override { forceAccumulator *= 0; };
     virtual float getMass() const override { return 0; }
     virtual float getInverseMass() const override { return 0;}
     virtual bool hasFiniteMass() const override { return 0;}
@@ -77,5 +80,49 @@ private:
     State state;
 };
 
+struct CarInformation
+{
+    Car car;
+    SteerForceGenerator steerForceGenerator;
+    BrakeForceGenerator brakeForceGenerator;
+    unsigned int roadID;
+};
+
+class CarRegistry
+{
+public:
+    CarRegistry();
+    ~CarRegistry();
+
+    void addCar(const Car &car, const unsigned int start_roadID);
+    void update(const RoadRegistry &roads, float time);
+    std::vector<Car> getCars();
+private:
+    void applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road* road);
+    void applyBrakeForce(Car &car, BrakeForceGenerator& brakeForceGenerator);
+private:
+    std::list<CarInformation> cars;
+};
+
+class CarGenerator
+{
+public:
+    CarGenerator();
+    CarGenerator(const Vector &pos, const int rate = 300);
+    inline void setPosition(const Vector &pos) { position = pos; }
+    inline const Vector& getPosition() const { return position; }
+    inline int getRate() const { return rate; }
+    inline void setRate(int rate) { this->rate = rate; }
+    inline void setStartRoadID(const unsigned int ID) { m_StartRoadID = ID; }
+    inline unsigned int getStartRoadId() { return m_StartRoadID; }
+    ~CarGenerator();
+    void update(CarRegistry &cars); //change to array of roads, roads connections
+   // void avoidColision(); //change name
+private:
+    Vector position;
+    int rate;
+    unsigned int m_StartRoadID;
+    std::chrono::time_point<std::chrono::steady_clock> time;
+};
 
 #endif

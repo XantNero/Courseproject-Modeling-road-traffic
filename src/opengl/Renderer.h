@@ -1,7 +1,6 @@
 #ifndef _RENDERER_H_
 #define _RENDERER_H_
 #include "VertexArray.h"
-#include "IndexBuffer.h"
 #include "Shader.h"
 
 class Renderer 

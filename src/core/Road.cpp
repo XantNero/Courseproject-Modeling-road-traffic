@@ -1,34 +1,58 @@
+#include "../pch.h"
 #include "Road.h"
 #include "Vector.h"
 
-unsigned int Road::s_LastID = 0;
+/*
+----------------------------------------------------------------------
+|||||||||||||||||||||||Road|||||||||||||||||||||||||||||||||||||||||||
+----------------------------------------------------------------------
+*/
 
-Road::Road()
-: points(), radius(5), m_ID(s_LastID++) { }
+/*
+----------------------------------------------------------------------
+|||||||||||||||||||||||RoadRegistry|||||||||||||||||||||||||||||||||||
+----------------------------------------------------------------------
+*/
 
-Road::~Road() { }
-
-void Road::addPoint(double x, double y) 
+RoadRegistry::RoadRegistry()
+    :connections(), roads(), m_hash()
 {
-    points.push_back(Vector(x, y));
+
+}
+RoadRegistry::~RoadRegistry()
+{
 }
 
-int Road::getRoadSize() const
+const Road* RoadRegistry::getRoad(const unsigned int roadID) const
 {
-    return points.size();
+    if (m_hash.find(roadID) != m_hash.end())
+        return roads[m_hash[roadID]].get();
+    return nullptr;
 }
 
-Vector Road::getPoint(int i) const
+const std::vector<const Road*> RoadRegistry::getRoads() const
 {
-    return points[i];
+    std::vector<const Road*> ret(roads.size());
+    for (unsigned int i = 0; i < roads.size(); ++i) {
+        ret[i] =roads[i].get();
+    }
+    return ret;
+}
+void RoadRegistry::addRoad(std::unique_ptr<Road> road)
+{
+    m_hash[road->getID()] = connections.size();
+    roads.push_back(std::move(road));
+    connections.push_back(std::vector<unsigned int>());
+}
+void RoadRegistry::connectRoads(const unsigned int ID_from, const unsigned int ID_to)
+{
+    if (m_hash.find(ID_from) != m_hash.end())
+    connections[m_hash[ID_from]].push_back(ID_to);
 }
 
-double Road::getRadius() const
+const std::vector<unsigned int>& RoadRegistry::getRoadConnections(const unsigned int roadID) const
 {
-    return radius;
-}
-
-unsigned int Road::getID() const
-{
-    return m_ID;
+    if (m_hash.find(roadID) != m_hash.end())
+        return connections[m_hash[roadID]];
+    //FIXME: no return statement
 }

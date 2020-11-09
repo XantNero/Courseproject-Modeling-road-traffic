@@ -8,13 +8,8 @@ add_executable(test
     src/core/Vector.h src/core/Vector.cpp
     src/core/Road.h src/core/Road.cpp
     src/core/Car.h src/core/Car.cpp
-    src/core/ForceGenerator.h
+    src/core/ForceGenerator.h src/core/ForceGenerator.cpp
     src/core/Particle.h src/core/Particle.cpp
-    src/core/SteerForceGenerator.h src/core/SteerForceGenerator.cpp
-    src/core/BrakeForceGenerator.h src/core/BrakeForceGenerator.cpp
-    src/core/CarGenerator.h src/core/CarGenerator.cpp
-    src/core/RoadRegistry.h src/core/RoadRegistry.cpp
-    src/core/CarRegistry.h src/core/CarRegistry.cpp
 
     src/glfw/Window.h src/glfw/Window.cpp
 
@@ -22,10 +17,9 @@ add_executable(test
 
     src/OpenglLayer.h src/OpenglLayer.cpp
     src/ModelApplication.h src/ModelApplication.cpp
+    src/MDLParser.h src/MDLParser.cpp
 
-    src/opengl/VertexBuffer.h src/opengl/VertexBuffer.cpp
-    src/opengl/IndexBuffer.h src/opengl/IndexBuffer.cpp
-    src/opengl/VertexBufferLayout.h src/opengl/VertexBufferLayout.cpp
+    src/opengl/Buffer.h src/opengl/Buffer.cpp
     src/opengl/VertexArray.h src/opengl/VertexArray.cpp
     src/opengl/debug.h src/opengl/debug.cpp
     src/opengl/Shader.h src/opengl/Shader.cpp

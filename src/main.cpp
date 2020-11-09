@@ -3,7 +3,7 @@
 int main(void)
 {
     srand(time(NULL));
-    ModelApplication app;
+    ModelApplication app("example.mdl");
     app.run();
     return 0;
 }

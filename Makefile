@@ -123,6 +123,33 @@ test/fast:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+src/MDLParser.o: src/MDLParser.cpp.o
+
+.PHONY : src/MDLParser.o
+
+# target to build an object file
+src/MDLParser.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/MDLParser.cpp.o
+.PHONY : src/MDLParser.cpp.o
+
+src/MDLParser.i: src/MDLParser.cpp.i
+
+.PHONY : src/MDLParser.i
+
+# target to preprocess a source file
+src/MDLParser.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/MDLParser.cpp.i
+.PHONY : src/MDLParser.cpp.i
+
+src/MDLParser.s: src/MDLParser.cpp.s
+
+.PHONY : src/MDLParser.s
+
+# target to generate assembly for a file
+src/MDLParser.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/MDLParser.cpp.s
+.PHONY : src/MDLParser.cpp.s
+
 src/ModelApplication.o: src/ModelApplication.cpp.o
 
 .PHONY : src/ModelApplication.o
@@ -177,33 +204,6 @@ src/OpenglLayer.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/OpenglLayer.cpp.s
 .PHONY : src/OpenglLayer.cpp.s
 
-src/core/BrakeForceGenerator.o: src/core/BrakeForceGenerator.cpp.o
-
-.PHONY : src/core/BrakeForceGenerator.o
-
-# target to build an object file
-src/core/BrakeForceGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/BrakeForceGenerator.cpp.o
-.PHONY : src/core/BrakeForceGenerator.cpp.o
-
-src/core/BrakeForceGenerator.i: src/core/BrakeForceGenerator.cpp.i
-
-.PHONY : src/core/BrakeForceGenerator.i
-
-# target to preprocess a source file
-src/core/BrakeForceGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/BrakeForceGenerator.cpp.i
-.PHONY : src/core/BrakeForceGenerator.cpp.i
-
-src/core/BrakeForceGenerator.s: src/core/BrakeForceGenerator.cpp.s
-
-.PHONY : src/core/BrakeForceGenerator.s
-
-# target to generate assembly for a file
-src/core/BrakeForceGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/BrakeForceGenerator.cpp.s
-.PHONY : src/core/BrakeForceGenerator.cpp.s
-
 src/core/Car.o: src/core/Car.cpp.o
 
 .PHONY : src/core/Car.o
@@ -231,59 +231,32 @@ src/core/Car.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/Car.cpp.s
 .PHONY : src/core/Car.cpp.s
 
-src/core/CarGenerator.o: src/core/CarGenerator.cpp.o
+src/core/ForceGenerator.o: src/core/ForceGenerator.cpp.o
 
-.PHONY : src/core/CarGenerator.o
-
-# target to build an object file
-src/core/CarGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/CarGenerator.cpp.o
-.PHONY : src/core/CarGenerator.cpp.o
-
-src/core/CarGenerator.i: src/core/CarGenerator.cpp.i
-
-.PHONY : src/core/CarGenerator.i
-
-# target to preprocess a source file
-src/core/CarGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/CarGenerator.cpp.i
-.PHONY : src/core/CarGenerator.cpp.i
-
-src/core/CarGenerator.s: src/core/CarGenerator.cpp.s
-
-.PHONY : src/core/CarGenerator.s
-
-# target to generate assembly for a file
-src/core/CarGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/CarGenerator.cpp.s
-.PHONY : src/core/CarGenerator.cpp.s
-
-src/core/CarRegistry.o: src/core/CarRegistry.cpp.o
-
-.PHONY : src/core/CarRegistry.o
+.PHONY : src/core/ForceGenerator.o
 
 # target to build an object file
-src/core/CarRegistry.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/CarRegistry.cpp.o
-.PHONY : src/core/CarRegistry.cpp.o
+src/core/ForceGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/ForceGenerator.cpp.o
+.PHONY : src/core/ForceGenerator.cpp.o
 
-src/core/CarRegistry.i: src/core/CarRegistry.cpp.i
+src/core/ForceGenerator.i: src/core/ForceGenerator.cpp.i
 
-.PHONY : src/core/CarRegistry.i
+.PHONY : src/core/ForceGenerator.i
 
 # target to preprocess a source file
-src/core/CarRegistry.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/CarRegistry.cpp.i
-.PHONY : src/core/CarRegistry.cpp.i
+src/core/ForceGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/ForceGenerator.cpp.i
+.PHONY : src/core/ForceGenerator.cpp.i
 
-src/core/CarRegistry.s: src/core/CarRegistry.cpp.s
+src/core/ForceGenerator.s: src/core/ForceGenerator.cpp.s
 
-.PHONY : src/core/CarRegistry.s
+.PHONY : src/core/ForceGenerator.s
 
 # target to generate assembly for a file
-src/core/CarRegistry.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/CarRegistry.cpp.s
-.PHONY : src/core/CarRegistry.cpp.s
+src/core/ForceGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/ForceGenerator.cpp.s
+.PHONY : src/core/ForceGenerator.cpp.s
 
 src/core/Particle.o: src/core/Particle.cpp.o
 
@@ -338,60 +311,6 @@ src/core/Road.s: src/core/Road.cpp.s
 src/core/Road.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/Road.cpp.s
 .PHONY : src/core/Road.cpp.s
-
-src/core/RoadRegistry.o: src/core/RoadRegistry.cpp.o
-
-.PHONY : src/core/RoadRegistry.o
-
-# target to build an object file
-src/core/RoadRegistry.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/RoadRegistry.cpp.o
-.PHONY : src/core/RoadRegistry.cpp.o
-
-src/core/RoadRegistry.i: src/core/RoadRegistry.cpp.i
-
-.PHONY : src/core/RoadRegistry.i
-
-# target to preprocess a source file
-src/core/RoadRegistry.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/RoadRegistry.cpp.i
-.PHONY : src/core/RoadRegistry.cpp.i
-
-src/core/RoadRegistry.s: src/core/RoadRegistry.cpp.s
-
-.PHONY : src/core/RoadRegistry.s
-
-# target to generate assembly for a file
-src/core/RoadRegistry.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/RoadRegistry.cpp.s
-.PHONY : src/core/RoadRegistry.cpp.s
-
-src/core/SteerForceGenerator.o: src/core/SteerForceGenerator.cpp.o
-
-.PHONY : src/core/SteerForceGenerator.o
-
-# target to build an object file
-src/core/SteerForceGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/SteerForceGenerator.cpp.o
-.PHONY : src/core/SteerForceGenerator.cpp.o
-
-src/core/SteerForceGenerator.i: src/core/SteerForceGenerator.cpp.i
-
-.PHONY : src/core/SteerForceGenerator.i
-
-# target to preprocess a source file
-src/core/SteerForceGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/SteerForceGenerator.cpp.i
-.PHONY : src/core/SteerForceGenerator.cpp.i
-
-src/core/SteerForceGenerator.s: src/core/SteerForceGenerator.cpp.s
-
-.PHONY : src/core/SteerForceGenerator.s
-
-# target to generate assembly for a file
-src/core/SteerForceGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/core/SteerForceGenerator.cpp.s
-.PHONY : src/core/SteerForceGenerator.cpp.s
 
 src/core/Vector.o: src/core/Vector.cpp.o
 
@@ -501,32 +420,32 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/opengl/IndexBuffer.o: src/opengl/IndexBuffer.cpp.o
+src/opengl/Buffer.o: src/opengl/Buffer.cpp.o
 
-.PHONY : src/opengl/IndexBuffer.o
+.PHONY : src/opengl/Buffer.o
 
 # target to build an object file
-src/opengl/IndexBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/IndexBuffer.cpp.o
-.PHONY : src/opengl/IndexBuffer.cpp.o
+src/opengl/Buffer.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/Buffer.cpp.o
+.PHONY : src/opengl/Buffer.cpp.o
 
-src/opengl/IndexBuffer.i: src/opengl/IndexBuffer.cpp.i
+src/opengl/Buffer.i: src/opengl/Buffer.cpp.i
 
-.PHONY : src/opengl/IndexBuffer.i
+.PHONY : src/opengl/Buffer.i
 
 # target to preprocess a source file
-src/opengl/IndexBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/IndexBuffer.cpp.i
-.PHONY : src/opengl/IndexBuffer.cpp.i
+src/opengl/Buffer.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/Buffer.cpp.i
+.PHONY : src/opengl/Buffer.cpp.i
 
-src/opengl/IndexBuffer.s: src/opengl/IndexBuffer.cpp.s
+src/opengl/Buffer.s: src/opengl/Buffer.cpp.s
 
-.PHONY : src/opengl/IndexBuffer.s
+.PHONY : src/opengl/Buffer.s
 
 # target to generate assembly for a file
-src/opengl/IndexBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/IndexBuffer.cpp.s
-.PHONY : src/opengl/IndexBuffer.cpp.s
+src/opengl/Buffer.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/Buffer.cpp.s
+.PHONY : src/opengl/Buffer.cpp.s
 
 src/opengl/OrtographicCamera.o: src/opengl/OrtographicCamera.cpp.o
 
@@ -662,60 +581,6 @@ src/opengl/VertexArray.s: src/opengl/VertexArray.cpp.s
 src/opengl/VertexArray.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexArray.cpp.s
 .PHONY : src/opengl/VertexArray.cpp.s
-
-src/opengl/VertexBuffer.o: src/opengl/VertexBuffer.cpp.o
-
-.PHONY : src/opengl/VertexBuffer.o
-
-# target to build an object file
-src/opengl/VertexBuffer.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexBuffer.cpp.o
-.PHONY : src/opengl/VertexBuffer.cpp.o
-
-src/opengl/VertexBuffer.i: src/opengl/VertexBuffer.cpp.i
-
-.PHONY : src/opengl/VertexBuffer.i
-
-# target to preprocess a source file
-src/opengl/VertexBuffer.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexBuffer.cpp.i
-.PHONY : src/opengl/VertexBuffer.cpp.i
-
-src/opengl/VertexBuffer.s: src/opengl/VertexBuffer.cpp.s
-
-.PHONY : src/opengl/VertexBuffer.s
-
-# target to generate assembly for a file
-src/opengl/VertexBuffer.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexBuffer.cpp.s
-.PHONY : src/opengl/VertexBuffer.cpp.s
-
-src/opengl/VertexBufferLayout.o: src/opengl/VertexBufferLayout.cpp.o
-
-.PHONY : src/opengl/VertexBufferLayout.o
-
-# target to build an object file
-src/opengl/VertexBufferLayout.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexBufferLayout.cpp.o
-.PHONY : src/opengl/VertexBufferLayout.cpp.o
-
-src/opengl/VertexBufferLayout.i: src/opengl/VertexBufferLayout.cpp.i
-
-.PHONY : src/opengl/VertexBufferLayout.i
-
-# target to preprocess a source file
-src/opengl/VertexBufferLayout.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexBufferLayout.cpp.i
-.PHONY : src/opengl/VertexBufferLayout.cpp.i
-
-src/opengl/VertexBufferLayout.s: src/opengl/VertexBufferLayout.cpp.s
-
-.PHONY : src/opengl/VertexBufferLayout.s
-
-# target to generate assembly for a file
-src/opengl/VertexBufferLayout.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/opengl/VertexBufferLayout.cpp.s
-.PHONY : src/opengl/VertexBufferLayout.cpp.s
 
 src/opengl/debug.o: src/opengl/debug.cpp.o
 
@@ -942,36 +807,27 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... src/MDLParser.o"
+	@echo "... src/MDLParser.i"
+	@echo "... src/MDLParser.s"
 	@echo "... src/ModelApplication.o"
 	@echo "... src/ModelApplication.i"
 	@echo "... src/ModelApplication.s"
 	@echo "... src/OpenglLayer.o"
 	@echo "... src/OpenglLayer.i"
 	@echo "... src/OpenglLayer.s"
-	@echo "... src/core/BrakeForceGenerator.o"
-	@echo "... src/core/BrakeForceGenerator.i"
-	@echo "... src/core/BrakeForceGenerator.s"
 	@echo "... src/core/Car.o"
 	@echo "... src/core/Car.i"
 	@echo "... src/core/Car.s"
-	@echo "... src/core/CarGenerator.o"
-	@echo "... src/core/CarGenerator.i"
-	@echo "... src/core/CarGenerator.s"
-	@echo "... src/core/CarRegistry.o"
-	@echo "... src/core/CarRegistry.i"
-	@echo "... src/core/CarRegistry.s"
+	@echo "... src/core/ForceGenerator.o"
+	@echo "... src/core/ForceGenerator.i"
+	@echo "... src/core/ForceGenerator.s"
 	@echo "... src/core/Particle.o"
 	@echo "... src/core/Particle.i"
 	@echo "... src/core/Particle.s"
 	@echo "... src/core/Road.o"
 	@echo "... src/core/Road.i"
 	@echo "... src/core/Road.s"
-	@echo "... src/core/RoadRegistry.o"
-	@echo "... src/core/RoadRegistry.i"
-	@echo "... src/core/RoadRegistry.s"
-	@echo "... src/core/SteerForceGenerator.o"
-	@echo "... src/core/SteerForceGenerator.i"
-	@echo "... src/core/SteerForceGenerator.s"
 	@echo "... src/core/Vector.o"
 	@echo "... src/core/Vector.i"
 	@echo "... src/core/Vector.s"
@@ -984,9 +840,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/opengl/IndexBuffer.o"
-	@echo "... src/opengl/IndexBuffer.i"
-	@echo "... src/opengl/IndexBuffer.s"
+	@echo "... src/opengl/Buffer.o"
+	@echo "... src/opengl/Buffer.i"
+	@echo "... src/opengl/Buffer.s"
 	@echo "... src/opengl/OrtographicCamera.o"
 	@echo "... src/opengl/OrtographicCamera.i"
 	@echo "... src/opengl/OrtographicCamera.s"
@@ -1002,12 +858,6 @@ help:
 	@echo "... src/opengl/VertexArray.o"
 	@echo "... src/opengl/VertexArray.i"
 	@echo "... src/opengl/VertexArray.s"
-	@echo "... src/opengl/VertexBuffer.o"
-	@echo "... src/opengl/VertexBuffer.i"
-	@echo "... src/opengl/VertexBuffer.s"
-	@echo "... src/opengl/VertexBufferLayout.o"
-	@echo "... src/opengl/VertexBufferLayout.i"
-	@echo "... src/opengl/VertexBufferLayout.s"
 	@echo "... src/opengl/debug.o"
 	@echo "... src/opengl/debug.i"
 	@echo "... src/opengl/debug.s"

@@ -1,4 +1,5 @@
 #include "ModelApplication.h"
+#include "MDLParser.h"
 
 
 
@@ -60,7 +61,8 @@
 
 ModelApplication* ModelApplication::s_App_Instanse = nullptr;
 
-ModelApplication::ModelApplication() 
+    
+ModelApplication::ModelApplication(const std::string& filePath)
     :m_Window(new Window({"test", 1080, 720})), m_OpenglLayer(new OpenglLayer()), m_ImguiLayer(new ImguiLayer()) 
 {
     s_App_Instanse = this;
@@ -69,38 +71,44 @@ ModelApplication::ModelApplication()
     // m_Window->setWindowSizeCallback(window_resize_callback);
     // m_Window->setScrollCallback(scroll_callback);
     m_Window->setVSync(true);
-
+    ParseInformation info = MDLParser::parseFile(filePath);
     
-    float roadVertices[] = {
-        540.0f, 720.0f,
-        540.0f, 360.0f,
-        0.0f, 0.0f,
-        1080.0f, 0.0f,
-        540.0f, 0.0f
-    };
+    m_RoadRegistry.reset(info.roadRegistry);
+    m_CarGenerators.resize(info.CarGenerators.size());
+    for (unsigned int i = 0; i < info.CarGenerators.size(); ++i) {
+        m_CarGenerators[i].reset(info.CarGenerators[i]);
+    }
+    m_CarRegistry = std::make_unique<CarRegistry>();
+    // float roadVertices[] = {
+    //     540.0f, 720.0f,
+    //     540.0f, 360.0f,
+    //     0.0f, 0.0f,
+    //     1080.0f, 0.0f,
+    //     540.0f, 0.0f
+    // };
 
-    std::unique_ptr<Road> road1 = std::make_unique<Road>();
-    std::unique_ptr<Road> road2 = std::make_unique<Road>();
-    std::unique_ptr<Road> road3 = std::make_unique<Road>();
-    std::unique_ptr<Road> road4 = std::make_unique<Road>();
+    // std::unique_ptr<Road> road1 = std::make_unique<Road>();
+    // std::unique_ptr<Road> road2 = std::make_unique<Road>();
+    // std::unique_ptr<Road> road3 = std::make_unique<Road>();
+    // std::unique_ptr<Road> road4 = std::make_unique<Road>();
 
-    road1->addPoint(roadVertices[0], roadVertices[1]);
-    road1->addPoint(roadVertices[2], roadVertices[3]);
-    road2->addPoint(roadVertices[2], roadVertices[3]);
-    road2->addPoint(roadVertices[4], roadVertices[5]);
-    road3->addPoint(roadVertices[2], roadVertices[3]);
-    road3->addPoint(roadVertices[6], roadVertices[7]);
-    road4->addPoint(roadVertices[2], roadVertices[3]);
-    road4->addPoint(roadVertices[8], roadVertices[9]);
+    // road1->addPoint(roadVertices[0], roadVertices[1]);
+    // road1->addPoint(roadVertices[2], roadVertices[3]);
+    // road2->addPoint(roadVertices[2], roadVertices[3]);
+    // road2->addPoint(roadVertices[4], roadVertices[5]);
+    // road3->addPoint(roadVertices[2], roadVertices[3]);
+    // road3->addPoint(roadVertices[6], roadVertices[7]);
+    // road4->addPoint(roadVertices[2], roadVertices[3]);
+    // road4->addPoint(roadVertices[8], roadVertices[9]);
     
-    m_Roads.addRoad(std::move(road1));
-    m_Roads.addRoad(std::move(road2));
-    m_Roads.addRoad(std::move(road3));
-    m_Roads.addRoad(std::move(road4));
-    m_Roads.connectRoads(0, 1);
-    m_Roads.connectRoads(0, 2);
-    m_Roads.connectRoads(0, 3);
-    m_CarGenerator.setPosition(Vector(540, 720));
+    // m_Roads.addRoad(std::move(road1));
+    // m_Roads.addRoad(std::move(road2));
+    // m_Roads.addRoad(std::move(road3));
+    // m_Roads.addRoad(std::move(road4));
+    // m_Roads.connectRoads(0, 1);
+    // m_Roads.connectRoads(0, 2);
+    // m_Roads.connectRoads(0, 3);
+    // m_CarGenerator.setPosition(Vector(540, 720));
     m_OpenglLayer->onAttach();
     m_ImguiLayer->onAttach();
 }
@@ -128,12 +136,13 @@ void ModelApplication::run()
     while(!m_Window->shouldClose()) {
         //CarGenerator.setRate((float)genRate / time);
         float time = 1.0f;
-        m_CarGenerator.update(m_CarRegistry);
-        m_CarRegistry.update(m_Roads, time);
+        for (unsigned int i = 0; i < m_CarGenerators.size(); ++i)
+            m_CarGenerators[i]->update(*m_CarRegistry);
+        m_CarRegistry->update(*m_RoadRegistry, time);
 
         ModelInformation info;
-        info.cars = m_CarRegistry.getCars();
-        info.roads = m_Roads.getRoads();
+        info.cars = m_CarRegistry->getCars();
+        info.roads = m_RoadRegistry->getRoads();
         m_OpenglLayer->onUpdate(info);
         m_ImguiLayer->begin();
         m_ImguiLayer->onImguiRender();
