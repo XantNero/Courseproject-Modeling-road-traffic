@@ -8,7 +8,7 @@ public:
     //Particle2D();
     Particle2D(const Vector& position, float mass = 1.0f, float damping = 0.98f);
     Particle2D(const float x, const float y, float mass = 1.0f, float damping = 0.98f);
-    virtual ~Particle2D() { };
+    virtual ~Particle2D() { }
     virtual void move(float duration) = 0;
     //virtual void setMass(float mass) = 0;
     virtual float getMass() const = 0;

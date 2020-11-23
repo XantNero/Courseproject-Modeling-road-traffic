@@ -136,6 +136,60 @@ QtApp_autogen/fast:
 	$(MAKE) -f CMakeFiles/QtApp_autogen.dir/build.make CMakeFiles/QtApp_autogen.dir/build
 .PHONY : QtApp_autogen/fast
 
+Item.o: Item.cpp.o
+
+.PHONY : Item.o
+
+# target to build an object file
+Item.cpp.o:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Item.cpp.o
+.PHONY : Item.cpp.o
+
+Item.i: Item.cpp.i
+
+.PHONY : Item.i
+
+# target to preprocess a source file
+Item.cpp.i:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Item.cpp.i
+.PHONY : Item.cpp.i
+
+Item.s: Item.cpp.s
+
+.PHONY : Item.s
+
+# target to generate assembly for a file
+Item.cpp.s:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Item.cpp.s
+.PHONY : Item.cpp.s
+
+Mainwindow.o: Mainwindow.cpp.o
+
+.PHONY : Mainwindow.o
+
+# target to build an object file
+Mainwindow.cpp.o:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Mainwindow.cpp.o
+.PHONY : Mainwindow.cpp.o
+
+Mainwindow.i: Mainwindow.cpp.i
+
+.PHONY : Mainwindow.i
+
+# target to preprocess a source file
+Mainwindow.cpp.i:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Mainwindow.cpp.i
+.PHONY : Mainwindow.cpp.i
+
+Mainwindow.s: Mainwindow.cpp.s
+
+.PHONY : Mainwindow.s
+
+# target to generate assembly for a file
+Mainwindow.cpp.s:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Mainwindow.cpp.s
+.PHONY : Mainwindow.cpp.s
+
 QtApp_autogen/mocs_compilation.o: QtApp_autogen/mocs_compilation.cpp.o
 
 .PHONY : QtApp_autogen/mocs_compilation.o
@@ -162,6 +216,60 @@ QtApp_autogen/mocs_compilation.s: QtApp_autogen/mocs_compilation.cpp.s
 QtApp_autogen/mocs_compilation.cpp.s:
 	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/QtApp_autogen/mocs_compilation.cpp.s
 .PHONY : QtApp_autogen/mocs_compilation.cpp.s
+
+Workspace.o: Workspace.cpp.o
+
+.PHONY : Workspace.o
+
+# target to build an object file
+Workspace.cpp.o:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Workspace.cpp.o
+.PHONY : Workspace.cpp.o
+
+Workspace.i: Workspace.cpp.i
+
+.PHONY : Workspace.i
+
+# target to preprocess a source file
+Workspace.cpp.i:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Workspace.cpp.i
+.PHONY : Workspace.cpp.i
+
+Workspace.s: Workspace.cpp.s
+
+.PHONY : Workspace.s
+
+# target to generate assembly for a file
+Workspace.cpp.s:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/Workspace.cpp.s
+.PHONY : Workspace.cpp.s
+
+WorkspaceScene.o: WorkspaceScene.cpp.o
+
+.PHONY : WorkspaceScene.o
+
+# target to build an object file
+WorkspaceScene.cpp.o:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/WorkspaceScene.cpp.o
+.PHONY : WorkspaceScene.cpp.o
+
+WorkspaceScene.i: WorkspaceScene.cpp.i
+
+.PHONY : WorkspaceScene.i
+
+# target to preprocess a source file
+WorkspaceScene.cpp.i:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/WorkspaceScene.cpp.i
+.PHONY : WorkspaceScene.cpp.i
+
+WorkspaceScene.s: WorkspaceScene.cpp.s
+
+.PHONY : WorkspaceScene.s
+
+# target to generate assembly for a file
+WorkspaceScene.cpp.s:
+	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/WorkspaceScene.cpp.s
+.PHONY : WorkspaceScene.cpp.s
 
 main.o: main.cpp.o
 
@@ -190,33 +298,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-mainwindow.o: mainwindow.cpp.o
-
-.PHONY : mainwindow.o
-
-# target to build an object file
-mainwindow.cpp.o:
-	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/mainwindow.cpp.o
-.PHONY : mainwindow.cpp.o
-
-mainwindow.i: mainwindow.cpp.i
-
-.PHONY : mainwindow.i
-
-# target to preprocess a source file
-mainwindow.cpp.i:
-	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/mainwindow.cpp.i
-.PHONY : mainwindow.cpp.i
-
-mainwindow.s: mainwindow.cpp.s
-
-.PHONY : mainwindow.s
-
-# target to generate assembly for a file
-mainwindow.cpp.s:
-	$(MAKE) -f CMakeFiles/QtApp.dir/build.make CMakeFiles/QtApp.dir/mainwindow.cpp.s
-.PHONY : mainwindow.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -227,15 +308,24 @@ help:
 	@echo "... edit_cache"
 	@echo "... QtApp"
 	@echo "... QtApp_autogen"
+	@echo "... Item.o"
+	@echo "... Item.i"
+	@echo "... Item.s"
+	@echo "... Mainwindow.o"
+	@echo "... Mainwindow.i"
+	@echo "... Mainwindow.s"
 	@echo "... QtApp_autogen/mocs_compilation.o"
 	@echo "... QtApp_autogen/mocs_compilation.i"
 	@echo "... QtApp_autogen/mocs_compilation.s"
+	@echo "... Workspace.o"
+	@echo "... Workspace.i"
+	@echo "... Workspace.s"
+	@echo "... WorkspaceScene.o"
+	@echo "... WorkspaceScene.i"
+	@echo "... WorkspaceScene.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... mainwindow.o"
-	@echo "... mainwindow.i"
-	@echo "... mainwindow.s"
 .PHONY : help
 
 

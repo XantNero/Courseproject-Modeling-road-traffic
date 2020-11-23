@@ -7,7 +7,7 @@
 class Road
 {
 public:
-    Road(unsigned int id) : points(), radius(5), m_ID(id) { }
+    Road(unsigned int id) : points(), radius(1), m_ID(id) { }
     ~Road() { }
     inline void addPoint(double x, double y) { points.push_back(Vector(x, y)); }
     inline int getRoadSize() const { return points.size(); }

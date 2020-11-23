@@ -12,6 +12,13 @@ struct ParseInformation
     std::vector<CarGenerator*> CarGenerators;
 };
 
+struct RoadGraph
+{
+    std::vector<std::vector<int>> connections;
+    std::vector<std::vector<int>> back_connections;
+};
+
+
 class MDLParser
 {
 public:
@@ -19,6 +26,10 @@ public:
 private:
     static RoadRegistry* parseRoads(std::ifstream& file);
     static std::vector<CarGenerator*> parseCarGenerators(std::ifstream& file);
+    static std::vector<Vector> parsePoints(std::ifstream& file);
+    static RoadGraph parseConnections(std::ifstream& file);
+    static void constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool> &vis);
+    static void connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry);
 };
 
 #endif

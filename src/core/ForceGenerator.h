@@ -6,6 +6,7 @@ class ForceGenerator
 {
 public:
     virtual void updateForce(Particle2D* Particle2D, const float duration) {}
+    virtual ~ForceGenerator() {}
 };
 
 class SteerForceGenerator : public ForceGenerator

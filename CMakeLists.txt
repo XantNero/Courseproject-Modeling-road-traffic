@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(CourseWork)
 
 
-add_executable(test
+add_executable(main
     src/main.cpp
     src/core/Vector.h src/core/Vector.cpp
     src/core/Road.h src/core/Road.cpp
@@ -45,7 +45,7 @@ add_executable(test
     src/vendor/imgui/imstb_truetype.h
 )
 
-target_link_libraries(test -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
+target_link_libraries(main -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
 
 set(CMAKE_CXX_FLAGS "-g")
 

@@ -11,13 +11,13 @@
 */
 
 Car::Car(const Vector& pos)
-    : Particle2D(pos), maxSpeed(5 + rand() % 4 - 2), state(LIVE)
+    : Particle2D(pos), maxSpeed(/*5 + rand() % 4 - 2*/ 4), state(LIVE)
 {
     position = pos;
 }
 
 Car::Car(const float x, const float y)
-    : Particle2D(x, y),  maxSpeed(5 + rand() % 4 - 2), state(LIVE)
+    : Particle2D(x, y),  maxSpeed(/*5 + rand() % 4 - 2*/4), state(LIVE)
 {
     position = Vector(x, y);
 }
@@ -55,9 +55,14 @@ bool Car::followPath(const Road* road, Vector* target)
             Vector normalPoint = getNormalPoint(predictPos, a, b);
             if (!(normalPoint.getX() + road->getRadius() > std::min(a.getX(), b.getX()) && normalPoint.getX() - road->getRadius() < std::max(a.getX(), b.getX())
                 && normalPoint.getY() + road->getRadius() > std::min(a.getY(), b.getY()) && normalPoint.getY() - road->getRadius() < std::max(a.getY(), b.getY()))) {
-                normalPoint = b;
+                if (getState() == State::TURN) {
+                    normalPoint = a;
+                }
+                else 
+                    normalPoint = b;
             } 
-
+            if (getState() == State::TURN)
+                setState(State::LIVE);
             distance = predictPos.distance(normalPoint);
 
             if (distance < worldRecord) {
@@ -200,7 +205,6 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
                     ++i;
                 }
                 it->roadID = conn[i];
-                it->car.setState(Car::LIVE);
             }
             else {
                 it->car.setState(Car::DEAD);

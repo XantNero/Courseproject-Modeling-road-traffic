@@ -30,16 +30,26 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 if(ANDROID)
   add_library(QtApp SHARED
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    Mainwindow.cpp
+    Mainwindow.h
+    Workspace.h
+    Workspace.cpp
+    WorkspaceScene.h
+    WorkspaceScene.cpp
+    Item.h
+    Item.cpp
   )
 else()
   add_executable(QtApp
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    Mainwindow.cpp
+    Mainwindow.h
+    Workspace.h
+    Workspace.cpp
+    WorkspaceScene.h
+    WorkspaceScene.cpp
+    Item.h
+    Item.cpp
   )
 endif()
 

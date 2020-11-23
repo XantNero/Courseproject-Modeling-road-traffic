@@ -108,7 +108,7 @@ class CarGenerator
 {
 public:
     CarGenerator();
-    CarGenerator(const Vector &pos, const int rate = 300);
+    CarGenerator(const Vector &pos, const int rate = 1000);
     inline void setPosition(const Vector &pos) { position = pos; }
     inline const Vector& getPosition() const { return position; }
     inline int getRate() const { return rate; }

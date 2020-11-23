@@ -46,7 +46,7 @@ void RoadRegistry::addRoad(std::unique_ptr<Road> road)
 }
 void RoadRegistry::connectRoads(const unsigned int ID_from, const unsigned int ID_to)
 {
-    if (m_hash.find(ID_from) != m_hash.end())
+    if (m_hash.find(ID_from) != m_hash.end() && m_hash.find(ID_to) != m_hash.end())
     connections[m_hash[ID_from]].push_back(ID_to);
 }
 
