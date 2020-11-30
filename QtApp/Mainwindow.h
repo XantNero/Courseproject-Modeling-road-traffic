@@ -2,7 +2,7 @@
 #define _MAINWINDOW_H_
 
 #include "WorkspaceScene.h"
-
+#include "Workspace.h"
 #include <QPlainTextEdit>
 #include <QMainWindow>
 #include <QGraphicsView>
@@ -27,7 +27,7 @@ private slots:
     bool slotSave();
     bool slotSaveAs();
     void slotAbout();
-    void slotDocumentWasModified();
+    void slotWorkspaceIsModified();
     void slotRun();
     void slotAddRoad();
     void slotAddCarGenerator();
@@ -47,7 +47,7 @@ private:
     QMenu* createItemMenu();
 private:
     //QPlainTextEdit *m_Workspace;
-    QGraphicsView *m_View;
+    Workspace *m_View;
     WorkspaceScene *m_Scene;
     QString m_CurFile;
     QMenu* m_itemMenu;

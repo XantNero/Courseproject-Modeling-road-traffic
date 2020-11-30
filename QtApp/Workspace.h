@@ -1,9 +1,20 @@
 #ifndef _WORKSPACE_H_
 #define _WORKSPACE_H_
-
-class Workspace
+#include <QGraphicsView>
+#include "WorkspaceScene.h"
+class Workspace : public QGraphicsView
 {
-
+    Q_OBJECT
+public:
+     Workspace(WorkspaceScene *scene, QWidget *parent = nullptr);
+     inline bool isUpdated() const { return m_IsUpdated; }
+     inline void setUpdated(bool value) { m_IsUpdated = value; }
+private slots:
+     void slotSceneUpdated();
+signals:
+     void signalModified();
+private:
+     bool m_IsUpdated;
 };
 
 #endif

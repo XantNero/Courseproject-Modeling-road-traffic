@@ -11,3 +11,5 @@ QtApp/CMakeLists.txt.user
 QtApp_autogen/
 *.mdl
 /QtApp/QtApp
+CMakeLists.txt.user
+gui

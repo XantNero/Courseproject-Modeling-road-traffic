@@ -10,6 +10,7 @@ add_executable(main
     src/core/Car.h src/core/Car.cpp
     src/core/ForceGenerator.h src/core/ForceGenerator.cpp
     src/core/Particle.h src/core/Particle.cpp
+    src/core/MDLParser.h src/core/MDLParser.cpp
 
     src/glfw/Window.h src/glfw/Window.cpp
 
@@ -17,7 +18,7 @@ add_executable(main
 
     src/OpenglLayer.h src/OpenglLayer.cpp
     src/ModelApplication.h src/ModelApplication.cpp
-    src/MDLParser.h src/MDLParser.cpp
+   
 
     src/opengl/Buffer.h src/opengl/Buffer.cpp
     src/opengl/VertexArray.h src/opengl/VertexArray.cpp
@@ -49,3 +50,31 @@ target_link_libraries(main -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
 
 set(CMAKE_CXX_FLAGS "-g")
 
+project(QtApp LANGUAGES CXX)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "-no-pie")
+
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+
+  add_executable(gui
+    QtApp/main.cpp
+    QtApp/Mainwindow.cpp
+    QtApp/Mainwindow.h
+    QtApp/Workspace.h
+    QtApp/Workspace.cpp
+    QtApp/WorkspaceScene.h
+    QtApp/WorkspaceScene.cpp
+    QtApp/Item.h
+    QtApp/Item.cpp
+  )
+
+target_link_libraries(gui PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

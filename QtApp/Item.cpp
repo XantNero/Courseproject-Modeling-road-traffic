@@ -10,10 +10,13 @@ CarGenerator::CarGenerator(QMenu* contextMenu, const QPointF& pos, QGraphicsItem
     QTransform transform;
     transform.translate(pos.x(), pos.y());
     setTransform(transform);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsFocusable, true);
 }
 void CarGenerator::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QPixmap pix("../QtApp/res/font_car.png");
+    QPixmap pix("res/textures/font_car.png");
     pix.scaled(QSize(64, 64), Qt::KeepAspectRatio);
     //painter->drawRect(0, 0, 64, 64);
     QPen pen(Qt::black, 3);
@@ -64,6 +67,9 @@ Road::Road(QMenu* contextMenu, RoadPoint* start, RoadPoint* end,QGraphicsItem* p
     :QGraphicsItem(parent), m_Start(start), m_End(end), m_ContextMenu(contextMenu)
 {
     setZValue(-1.0f);
+    setFlag(QGraphicsItem::ItemIsMovable, false);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
+    setFlag(QGraphicsItem::ItemIsFocusable, false);
 }
 void Road::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {    
@@ -102,15 +108,20 @@ RoadPoint::RoadPoint(QMenu* contextMenu, const QPointF& pos, QGraphicsItem* pare
     QTransform transform;
     transform.translate(pos.x(), pos.y());
     setTransform(transform);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsFocusable, true);
+    setSelected(true);
 }
 
 RoadPoint::~RoadPoint()
 {
-    for (auto connected : m_Connected)
-        connected->deleteConnection(this);
+    for (auto connected : m_Connected) {
+         connected->deleteConnection(this);
+    }
     for (auto connection : m_Connections) {
-        connection->deleteConnected(this);
         deleteConnection(connection);
+        connection->deleteConnected(this);
     }
 }
 

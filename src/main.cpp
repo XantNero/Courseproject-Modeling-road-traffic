@@ -3,10 +3,10 @@
 //TODO: timestep
 //TODO: proper zoom and camera movement
 
-int main(void)
+int main(int argc, const char* argv[])
 {
     srand(time(NULL));
-    ModelApplication app("test2.mdl");
+    ModelApplication app(argv[1]);
     app.run();
     return 0;
 }

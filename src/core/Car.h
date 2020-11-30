@@ -44,9 +44,11 @@ class Car : public Particle2D
 {
 public:
     enum State{
-            LIVE,
-            TURN,
-            DEAD
+        LIVE    = 1L << 0,
+        TURN    = 1L << 1,
+        FOLLOW  = 1L << 2,
+        YIELD    = 1L << 3,
+        STOP    = 1L << 4
     };
 public:
     Car(const Vector& position);
@@ -60,9 +62,9 @@ public:
     inline virtual Vector getVelocity() const override { return velocity; }
     inline virtual Vector getAcceleration() const override { return acceleration; }
     inline State getState() const { return state; }
-    inline void setState(State state) { this->state = state; }
-    inline double getMaxSpeed() const { return maxSpeed; }
-    bool view(const Car &car) const;
+    void setState(State state, bool value);
+    double getMaxSpeed() const;
+    bool view(const Car &car, double angle, double dist) const;
     inline virtual Vector getForceAccumulator() const override { return forceAccumulator; }
     // inline void setVel(const Vector& vel) {velocity = vel;}
     // inline void setMaxSpeed(const double spe) { maxSpeed = spe; }
@@ -79,6 +81,21 @@ private:
     double maxSpeed;
     State state;
 };
+
+inline constexpr Car::State operator&(Car::State __a, Car::State __b)
+{ return Car::State(static_cast<int>(__a) & static_cast<int>(__b)); }
+inline constexpr Car::State operator|(Car::State __a, Car::State __b)
+{ return Car::State(static_cast<int>(__a) | static_cast<int>(__b)); }
+inline constexpr Car::State operator^(Car::State __a, Car::State __b)
+{ return Car::State(static_cast<int>(__a) ^ static_cast<int>(__b)); }
+inline constexpr Car::State operator~(Car::State __a)
+{ return Car::State(~static_cast<int>(__a)); }
+inline const Car::State& operator|=(Car::State& __a, Car::State __b)
+{ return __a = __a | __b; }
+inline const Car::State& operator&=(Car::State& __a, Car::State __b)
+{ return __a = __a & __b; }
+inline const Car::State& operator^=(Car::State& __a, Car::State __b)
+{ return __a = __a ^ __b; }
 
 struct CarInformation
 {
@@ -108,7 +125,7 @@ class CarGenerator
 {
 public:
     CarGenerator();
-    CarGenerator(const Vector &pos, const int rate = 1000);
+    CarGenerator(const Vector &pos, const int rate = 200);
     inline void setPosition(const Vector &pos) { position = pos; }
     inline const Vector& getPosition() const { return position; }
     inline int getRate() const { return rate; }

@@ -39,6 +39,12 @@ private:
     float distance;
 };
 
-
+class StopForceGenerator : public ForceGenerator
+{
+public: 
+    StopForceGenerator() { }
+    ~StopForceGenerator() { }
+    virtual void updateForce(Particle2D* Particle2D, const float duration) override;
+};
 
 #endif

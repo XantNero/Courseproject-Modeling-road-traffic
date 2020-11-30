@@ -11,13 +11,13 @@
 */
 
 Car::Car(const Vector& pos)
-    : Particle2D(pos), maxSpeed(/*5 + rand() % 4 - 2*/ 4), state(LIVE)
+    : Particle2D(pos), maxSpeed(5 + rand() % 4 - 2), state(LIVE)
 {
     position = pos;
 }
 
 Car::Car(const float x, const float y)
-    : Particle2D(x, y),  maxSpeed(/*5 + rand() % 4 - 2*/4), state(LIVE)
+    : Particle2D(x, y),  maxSpeed(5 + rand() % 4 - 2), state(LIVE)
 {
     position = Vector(x, y);
 }
@@ -35,6 +35,23 @@ Car::Car(const Car& copy)
     forceAccumulator = copy.forceAccumulator;
     inverseMass = copy.inverseMass;
     damping = copy.damping;
+}
+
+void Car::setState(State state, bool value)
+{
+    if (value)
+        this->state |= state;
+    else
+        this->state &= ~state;
+}
+
+double Car::getMaxSpeed() const
+{
+    if (state & State::FOLLOW)
+        return velocity.getMagnitude();
+    else if (state & State::STOP)
+        return 0.01f;
+    return maxSpeed;
 }
 
 bool Car::followPath(const Road* road, Vector* target)
@@ -55,14 +72,25 @@ bool Car::followPath(const Road* road, Vector* target)
             Vector normalPoint = getNormalPoint(predictPos, a, b);
             if (!(normalPoint.getX() + road->getRadius() > std::min(a.getX(), b.getX()) && normalPoint.getX() - road->getRadius() < std::max(a.getX(), b.getX())
                 && normalPoint.getY() + road->getRadius() > std::min(a.getY(), b.getY()) && normalPoint.getY() - road->getRadius() < std::max(a.getY(), b.getY()))) {
-                if (getState() == State::TURN) {
-                    normalPoint = a;
-                }
-                else 
+                // if (getState() & State::TURN) {
+                //     normalPoint = a;
+                // }
+                // else 
                     normalPoint = b;
             } 
-            if (getState() == State::TURN)
-                setState(State::LIVE);
+             if (getState() & State::TURN) {
+                setState(State::TURN, false);
+                            
+                if (road->isMain() == false) {
+                    setState(State::YIELD, true);
+                    setState(State::STOP, false);
+                }
+                else {
+                    setState(State::YIELD | State::STOP, false);
+                }
+            }
+           
+               
             distance = predictPos.distance(normalPoint);
 
             if (distance < worldRecord) {
@@ -70,7 +98,7 @@ bool Car::followPath(const Road* road, Vector* target)
                 normal = normalPoint;
 
                 Vector dir = b - a;
-                dir.setMagnitude(getMaxSpeed());
+                dir.setMagnitude(maxSpeed);
                 Vector temp = *target;
                 (*target) = normal + dir;
                 Vector mov = *target - getPosition();
@@ -81,9 +109,11 @@ bool Car::followPath(const Road* road, Vector* target)
                 worldRecord = distance; 
 
                 if (normal == road->getPoint(road->getRoadSize() - 1) && normal.distance(getPosition()) < 50)
-                    setState(TURN);
+                    setState(State::TURN, true);
             }
         }
+
+   
 
     // Vector a = road.getPoint(nowRoadStart);
     // Vector b = road.getPoint(nowRoadStart + 1);
@@ -128,7 +158,7 @@ bool Car::followPath(const Road* road, Vector* target)
     //         turning = true;
     //     } 
     // }
-    // if (worldRecord > road.getRadius() || getVelocity().getMagnitude() == 0.0)
+    // if (worldRecord > road->getRadius() || getVelocity().getMagnitude() == 0.0)
     //     return true;
     return true;
     // else {
@@ -157,11 +187,9 @@ Vector Car::getNormalPoint(Vector&p, Vector&a, Vector&b)
     return ab + a;
 }
 
-bool Car::view(const Car &car) const
+bool Car::view(const Car &car, double angle, double d) const
 {
     Vector dist = car.getPosition() - getPosition();
-    double d = 50;
-    double angle = 4 * 3.14 / 6.0;
     Vector vel = getVelocity();
     double a = dist.getAngle(vel);
     if (dist.getMagnitude() < d && a < angle)
@@ -195,7 +223,47 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
     std::list<CarInformation>::iterator it = cars.begin();
     while(it != cars.end()) {
         
-        if (it->car.getState() == Car::TURN) {
+         if ((it->car.getState() & Car::State::YIELD) && (it->car.getState() & Car::State::FOLLOW) == 0) {
+            std::list<CarInformation>::iterator view_check = cars.begin();
+            bool stop_fl = false;
+            while(view_check != cars.end()) {
+                if (/*it->roadID == view_check->roadID || */&it->car == &view_check->car) {
+                    ++view_check;
+                    continue;
+                }
+                bool fl = false;
+                std::vector<unsigned int> conn = roads.getRoadConnections(view_check->roadID);
+                for (auto u : conn) {
+                    if (it->roadID == u) {
+                        fl = true;
+                        break;
+                    }
+                }
+                // if (it->roadID == view_check->roadID)
+                //     fl = true;
+                if (fl) {
+                    ++view_check;
+                    continue;
+                }
+                
+                if (it->car.view(view_check->car, 4 * 3.14 / 6, 75)) {
+                    
+                    it->car.setState(Car::State::STOP, true);
+                    Vector desired = it->car.getVelocity();
+                    desired.setMagnitude(0.01);
+                    it->brakeForceGenerator.init(desired, (float)view_check->car.getPosition().distance(it->car.getPosition()));
+                    stop_fl = true;
+                    break;
+                }
+                ++view_check;
+            }   
+            if (!stop_fl)
+                it->car.setState(Car::State::STOP, false);
+        }
+
+
+
+        if (it->car.getState() & Car::TURN) {
             std::vector<unsigned int> conn = roads.getRoadConnections(it->roadID);
             if (conn.size() != 0) {
                     double prob = (double)(std::rand() % 100) / 100; // change
@@ -205,26 +273,86 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
                     ++i;
                 }
                 it->roadID = conn[i];
+                // if (roads.getRoad(it->roadID)->isMain() == false) {
+
+                //     it->car.setState(Car::State::YELL, true);
+                // }
+                // else {
+                //     it->car.setState(Car::State::YELL | Car::State::STOP, false);
+                // }
             }
             else {
-                it->car.setState(Car::DEAD);
+                it->car.setState(Car::LIVE, false);
             }
         }
-        if (it->car.getState() == Car::DEAD) {
+
+        std::list<CarInformation>::iterator view_check = cars.begin();
+        bool follow_fl = false;
+        if ((it->car.getState() & Car::State::TURN) == 0) {
+             while(view_check != cars.end()) {
+                if (&it->car == &view_check->car) {
+                    ++view_check;
+                    continue;
+                }
+                bool fl = false;
+                std::vector<unsigned int> conn = roads.getRoadConnections(it->roadID);
+                for (auto u : conn) {
+                    if (view_check->roadID == u) {
+                        fl = true;
+                        break;
+                    }
+                }
+                if (it->roadID == view_check->roadID)
+                    fl = true;
+                if (!fl) {
+                    ++view_check;
+                      continue;
+                }
+                  
+                if (it->car.view(view_check->car, 3.14 / 2 + 0.1, 50)) {
+                    if (it->car.getVelocity().getSquareMagnitude() == 0) {
+                        it->car.setState(Car::State::LIVE, false);
+                        break;
+                    }
+                    
+                    it->car.setState(Car::State::FOLLOW, true);
+                    Vector desired = view_check->car.getVelocity();
+                    desired.setMagnitude(view_check->car.getMaxSpeed());
+                    it->brakeForceGenerator.init(desired, (float)view_check->car.getPosition().distance(it->car.getPosition()));
+                    follow_fl = true;
+                    break;
+                }
+                ++view_check;
+            }   
+            if (!follow_fl)
+                it->car.setState(Car::State::FOLLOW, false);
+        }
+       
+
+
+
+        if ((it->car.getState() & Car::LIVE) == 0) {
             it = cars.erase(it);
+            continue;
         }
         if (it == cars.end())
             break;
+        
+       
+
        
         applySteerForce(it->car, it->steerForceGenerator, roads.getRoad(it->roadID));
         //it->car.move(time);
         applyBrakeForce(it->car, it->brakeForceGenerator);
         //it->car.move(time);
+        
+
         ++it;
     }
     it = cars.begin();
     while(it != cars.end()) {
         it->car.move(time);
+        
         ++it;
     }
     
@@ -251,20 +379,10 @@ void CarRegistry::applySteerForce(Car &car, SteerForceGenerator& steerForceGener
 }
 void CarRegistry::applyBrakeForce(Car &car, BrakeForceGenerator& brakeForceGenerator)
 {
-    std::list<CarInformation>::iterator it = cars.begin();
-    while(it != cars.end()) {
-        if (&it->car == &car) {
-            ++it;
-            continue;
-        }
-         
-        if (car.view(it->car)) {
-            brakeForceGenerator.init(it->car.getVelocity(), (float)it->car.getPosition().distance(car.getPosition()));
-            brakeForceGenerator.updateForce(&car, 0);
-            break;
-        }
-        ++it;
-    }   
+   if ((car.getState() & Car::State::FOLLOW) || (car.getState() & Car::State::STOP)) {
+        brakeForceGenerator.updateForce(&car, 0);
+    }
+
 }
 
 /*

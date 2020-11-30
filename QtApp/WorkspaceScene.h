@@ -23,6 +23,8 @@ public slots:
     void slotDelete();
     void slotConnect();
     void slotDisconnect();
+signals:
+    void isModified();
 protected:
     void init();
     void setState(ActionType type) { m_ActionType = type; }

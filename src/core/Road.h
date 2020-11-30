@@ -7,7 +7,7 @@
 class Road
 {
 public:
-    Road(unsigned int id) : points(), radius(1), m_ID(id) { }
+    Road(unsigned int id, bool main = true) : points(), radius(0), m_ID(id), m_Main(false) { }
     ~Road() { }
     inline void addPoint(double x, double y) { points.push_back(Vector(x, y)); }
     inline int getRoadSize() const { return points.size(); }
@@ -15,10 +15,13 @@ public:
     inline Vector getPoint(int i) const { return points[i]; }
     inline double getRadius() const { return radius; }
     inline unsigned int getID() const { return m_ID; }
+    inline bool isMain() const { return m_Main; }
+    inline void setMain(bool value) { m_Main = value; }
 private:
     std::vector <Vector> points;
     double radius;
     unsigned int m_ID;
+    bool m_Main;
 };
 
 class RoadRegistry

@@ -40,11 +40,10 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         switch (m_ActionType) {
             case ActionType::AddCarGenerator:
                 carGeneratorItem = new CarGenerator(m_ItemMenu, mouseEvent->scenePos());
-                carGeneratorItem->setFlag(QGraphicsItem::ItemIsMovable, true);
-                carGeneratorItem->setFlag(QGraphicsItem::ItemIsSelectable, true);
-                carGeneratorItem->setFlag(QGraphicsItem::ItemIsFocusable, true);
+
                 addItem(carGeneratorItem);
                 QGraphicsScene::mousePressEvent(mouseEvent);
+                emit isModified();
                 break;
             case ActionType::AddRoad:
 //                list = selectedItems();
@@ -62,19 +61,13 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 //                roadItem->addPoint(roadItem->mapFromScene(mouseEvent->scenePos()));
                 list = selectedItems();
                 roadPointItem = new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
-                roadPointItem->setFlag(QGraphicsItem::ItemIsMovable, true);
-                roadPointItem->setFlag(QGraphicsItem::ItemIsSelectable, true);
-                roadPointItem->setFlag(QGraphicsItem::ItemIsFocusable, true);
-                roadPointItem->setSelected(true);
                 addItem(roadPointItem);
                 for (auto item : list) {
                     if (item->type() == (int)ModelTypes::RoadPoint) {
                         RoadPoint* roadPoint = dynamic_cast<RoadPoint*>(item);
 
                         roadItem = new Road(m_ItemMenu, roadPoint, roadPointItem);
-                        roadItem->setFlag(QGraphicsItem::ItemIsMovable, false);
-                        roadItem->setFlag(QGraphicsItem::ItemIsSelectable, false);
-                        roadItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
+
                         roadPoint->connect(roadPointItem, roadItem);
                         roadPointItem->connected(roadPoint, roadItem);
 //                        addLine(QLineF(roadPoint->getPoint(), mouseEvent->scenePos()),
@@ -82,6 +75,7 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     }
                 }
                 QGraphicsScene::mousePressEvent(mouseEvent);
+                emit isModified();
                 break;
             case ActionType::Connect:
                  list = selectedItems();
@@ -91,9 +85,6 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                          if (to_connect->type() == (int)ModelTypes::RoadPoint) {
                              RoadPoint* roadPoint = dynamic_cast<RoadPoint*>(to_connect);
                              roadItem = new Road(m_ItemMenu, roadPoint, roadPointItem);
-                             roadItem->setFlag(QGraphicsItem::ItemIsMovable, false);
-                             roadItem->setFlag(QGraphicsItem::ItemIsSelectable, false);
-                             roadItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
                              roadPoint->connect(roadPointItem, roadItem);
                              roadPointItem->connected(roadPoint, roadItem);
                          }
@@ -104,7 +95,7 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                      }
                  }
                 setState(ActionType::None);
-
+                emit isModified();
                 break;
             case ActionType::Disconnect:
                 list = selectedItems();
@@ -123,9 +114,9 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     }
                 }
                 setState(ActionType::None);
+                emit isModified();
                 break;
             default: QGraphicsScene::mousePressEvent(mouseEvent);
-
         }
 
     }
@@ -151,6 +142,7 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
          removeItem(item);
          delete item;
      }
+     emit isModified();
  }
 
  void WorkspaceScene::slotConnect()

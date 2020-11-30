@@ -3,24 +3,25 @@
 #include "Item.h"
 #include <QVector>
 #include <QList>
+#include <QScreen>
 #include <QHash>
+#include <cstdio>
+#include <QProcess>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)/*, m_Workspace(new QPlainTextEdit(this))*/
 {
     m_itemMenu = createItemMenu();
-
-    m_Scene = new WorkspaceScene(m_itemMenu, QRectF(0.0f, 0.0f, 1080.0f, 720.0f), this);
+    m_Scene = new WorkspaceScene(m_itemMenu, QGuiApplication::screens()[0]->geometry(), this);
     //m_Scene->addRect(QRectF(0.0f, 0.0f, 100.0f, 100.0f), QPen(QColor(Qt::yellow)), QBrush(Qt::yellow));
-    m_View = new QGraphicsView(m_Scene, this);
+    m_View = new Workspace(m_Scene, this);
     setCentralWidget(m_View);
 
 
     createActions();
     createStatusBar();
     readSettings();
-//    connect(m_Workspace->document(), &QTextDocument::contentsChanged,
-//            this, &MainWindow::slotDocumentWasModified);
+    connect(m_View, &Workspace::signalModified, this, &MainWindow::slotWorkspaceIsModified);
     connect(this, &MainWindow::signalAction, m_Scene, &WorkspaceScene::slotSetAction);
 
 //#ifndef QT_NO_SESSIONMANAGER
@@ -31,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCurrentFile(QString());
     setUnifiedTitleAndToolBarOnMac(true);
+    m_Scene->update();
+    m_View->update();
 }
 
 void MainWindow::createActions()
@@ -112,9 +115,21 @@ void MainWindow::createActions()
 
     QToolBar *toolsToolBar = new QToolBar(tr("Toolbar"), this);
     addToolBar(Qt::LeftToolBarArea, toolsToolBar);
-    QAction *addRoadAct = toolsToolBar->addAction(tr("Add Road"), this, &MainWindow::slotAddRoad);
-    QAction *addCarGeneratorAct = toolsToolBar->addAction(tr("Add Car Generator"), this, &MainWindow::slotAddCarGenerator);
-    QAction *moveAct = toolsToolBar->addAction(tr("Move hand"), this, &MainWindow::slotMove);
+
+    const QIcon addRoadIcon("res/textures/road.png");
+    QAction *addRoadAct = new QAction(addRoadIcon, tr("Add road"), toolsToolBar);
+    connect(addRoadAct, &QAction::triggered, this, &MainWindow::slotAddRoad);
+    toolsToolBar->addAction(addRoadAct);
+
+    const QIcon addCarGeneratorIcon("res/textures/carIcon.png");
+    QAction *addCarGeneratorAct = new QAction(addCarGeneratorIcon, tr("Add car generator"), toolsToolBar);
+    connect(addCarGeneratorAct, &QAction::triggered, this, &MainWindow::slotAddCarGenerator);
+    toolsToolBar->addAction(addCarGeneratorAct);
+
+    const QIcon handIcon("res/textures/hand.png");
+    QAction *moveAct = new QAction(handIcon, tr("Move hand"), toolsToolBar);
+    connect(moveAct, &QAction::triggered, this, &MainWindow::slotMove);
+    toolsToolBar->addAction(moveAct);
 
     menuBar()->addSeparator();
 
@@ -163,11 +178,13 @@ void MainWindow::slotNewFile()
 }
 void MainWindow::slotOpen()
 {
+    m_View->hide();
     if (maybeSave()) {
-        QString fileName = QFileDialog::getOpenFileName(this);
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::currentPath(), tr("MDL (*.mdl)"));
         if (!fileName.isEmpty())
             loadFile(fileName);
     }
+    m_View->show();
 }
 bool MainWindow::slotSave()
 {
@@ -177,29 +194,21 @@ bool MainWindow::slotSave()
 }
 bool MainWindow::slotSaveAs()
 {
-//    QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),
-//                                                    m_CurFile);
-//    if (fileName.isEmpty())
-//        return false;
- //   return saveFile(fileName);
     m_View->hide();
-    QFileDialog dialog(this);
-    dialog.setWindowModality(Qt::WindowModal);
-    dialog.setAcceptMode(QFileDialog::AcceptSave);
-    //dialog.exec();
-    if (dialog.exec() != QFileDialog::Accepted) {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), QDir::currentPath(), tr("MDL (*.mdl)"));
+    m_View->show();
+    if (fileName.isEmpty())
         return false;
-    }
-    return saveFile(dialog.getSaveFileName());
+    return saveFile(fileName);
 }
 void MainWindow::slotAbout()
 {
     QMessageBox::about(this, tr("About application"),
                        tr("Will be updated"));
 }
-void MainWindow::slotDocumentWasModified()
+void MainWindow::slotWorkspaceIsModified()
 {
-    //setWindowModified(m_Workspace->document()->isModified());
+    setWindowModified(m_View->isUpdated());
 }
 
  void MainWindow::closeEvent(QCloseEvent *event)
@@ -216,15 +225,94 @@ void MainWindow::slotDocumentWasModified()
  void MainWindow::loadFile(const QString &fileName)
  {
     QFile file(fileName);
+    QString errorMessage;
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         QMessageBox::warning(this, tr("Application"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(QDir::toNativeSeparators(fileName), file.errorString()));
         return;
     }
+    QList<QGraphicsItem*> items = m_Scene->items();
+    for (auto item : items) {
+        item->setSelected(true);
+    }
+    m_Scene->slotDelete();
+
     QTextStream in(&file);
     QGuiApplication::setOverrideCursor(Qt::WaitCursor);
-    //m_Workspace->setPlainText(in.readAll());
+    QString line;
+    QVector<CarGenerator*> carGenerators;
+    QVector<int> carGeneratorsConnections;
+    QVector<RoadPoint*> points;
+    QVector<QVector<int>> conn;
+    while (!in.atEnd()) {
+        line = in.readLine();
+        if (line == "#CarGenerators") {
+            while (line != "{")
+                line = in.readLine();
+            int connectionID;
+            float posX, posY;
+            line = in.readLine();
+            while (line != "}") {
+                sscanf(line.toStdString().c_str(), "%d%f%f", &connectionID, &posX, &posY);
+                carGenerators.push_back(new CarGenerator(m_itemMenu, QPointF(posX, posY)));
+                carGeneratorsConnections.push_back(connectionID);
+                line = in.readLine();
+            }
+        }
+        else if (line == "#Points") {
+            while (line != "{")
+                line = in.readLine();
+            int pointID;;
+            float posX, posY;
+            line = in.readLine();
+            while (line != "}") {
+                sscanf(line.toStdString().c_str(), "%d%f%f", &pointID, &posX, &posY);
+                RoadPoint* point = new RoadPoint(m_itemMenu, QPointF(posX, posY));
+                if (pointID >= points.size()) {
+                    points.resize(pointID + 1);
+                }
+                points[pointID] = point;
+                line = in.readLine();
+            }
+        }
+        else if (line == "#Connections") {
+            while (line != "{")
+                line = in.readLine();
+            int from, to;
+            line = in.readLine();
+            while (line != "}") {
+                sscanf(line.toStdString().c_str(), "%d%d", &from, &to);
+                if (from >= conn.size()) {
+                    conn.resize(from + 1);
+                }
+                conn[from].push_back(to);
+                line = in.readLine();
+            }
+        }
+        else if (line == "")
+            continue;
+        else {
+            QMessageBox::warning(this, tr("Application"),
+                                 tr("Cannot read file %1:\nfile is broken.")
+                                 .arg(QDir::toNativeSeparators(fileName)));
+            QGuiApplication::restoreOverrideCursor();
+            return;
+        }
+    }
+    for (int i = 0; i < carGenerators.size(); ++i) {
+        m_View->scene()->addItem(carGenerators[i]);
+        carGenerators[i]->connect(points[carGeneratorsConnections[i]]);
+    }
+    for (int i = 0; i < points.size(); ++i) {
+        m_View->scene()->addItem(points[i]);
+        for (int j = 0; j < conn[i].size(); ++j) {
+            Road* road = new Road(m_itemMenu, points[i], points[conn[i][j]]);
+            points[i]->connect(points[conn[i][j]], road);
+            points[conn[i][j]]->connected(points[i], road);
+        }
+
+    }
     QGuiApplication::restoreOverrideCursor();
 
     setCurrentFile(fileName);
@@ -257,8 +345,8 @@ void MainWindow::slotDocumentWasModified()
  }
  bool MainWindow::maybeSave()
  {
-//    if (!m_Workspace->document()->isModified())
-//        return true;
+     if (!m_View->isUpdated())
+        return true;
     const QMessageBox::StandardButton ret =
             QMessageBox::warning(this, tr("Application"), tr("Do you want save your changes?"),
                                  QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -274,7 +362,7 @@ void MainWindow::slotDocumentWasModified()
  }
  bool MainWindow::saveFile(const QString &fileName)
  {
-     m_View->show();
+
     QString errorMessage;
     QGuiApplication::setOverrideCursor(Qt::WaitCursor);
     QSaveFile file(fileName);
@@ -306,7 +394,7 @@ void MainWindow::slotDocumentWasModified()
         out << "#CarGenerators\n{\n";
         for (int i = 0; i < carGenerators.size(); ++i) {
             QString str = QString("\t%1 %2 %3\n").arg(hash[carGenerators[i]->getConnection()])
-                    .arg(carGenerators[i]->getConnection()->getPoint().x()).arg(carGenerators[i]->getConnection()->getPoint().y());
+                    .arg(carGenerators[i]->scenePos().x()).arg(carGenerators[i]->scenePos().y());
             out << str;
         }
         out << "}\n";
@@ -349,11 +437,11 @@ void MainWindow::slotDocumentWasModified()
  void MainWindow::setCurrentFile(const QString &fileName)
  {
     m_CurFile = fileName;
-    //m_Workspace->document()->setModified(false);
+    m_View->setUpdated(false);
     setWindowModified(false);
     QString shownName(fileName);
     if (shownName.isEmpty())
-        shownName = "untitled.txt";
+        shownName = "untitled.mdl";
     setWindowFilePath(shownName);
  }
  QString MainWindow::strippedName(const QString &fullfileName)
@@ -363,7 +451,11 @@ void MainWindow::slotDocumentWasModified()
 
  void MainWindow::slotRun()
  {
-
+     QProcess* model = new QProcess(this);
+    QStringList l = QStringList(m_CurFile);
+     model->setProgram("/home/dmitry/Courseproject-Modelling-road-traffic/main");
+     model->setArguments(l);
+     model->start();
  }
 
  void MainWindow::slotAddRoad()

@@ -1,6 +1,6 @@
 #include "Mainwindow.h"
-
 #include <QApplication>
+#include <QProcess>
 
 int main(int argc, char *argv[])
 {
@@ -9,5 +9,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Roads Modelling");
     MainWindow w;
     w.show();
+//    QProcess* model = new QProcess(&w);
+//    QStringList l = QStringList("/home/dmitry/Courseproject-Modelling-road-traffic/test.mdl");
+//    model->setProgram("/home/dmitry/Courseproject-Modelling-road-traffic/main");
+//    //model->setArguments(l);
+//    model->start();
     return a.exec();
 }
