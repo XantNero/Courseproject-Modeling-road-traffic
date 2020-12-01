@@ -519,6 +519,33 @@ src/core/Road.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/core/Road.cpp.s
 .PHONY : src/core/Road.cpp.s
 
+src/core/TrafficLight.o: src/core/TrafficLight.cpp.o
+
+.PHONY : src/core/TrafficLight.o
+
+# target to build an object file
+src/core/TrafficLight.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/core/TrafficLight.cpp.o
+.PHONY : src/core/TrafficLight.cpp.o
+
+src/core/TrafficLight.i: src/core/TrafficLight.cpp.i
+
+.PHONY : src/core/TrafficLight.i
+
+# target to preprocess a source file
+src/core/TrafficLight.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/core/TrafficLight.cpp.i
+.PHONY : src/core/TrafficLight.cpp.i
+
+src/core/TrafficLight.s: src/core/TrafficLight.cpp.s
+
+.PHONY : src/core/TrafficLight.s
+
+# target to generate assembly for a file
+src/core/TrafficLight.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/core/TrafficLight.cpp.s
+.PHONY : src/core/TrafficLight.cpp.s
+
 src/core/Vector.o: src/core/Vector.cpp.o
 
 .PHONY : src/core/Vector.o
@@ -816,6 +843,33 @@ src/opengl/debug.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/opengl/debug.cpp.s
 .PHONY : src/opengl/debug.cpp.s
 
+src/pch.o: src/pch.cpp.o
+
+.PHONY : src/pch.o
+
+# target to build an object file
+src/pch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pch.cpp.o
+.PHONY : src/pch.cpp.o
+
+src/pch.i: src/pch.cpp.i
+
+.PHONY : src/pch.i
+
+# target to preprocess a source file
+src/pch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pch.cpp.i
+.PHONY : src/pch.cpp.i
+
+src/pch.s: src/pch.cpp.s
+
+.PHONY : src/pch.s
+
+# target to generate assembly for a file
+src/pch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pch.cpp.s
+.PHONY : src/pch.cpp.s
+
 src/vendor/imgui/imgui.o: src/vendor/imgui/imgui.cpp.o
 
 .PHONY : src/vendor/imgui/imgui.o
@@ -1055,6 +1109,9 @@ help:
 	@echo "... src/core/Road.o"
 	@echo "... src/core/Road.i"
 	@echo "... src/core/Road.s"
+	@echo "... src/core/TrafficLight.o"
+	@echo "... src/core/TrafficLight.i"
+	@echo "... src/core/TrafficLight.s"
 	@echo "... src/core/Vector.o"
 	@echo "... src/core/Vector.i"
 	@echo "... src/core/Vector.s"
@@ -1088,6 +1145,9 @@ help:
 	@echo "... src/opengl/debug.o"
 	@echo "... src/opengl/debug.i"
 	@echo "... src/opengl/debug.s"
+	@echo "... src/pch.o"
+	@echo "... src/pch.i"
+	@echo "... src/pch.s"
 	@echo "... src/vendor/imgui/imgui.o"
 	@echo "... src/vendor/imgui/imgui.i"
 	@echo "... src/vendor/imgui/imgui.s"

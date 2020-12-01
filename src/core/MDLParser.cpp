@@ -3,6 +3,7 @@
 #include <cstdio>
 
 static std::unordered_multimap<int, std::pair<int, int>> m;
+static std::set<std::pair<int, int>> roadType;
 
 
 const ParseInformation MDLParser::parseFile(const std::string& filePath) 
@@ -11,22 +12,24 @@ const ParseInformation MDLParser::parseFile(const std::string& filePath)
         "#CarGenerators",
         "#Roads",
         "#Connections",
-        "#Points"
+        "#Points",
+        "#TrafficLights"
     };
     ParseInformation info;
     std::ifstream file(filePath);
     std::string line;
     std::vector<Vector> points;
-    std::vector<bool> roadValue;
     std::vector<bool> vis;
     RoadGraph graph;
     while(getline(file, line)) {
         if (line == "#CarGenerators")
             info.CarGenerators = parseCarGenerators(file);
         else if (line == "#Points")
-            points = parsePoints(file, roadValue);
+            points = parsePoints(file);
         else if (line == "#Connections")
             graph = parseConnections(file);
+        else if (line == "#TrafficLights")
+            info.TrafficLights = parseTrafficLights(file);
     }
     vis.resize(points.size(), false);
     info.roadRegistry = new RoadRegistry();
@@ -35,7 +38,7 @@ const ParseInformation MDLParser::parseFile(const std::string& filePath)
     }
     for (int i = 0; i < points.size(); ++i) {
         if (!vis[i])
-            constructRoads(graph, i, info.roadRegistry, points, vis, roadValue);
+            constructRoads(graph, i, info.roadRegistry, points, vis);
     }
     connectRoads(graph, info.roadRegistry);
     file.close();
@@ -93,7 +96,7 @@ std::vector<CarGenerator*> MDLParser::parseCarGenerators(std::ifstream& file)
     return generators;
 }
 
-std::vector<Vector> MDLParser::parsePoints(std::ifstream& file, std::vector<bool>& roadValue) 
+std::vector<Vector> MDLParser::parsePoints(std::ifstream& file) 
 {
     std::string line;
     std::vector<Vector> points;
@@ -102,14 +105,42 @@ std::vector<Vector> MDLParser::parsePoints(std::ifstream& file, std::vector<bool
             break;
         if (line == "" || line == "{")
             continue;
-        int ID, main;
+        int ID;
         float x, y;
-        sscanf(line.c_str(), "%d%f%f%d", &ID, &x, &y, &main);
+        sscanf(line.c_str(), "%d%f%f", &ID, &x, &y);
         points.push_back(Vector(x, y));
-        roadValue.push_back(main);
     }
     return points;
 }
+
+std::vector<TrafficLight*> MDLParser::parseTrafficLights(std::ifstream& file) 
+{
+    std::string line;
+    std::vector<TrafficLight*> lights;
+    while (getline(file, line)) {
+        if (line == "}")
+            break;
+        if (line == "" || line == "{")
+            continue;
+        float x, y;
+        int green, yellow, red;
+        sscanf(line.c_str(), "%f%f%d%d%d", &x, &y, &green, &yellow, &red);
+        TrafficLight::State state;
+        if (green <= yellow) {
+            if (green <= red)
+                state = TrafficLight::State::Green;
+            else 
+                state = TrafficLight::State::Red;
+        }
+        else {
+            state = TrafficLight::State::Yellow;
+        }
+        TrafficLight* light = new TrafficLight(Vector(x, y), state, green, yellow, red);
+        lights.push_back(light);
+    }
+    return lights;
+}
+
 
 RoadGraph MDLParser::parseConnections(std::ifstream& file) 
 {
@@ -120,8 +151,10 @@ RoadGraph MDLParser::parseConnections(std::ifstream& file)
             break;
         if (line == "" || line == "{")
             continue;
-        int IDfrom, IDto;
-        sscanf(line.c_str(), "%d%d", &IDfrom, &IDto);
+        int IDfrom, IDto, type;
+        sscanf(line.c_str(), "%d%d%d", &IDfrom, &IDto, &type);
+        if (!type)
+            roadType.insert({IDfrom, IDto});
         if (IDfrom >= graph.connections.size()) {
             graph.connections.resize(IDfrom + 1);
         }
@@ -138,7 +171,7 @@ RoadGraph MDLParser::parseConnections(std::ifstream& file)
     return graph;
 }
 
-void MDLParser::constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool>& vis, std::vector<bool>& roadValue) 
+void MDLParser::constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool>& vis) 
 {
     static unsigned int lastID = points.size();
     while (graph.back_connections[x].size() == 1 && graph.connections[x].size() <= 1) {
@@ -164,14 +197,16 @@ void MDLParser::constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegist
             m.insert({x, {lastID - 1, it}});
         else 
             m.insert({x, {x, it}});
+        std::pair<int, int> key;
+        key.first = x;
         while (!queue.empty()) {
             road->addPoint(points[queue.front()].getX(), points[queue.front()].getY());
-             if (roadValue[queue.front()] == true)
+            key.second = queue.front();
+            if (!roadType.count(key))
                 road_value = true;
+            key.first = queue.front();
             queue.pop();
         }
-        if (roadValue[x] == true)
-            road_value = true;
         road->setMain(road_value);
         roadRegistry->addRoad(std::move(road));
     }

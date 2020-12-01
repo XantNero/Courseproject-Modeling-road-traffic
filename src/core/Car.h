@@ -5,6 +5,7 @@
 
 #include "Vector.h"
 #include "Road.h"
+#include "TrafficLight.h"
 #include "Particle.h"
 #include "ForceGenerator.h"
 
@@ -64,7 +65,9 @@ public:
     inline State getState() const { return state; }
     void setState(State state, bool value);
     double getMaxSpeed() const;
+    inline double getMaxPossibleSpeed() const { return maxSpeed; }
     bool view(const Car &car, double angle, double dist) const;
+    bool view(const TrafficLight &light, double angle, double dist) const;
     inline virtual Vector getForceAccumulator() const override { return forceAccumulator; }
     // inline void setVel(const Vector& vel) {velocity = vel;}
     // inline void setMaxSpeed(const double spe) { maxSpeed = spe; }
@@ -112,7 +115,7 @@ public:
     ~CarRegistry();
 
     void addCar(const Car &car, const unsigned int start_roadID);
-    void update(const RoadRegistry &roads, float time);
+    void update(const RoadRegistry &roads, const std::vector<const TrafficLight*>& lights, float time);
     std::vector<Car> getCars();
 private:
     void applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road* road);

@@ -19,9 +19,11 @@ public:
 private:
     std::unique_ptr<OrtographicCamera> m_Camera;
     std::unique_ptr<VertexArray> m_RoadVAO;
-    std::unique_ptr<Shader> m_RoadShader;
+    std::unique_ptr<Shader> m_Shader;
+   // std::unique_ptr<Shader> m_RoadShader;
     std::unique_ptr<VertexArray> m_CarVAO;
-    std::unique_ptr<Shader> m_CarShader;
+    //std::unique_ptr<Shader> m_CarShader;
+    std::unique_ptr<VertexArray> m_LightsVAO;
     std::unique_ptr<Texture> m_Texture;
 };
 #endif

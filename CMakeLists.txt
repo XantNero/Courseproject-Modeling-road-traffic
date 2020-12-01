@@ -5,12 +5,15 @@ project(CourseWork)
 
 add_executable(main
     src/main.cpp
+    src/pch.h src/pch.cpp
+
     src/core/Vector.h src/core/Vector.cpp
     src/core/Road.h src/core/Road.cpp
     src/core/Car.h src/core/Car.cpp
     src/core/ForceGenerator.h src/core/ForceGenerator.cpp
     src/core/Particle.h src/core/Particle.cpp
     src/core/MDLParser.h src/core/MDLParser.cpp
+    src/core/TrafficLight.h src/core/TrafficLight.cpp
 
     src/glfw/Window.h src/glfw/Window.cpp
 
@@ -49,6 +52,7 @@ add_executable(main
 target_link_libraries(main -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
 
 set(CMAKE_CXX_FLAGS "-g")
+
 
 project(QtApp LANGUAGES CXX)
 

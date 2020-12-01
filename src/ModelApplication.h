@@ -6,6 +6,7 @@
 
 #include "core/Car.h"
 #include "core/Road.h"
+#include "core/TrafficLight.h"
 
 #include <vector>
 #include <memory>
@@ -19,6 +20,7 @@ struct ModelInformation
 {
     std::vector<Car> cars;
     std::vector<const Road*> roads;
+    std::vector<const TrafficLight*> lights;
 };
 
 class ModelApplication
@@ -38,6 +40,7 @@ private:
     std::unique_ptr<RoadRegistry> m_RoadRegistry;
     std::unique_ptr<CarRegistry> m_CarRegistry;
     std::vector<std::unique_ptr<CarGenerator>> m_CarGenerators;
+    std::vector<std::unique_ptr<TrafficLight>> m_TrafficLights;
 };
 
 #endif

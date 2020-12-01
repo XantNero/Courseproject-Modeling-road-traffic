@@ -2,6 +2,7 @@
 #define _MDLPARSER_H_
 #include "Car.h"
 #include "Road.h"
+#include "TrafficLight.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -10,6 +11,7 @@ struct ParseInformation
 {
     RoadRegistry* roadRegistry;
     std::vector<CarGenerator*> CarGenerators;
+    std::vector<TrafficLight*> TrafficLights;
 };
 
 struct RoadGraph
@@ -26,9 +28,10 @@ public:
 private:
     static RoadRegistry* parseRoads(std::ifstream& file);
     static std::vector<CarGenerator*> parseCarGenerators(std::ifstream& file);
-    static std::vector<Vector> parsePoints(std::ifstream& file, std::vector<bool>& road_value);
+    static std::vector<Vector> parsePoints(std::ifstream& file);
     static RoadGraph parseConnections(std::ifstream& file);
-    static void constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool> &vis, std::vector<bool>& roadValue);
+    static std::vector<TrafficLight* > parseTrafficLights(std::ifstream& file);
+    static void constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool> &vis);
     static void connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry);
 };
 

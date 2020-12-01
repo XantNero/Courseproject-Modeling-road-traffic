@@ -172,7 +172,7 @@ void Car::move(float time)
     acceleration *= 0;
     acceleration += forceAccumulator;
     velocity += acceleration * time;
-    velocity.limitMagnitude(maxSpeed * time);
+    velocity.limitMagnitude(getMaxSpeed() * time);
     position += velocity * time;
     // acceleration *= damping;
     clearAccumulator();    
@@ -190,6 +190,16 @@ Vector Car::getNormalPoint(Vector&p, Vector&a, Vector&b)
 bool Car::view(const Car &car, double angle, double d) const
 {
     Vector dist = car.getPosition() - getPosition();
+    Vector vel = getVelocity();
+    double a = dist.getAngle(vel);
+    if (dist.getMagnitude() < d && a < angle)
+        return true;
+    return false;
+}
+
+bool Car::view(const TrafficLight &light, double angle, double d) const
+{
+    Vector dist = light.getPosition() - getPosition();
     Vector vel = getVelocity();
     double a = dist.getAngle(vel);
     if (dist.getMagnitude() < d && a < angle)
@@ -218,11 +228,27 @@ void CarRegistry::addCar(const Car &car, const unsigned int start_roadID)
     cars.push_back({car, SteerForceGenerator(), BrakeForceGenerator(), start_roadID});
 }
 
-void CarRegistry::update(const RoadRegistry &roads, float time)
+void CarRegistry::update(const RoadRegistry &roads, const std::vector<const TrafficLight*> &lights, float time)
 {   
     std::list<CarInformation>::iterator it = cars.begin();
     while(it != cars.end()) {
         
+        bool red_fl;
+        for (unsigned int i = 0; i < lights.size(); ++i) {
+            if (it->car.view(*lights[i], 3.14 / 6, 70)) {
+                if (lights[i]->getState() == TrafficLight::State::Red || lights[i]->getState() == TrafficLight::State::Yellow) {
+                     it->car.setState(Car::State::STOP, true);
+                      Vector desired = it->car.getVelocity();
+                    desired.setMagnitude(0.01);
+                    it->brakeForceGenerator.init(desired, (float)lights[i]->getPosition().distance(it->car.getPosition()));
+                     red_fl = true;
+                }
+                break;
+            }
+        }
+        if (!red_fl)
+            it->car.setState(Car::State::STOP, false);
+
          if ((it->car.getState() & Car::State::YIELD) && (it->car.getState() & Car::State::FOLLOW) == 0) {
             std::list<CarInformation>::iterator view_check = cars.begin();
             bool stop_fl = false;
@@ -237,7 +263,7 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
                     if (it->roadID == u) {
                         fl = true;
                         break;
-                    }
+                    }   
                 }
                 // if (it->roadID == view_check->roadID)
                 //     fl = true;
@@ -246,7 +272,7 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
                     continue;
                 }
                 
-                if (it->car.view(view_check->car, 4 * 3.14 / 6, 75)) {
+                if (it->car.view(view_check->car, 3.14 / 3, 50) || it->car.view(view_check->car, 4 * 3.14 / 6, 75)) {
                     
                     it->car.setState(Car::State::STOP, true);
                     Vector desired = it->car.getVelocity();
@@ -262,11 +288,10 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
         }
 
 
-
         if (it->car.getState() & Car::TURN) {
             std::vector<unsigned int> conn = roads.getRoadConnections(it->roadID);
             if (conn.size() != 0) {
-                    double prob = (double)(std::rand() % 100) / 100; // change
+                double prob = (double)(std::rand() % 100) / 100; // change
                 int i = 0;
                 while (prob > 1.0f / conn.size()) {
                     prob -= 1.0f / conn.size();
@@ -281,14 +306,15 @@ void CarRegistry::update(const RoadRegistry &roads, float time)
                 //     it->car.setState(Car::State::YELL | Car::State::STOP, false);
                 // }
             }
-            else {
+            else {  
                 it->car.setState(Car::LIVE, false);
             }
         }
 
-        std::list<CarInformation>::iterator view_check = cars.begin();
-        bool follow_fl = false;
+       
         if ((it->car.getState() & Car::State::TURN) == 0) {
+             std::list<CarInformation>::iterator view_check = cars.begin();
+             bool follow_fl = false;
              while(view_check != cars.end()) {
                 if (&it->car == &view_check->car) {
                     ++view_check;

@@ -4,6 +4,7 @@
 #include <memory>
 #include <unordered_map>
 #include "Vector.h"
+//#include "TrafficLight.h"
 class Road
 {
 public:
@@ -17,8 +18,12 @@ public:
     inline unsigned int getID() const { return m_ID; }
     inline bool isMain() const { return m_Main; }
     inline void setMain(bool value) { m_Main = value; }
+    // inline void addTrafficLight(TrafficLight* light) {m_TrafficLights.push_back(std::make_shared<TrafficLight>(light)); }
+    // inline const std::vector<std::shared_ptr<TrafficLight>>& getTrafficLights() const
+    //     { return m_TrafficLights; }
 private:
     std::vector <Vector> points;
+    //std::vector<std::shared_ptr<TrafficLight>> m_TrafficLights;
     double radius;
     unsigned int m_ID;
     bool m_Main;

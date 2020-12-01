@@ -13,3 +13,4 @@ QtApp_autogen/
 /QtApp/QtApp
 CMakeLists.txt.user
 gui
+gui_autogen/

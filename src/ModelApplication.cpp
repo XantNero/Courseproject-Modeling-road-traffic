@@ -75,40 +75,14 @@ ModelApplication::ModelApplication(const std::string& filePath)
     
     m_RoadRegistry.reset(info.roadRegistry);
     m_CarGenerators.resize(info.CarGenerators.size());
+    m_TrafficLights.resize(info.TrafficLights.size());
     for (unsigned int i = 0; i < info.CarGenerators.size(); ++i) {
         m_CarGenerators[i].reset(info.CarGenerators[i]);
     }
+    for (unsigned int i = 0; i < info.TrafficLights.size(); ++i) {
+        m_TrafficLights[i].reset(info.TrafficLights[i]);
+    }
     m_CarRegistry = std::make_unique<CarRegistry>();
-    // float roadVertices[] = {
-    //     540.0f, 720.0f,
-    //     540.0f, 360.0f,
-    //     0.0f, 0.0f,
-    //     1080.0f, 0.0f,
-    //     540.0f, 0.0f
-    // };
-
-    // std::unique_ptr<Road> road1 = std::make_unique<Road>();
-    // std::unique_ptr<Road> road2 = std::make_unique<Road>();
-    // std::unique_ptr<Road> road3 = std::make_unique<Road>();
-    // std::unique_ptr<Road> road4 = std::make_unique<Road>();
-
-    // road1->addPoint(roadVertices[0], roadVertices[1]);
-    // road1->addPoint(roadVertices[2], roadVertices[3]);
-    // road2->addPoint(roadVertices[2], roadVertices[3]);
-    // road2->addPoint(roadVertices[4], roadVertices[5]);
-    // road3->addPoint(roadVertices[2], roadVertices[3]);
-    // road3->addPoint(roadVertices[6], roadVertices[7]);
-    // road4->addPoint(roadVertices[2], roadVertices[3]);
-    // road4->addPoint(roadVertices[8], roadVertices[9]);
-    
-    // m_Roads.addRoad(std::move(road1));
-    // m_Roads.addRoad(std::move(road2));
-    // m_Roads.addRoad(std::move(road3));
-    // m_Roads.addRoad(std::move(road4));
-    // m_Roads.connectRoads(0, 1);
-    // m_Roads.connectRoads(0, 2);
-    // m_Roads.connectRoads(0, 3);
-    // m_CarGenerator.setPosition(Vector(540, 720));
     m_OpenglLayer->onAttach();
     m_ImguiLayer->onAttach();
 }
@@ -138,11 +112,18 @@ void ModelApplication::run()
         float time = 1.0f;
         for (unsigned int i = 0; i < m_CarGenerators.size(); ++i)
             m_CarGenerators[i]->update(*m_CarRegistry);
-        m_CarRegistry->update(*m_RoadRegistry, time);
+        for (unsigned int i = 0; i < m_TrafficLights.size(); ++i)
+            m_TrafficLights[i]->update();
+
+        std::vector<const TrafficLight*> lights;
+        for (unsigned int i = 0; i < m_TrafficLights.size(); ++i) 
+            lights.push_back(m_TrafficLights[i].get());
+        m_CarRegistry->update(*m_RoadRegistry, lights, time);
 
         ModelInformation info;
         info.cars = m_CarRegistry->getCars();
         info.roads = m_RoadRegistry->getRoads();
+        info.lights = lights;
         m_OpenglLayer->onUpdate(info);
         m_ImguiLayer->begin();
         m_ImguiLayer->onImguiRender();
