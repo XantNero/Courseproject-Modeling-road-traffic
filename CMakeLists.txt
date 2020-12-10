@@ -2,35 +2,29 @@ cmake_minimum_required(VERSION 3.16)
 
 project(CourseWork)
 
-
 add_executable(main
-    src/main.cpp
-    src/pch.h src/pch.cpp
+    src/model/main.cpp
+    src/model/pch.h src/model/pch.cpp
+    src/model/core/Vector.h src/model/core/Vector.cpp
+    src/model/core/Road.h src/model/core/Road.cpp
+    src/model/core/Car.h src/model/core/Car.cpp
+    src/model/core/ForceGenerator.h src/model/core/ForceGenerator.cpp
+    src/model/core/Particle.h src/model/core/Particle.cpp
+    src/model/core/MDLParser.h src/model/core/MDLParser.cpp
+    src/model/core/TrafficLight.h src/model/core/TrafficLight.cpp
+    src/model/glfw/Window.h src/model/glfw/Window.cpp
+    src/model/imgui/ImguiLayer.h src/model/imgui/ImguiLayer.cpp 
+    src/model/OpenglLayer.h src/model/OpenglLayer.cpp
+    src/model/ModelApplication.h src/model/ModelApplication.cpp
 
-    src/core/Vector.h src/core/Vector.cpp
-    src/core/Road.h src/core/Road.cpp
-    src/core/Car.h src/core/Car.cpp
-    src/core/ForceGenerator.h src/core/ForceGenerator.cpp
-    src/core/Particle.h src/core/Particle.cpp
-    src/core/MDLParser.h src/core/MDLParser.cpp
-    src/core/TrafficLight.h src/core/TrafficLight.cpp
+    src/model/opengl/Buffer.h src/model/opengl/Buffer.cpp
+    src/model/opengl/VertexArray.h src/model/opengl/VertexArray.cpp
+    src/model/opengl/debug.h src/model/opengl/debug.cpp
+    src/model/opengl/Shader.h src/model/opengl/Shader.cpp
+    src/model/opengl/Renderer.h src/model/opengl/Renderer.cpp
+    src/model/opengl/Texture.h src/model/opengl/Texture.cpp
+    src/model/opengl/OrtographicCamera.h src/model/opengl/OrtographicCamera.cpp
 
-    src/glfw/Window.h src/glfw/Window.cpp
-
-    src/imgui/ImguiLayer.h src/imgui/ImguiLayer.cpp 
-
-    src/OpenglLayer.h src/OpenglLayer.cpp
-    src/ModelApplication.h src/ModelApplication.cpp
-   
-
-    src/opengl/Buffer.h src/opengl/Buffer.cpp
-    src/opengl/VertexArray.h src/opengl/VertexArray.cpp
-    src/opengl/debug.h src/opengl/debug.cpp
-    src/opengl/Shader.h src/opengl/Shader.cpp
-    src/opengl/Renderer.h src/opengl/Renderer.cpp
-    src/opengl/Texture.h src/opengl/Texture.cpp
-    src/opengl/OrtographicCamera.h src/opengl/OrtographicCamera.cpp
-  
     src/vendor/stb_image/stb_image.h src/vendor/stb_image/stb_image.cpp
     src/vendor/glm/glm.hpp src/vendor/glm/gtc/matrix_transform.hpp
     src/vendor/imgui/imconfig.h
@@ -48,8 +42,17 @@ add_executable(main
     src/vendor/imgui/imstb_textedit.h
     src/vendor/imgui/imstb_truetype.h
 )
+#ad_subdirectory(src/vendor/glew-2.1.0/build/cmake)
 
-target_link_libraries(main -lglfw -lrt -lm -ldl -lGLEW -lGLU -lm -lGL)
+add_subdirectory(src/vendor/glfw-3.3.2)
+include_directories(src/vendor/glfw-3.3.2/include)
+
+add_subdirectory(src/vendor/glew-2.1.0/build/cmake)
+include_directories(src/vendor/glew-2.1.0/include)
+
+#find_package(GLEW REQUIRED PATHS src/vendor/glew-2.1.0)
+#message(STATUS "Found GLEW in ${GLEW_INCLUDE_DIR}")
+target_link_libraries(main glfw ${GLFW_LIBRARIES} glew)
 
 set(CMAKE_CXX_FLAGS "-g")
 
@@ -66,19 +69,23 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-no-pie")
 
+
+
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
-
+#message(STATUS "Found QT in ${Qt5_DIR}")
   add_executable(gui
-    QtApp/main.cpp
-    QtApp/Mainwindow.cpp
-    QtApp/Mainwindow.h
-    QtApp/Workspace.h
-    QtApp/Workspace.cpp
-    QtApp/WorkspaceScene.h
-    QtApp/WorkspaceScene.cpp
-    QtApp/Item.h
-    QtApp/Item.cpp
+    src/gui/main.cpp
+    src/gui/Mainwindow.cpp
+    src/gui/Mainwindow.h
+    src/gui/Workspace.h
+    src/gui/Workspace.cpp
+    src/gui/WorkspaceScene.h
+    src/gui/WorkspaceScene.cpp
+    src/gui/Item.h
+    src/gui/Item.cpp
+    src/gui/TrafficlightWindow.h
+    src/gui/TrafficlightWindow.cpp
   )
 
 target_link_libraries(gui PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
