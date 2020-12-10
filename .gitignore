@@ -6,7 +6,6 @@ test
 main
 forhelp.cpp
 imgui.ini
-build*/
 QtApp/CMakeLists.txt.user
 QtApp_autogen/
 *.mdl
