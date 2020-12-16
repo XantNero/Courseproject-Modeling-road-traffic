@@ -14,3 +14,6 @@ CMakeLists.txt.user
 ./gui
 gui_autogen/
 .cmake/
+CMakeDoxy*
+lib/
+bin/

@@ -1,5 +1,4 @@
 #include "WorkspaceScene.h"
-#include "Item.h"
 #include <QGraphicsView>
 #include <QInputEvent>
 
@@ -33,7 +32,7 @@ void WorkspaceScene::addCarGenerator(QGraphicsSceneMouseEvent *mouseEvent)
 
 void WorkspaceScene::addRoad(QGraphicsSceneMouseEvent *mouseEvent)
 {
-     QList<QGraphicsItem*> list = selectedItems();
+    QList<QGraphicsItem*> list = selectedItems();
     RoadPoint* roadPointItem = new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
     addItem(roadPointItem);
     for (auto item : list) {
@@ -62,7 +61,15 @@ void WorkspaceScene::addRoad(QGraphicsSceneMouseEvent *mouseEvent)
    //                    break;
    //                }
    //                roadItem = dynamic_cast<Road*>(list[0]);
-   //                roadItem->addPoint(roadItem->mapFromScene(mouseEvent->scenePos()));
+    //                roadItem->addPoint(roadItem->mapFromScene(mouseEvent->scenePos()));
+}
+
+void WorkspaceScene::addRoadPoint(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    RoadPoint* roadPointItem = new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
+    addItem(roadPointItem);
+    QGraphicsScene::mousePressEvent(mouseEvent);
+    emit isModified();
 }
 
 void WorkspaceScene::addTrafficlight(QGraphicsSceneMouseEvent *mouseEvent)
@@ -73,7 +80,7 @@ void WorkspaceScene::addTrafficlight(QGraphicsSceneMouseEvent *mouseEvent)
    emit isModified();
 }
 
-void WorkspaceScene::connect(QGraphicsSceneMouseEvent *mouseEvent)
+void WorkspaceScene::connect(QGraphicsSceneMouseEvent *mouseEvent, Road::Type roadType)
 {
     QList<QGraphicsItem*> list = selectedItems();
     QGraphicsItem* item;
@@ -81,9 +88,13 @@ void WorkspaceScene::connect(QGraphicsSceneMouseEvent *mouseEvent)
         RoadPoint* roadPointItem = dynamic_cast<RoadPoint*>(item);
         for (auto to_connect : list) {
             if (to_connect->type() == (int)ModelTypes::RoadPoint || to_connect->type() == (int)ModelTypes::CarGenerator || to_connect->type() == (int)ModelTypes::Trafficlight) {
-                Road::Type type = to_connect->type() == (int)ModelTypes::RoadPoint ? Road::NotMain : Road::Connection;
+                Road::Type type = to_connect->type() == (int)ModelTypes::RoadPoint ? roadType : Road::Connection;
                 RoadPoint* roadPoint = dynamic_cast<RoadPoint*>(to_connect);
                 Road* roadItem = new Road(m_ItemMenu, roadPoint, roadPointItem, type);
+                if (to_connect->type() == (int)ModelTypes::CarGenerator || to_connect->type() == (int)ModelTypes::Trafficlight) {
+                    if (roadPoint->getConnections().size() == 1)
+                        roadPoint->deleteConnection(roadPoint->getConnections()[0]);
+                }
                 roadPoint->connect(roadPointItem, roadItem);
                 roadPointItem->connected(roadPoint, roadItem);
             }
@@ -138,14 +149,20 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             case ActionType::AddCarGenerator:
                 addCarGenerator(mouseEvent);
                 break;
+            case ActionType::AddRoidPoint:
+                addRoadPoint(mouseEvent);
+                break;
             case ActionType::AddRoad:
                 addRoad(mouseEvent);
                 break;
             case ActionType::AddTrafficlight:
                 addTrafficlight(mouseEvent);
                 break;
-            case ActionType::Connect:
-                connect(mouseEvent);
+            case ActionType::ConnectMainRoad:
+                connect(mouseEvent, Road::Main);
+                break;
+            case ActionType::ConnectNotMainRoad:
+                connect(mouseEvent, Road::NotMain);
                 break;
             case ActionType::Disconnect:
                 disconnect(mouseEvent);
@@ -179,10 +196,16 @@ void WorkspaceScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
      emit isModified();
  }
 
- void WorkspaceScene::slotConnect()
+ void WorkspaceScene::slotConnectMainRoad()
  {
-    setState(ActionType::Connect);
+     setState(ActionType::ConnectMainRoad);
  }
+
+ void WorkspaceScene::slotConnectNotMainRoad()
+ {
+     setState(ActionType::ConnectNotMainRoad);
+ }
+
  void WorkspaceScene::slotDisconnect()
  {
      setState(ActionType::Disconnect);

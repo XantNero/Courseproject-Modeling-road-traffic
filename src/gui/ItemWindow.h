@@ -1,5 +1,5 @@
-#ifndef _TRAFFICLIGHTWINDOW_H_
-#define _TRAFFICLIGHTWINDOW_H_
+#ifndef _ITEMTWINDOW_H_
+#define _ITEMTWINDOW_H_
 #include "QDockWidget"
 #include "QDoubleSpinBox"
 
@@ -25,11 +25,24 @@ class TrafficlightWindow : public QWidget
 public:
     TrafficlightWindow(LightTimings timings, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
     LightTimings getTimings() const;
+private:
+    void setSliders();
+    void setTimeings(LightTimings timings);
 private slots:
     void slotStartLight(int index);
 private:
     LightSlider* m_Sliders[6];
     int m_StartLight;
+};
+
+class CarGeneratorWindow : public QWidget
+{
+    Q_OBJECT
+public:
+    CarGeneratorWindow(int timing, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
+    unsigned int getRate() const { return m_Box->value(); }
+private:
+    QSpinBox *m_Box;
 };
 
 #endif

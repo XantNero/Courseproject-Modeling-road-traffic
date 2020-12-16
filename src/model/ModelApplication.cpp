@@ -12,10 +12,6 @@ ModelApplication::ModelApplication(const std::string& filePath)
     m_Window->setWindowSizeCallback(window_resize_callback);
     m_Window->setScrollCallback(scroll_callback);
     s_App_Instanse = this;
-
-    // m_Window->setCursorPosCallback(cursor_position_callback);
-    // m_Window->setWindowSizeCallback(window_resize_callback);
-    // m_Window->setScrollCallback(scroll_callback);
     m_Window->setVSync(true);
     ParseInformation info = MDLParser::parseFile(filePath);
     
@@ -55,7 +51,11 @@ void ModelApplication::run()
 {
     while(!m_Window->shouldClose()) {
         //CarGenerator.setRate((float)genRate / time);
-        float time = 1.0f;
+
+        float time = glfwGetTime();
+        float deltaTime = time - m_LastFrameTime;
+        m_LastFrameTime = time;
+        // std::cout << deltaTime << '\n';
         for (unsigned int i = 0; i < m_CarGenerators.size(); ++i)
             m_CarGenerators[i]->update(*m_CarRegistry);
         for (unsigned int i = 0; i < m_TrafficLights.size(); ++i)
@@ -64,7 +64,7 @@ void ModelApplication::run()
         std::vector<const TrafficLight*> lights;
         for (unsigned int i = 0; i < m_TrafficLights.size(); ++i) 
             lights.push_back(m_TrafficLights[i].get());
-        m_CarRegistry->update(*m_RoadRegistry, lights, time);
+        m_CarRegistry->update(*m_RoadRegistry, lights, deltaTime);
 
         ModelInformation info;
         info.cars = m_CarRegistry->getCars();
@@ -78,6 +78,7 @@ void ModelApplication::run()
     }
   
 }
+
 
 
 static float ratio = 1.0f;

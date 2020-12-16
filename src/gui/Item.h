@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QPainter>
-#include "TrafficlightWindow.h"
+#include "ItemWindow.h"
 
 
 enum class ModelTypes
@@ -66,15 +66,19 @@ protected:
 class CarGenerator : public RoadPoint
 {
 public:
-   CarGenerator(QMenu* contextMenu, const QPointF& pos, QGraphicsItem* parent = nullptr);
+   CarGenerator(QMenu* contextMenu, const QPointF& pos, int timing = 1000, QGraphicsItem* parent = nullptr);
    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
    virtual QRectF boundingRect() const override;
    virtual int type() const override;
+   inline unsigned int getRate() const { return m_Window->getRate();}
 //   void connect(RoadPoint* point);
 //   void disconnect();
 //   RoadPoint* getConnection() const;
 protected:
    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+   virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
+private:
+   CarGeneratorWindow* m_Window;
 };
 
 

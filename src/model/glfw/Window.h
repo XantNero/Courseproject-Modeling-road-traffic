@@ -6,8 +6,6 @@ struct GLFWwindow;
 
 class Window;
 
-
-
 struct WindowData
 {
     std::string Title;
@@ -36,24 +34,29 @@ struct WindowProps
 class Window
 {
 public:
-    Window();
-    Window(const WindowProps& props);
+    Window(const WindowProps& props = WindowProps());
     ~Window();
     void onUpdate();
-    void setWindowSizeCallback(void (*)(Window* window, int width, int height));
-	void setKeyCallback(void (*)(Window* window, int key, int scancode, int action, int mods));
-	void setCharCallback(void (*)(Window* window, unsigned int keycode));
-	void setMouseButtonCallback(void (*)(Window* window, int button, int action, int mods));
-	void setScrollCallback(void (*)(Window* window, double xOffset, double yOffset));
-	void setCursorPosCallback(void (*)(Window* window, double xPos, double yPos));
-    unsigned int getMouseButton(unsigned int button);
-    unsigned int getWidth() const;
-    unsigned int getHeight() const;
+    inline void setWindowSizeCallback(void (*cb)(Window* window, int width, int height))
+        {m_data.WindowSizeCallback = cb; }
+	inline void setKeyCallback(void (*cb)(Window* window, int key, int scancode, int action, int mods))
+        {m_data.KeyCallback = cb; }
+	inline void setCharCallback(void (*cb)(Window* window, unsigned int keycode))
+        {m_data.CharCallback = cb; }
+	inline void setMouseButtonCallback(void (*cb)(Window* window, int button, int action, int mods))
+        {m_data.MouseButtonCallback = cb; }
+	inline void setScrollCallback(void (*cb)(Window* window, double xOffset, double yOffset))
+        {m_data.ScrollCallback = cb; }
+	inline void setCursorPosCallback(void (*cb)(Window* window, double xPos, double yPos))
+        {m_data.CursorPosCallback = cb; }
+    unsigned int getMouseButton(unsigned int button) const;
+    inline unsigned int getWidth() const { return m_data.Width; }
+    inline unsigned int getHeight() const { return m_data.Height; }
     bool shouldClose() const;
-    void setVSync(bool);
-
+    void setVSync(bool mode);
 private:
-    void shutDown();
+    inline void shutDown();
+private:
     WindowData m_data;
     GLFWwindow* m_Window;
 };

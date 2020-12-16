@@ -5,8 +5,8 @@
 #include <QMenu>
 #include <cmath>
 
-CarGenerator::CarGenerator(QMenu* contextMenu, const QPointF& pos, QGraphicsItem* parent)
-    :RoadPoint(contextMenu, pos, parent)
+CarGenerator::CarGenerator(QMenu* contextMenu, const QPointF& pos, int timing, QGraphicsItem* parent)
+    :RoadPoint(contextMenu, pos, parent), m_Window(new CarGeneratorWindow(timing))
 {
     QTransform transform;
     transform.translate(pos.x(), pos.y());
@@ -47,6 +47,24 @@ void CarGenerator::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     scene()->clearSelection();
     setSelected(true);
     m_ContextMenu->exec(event->screenPos());
+}
+
+
+QVariant CarGenerator::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange) {
+        WorkspaceScene* workspaceScene = dynamic_cast<WorkspaceScene*>(scene());
+        if (value == true) {
+            m_Window->show();
+            workspaceScene->slotAddDockWidget(m_Window);
+        }
+        else {
+            m_Window->hide();
+            workspaceScene->slotRemoveDockWidget(m_Window);
+        }
+        return value;
+    }
+    return QGraphicsItem::itemChange(change, value);
 }
 
 //void CarGenerator::connect(RoadPoint* point)

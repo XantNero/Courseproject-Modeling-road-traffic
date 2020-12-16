@@ -28,12 +28,12 @@ public:
     virtual void clearAccumulator() = 0;
     virtual void applyForce(const Vector& force) = 0;
 protected:
-    Vector position;
-    Vector velocity;
-    Vector acceleration;
-    Vector forceAccumulator;
-    float inverseMass;
-    float damping;
+    Vector m_Position;
+    Vector m_Velocity;
+    Vector m_Acceleration;
+    Vector m_ForceAccumulator;
+    float m_InverseMass;
+    float m_Damping;
 };
 
 #endif

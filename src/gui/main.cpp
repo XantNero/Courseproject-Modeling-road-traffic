@@ -5,18 +5,18 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("Xant_Nero");
     QCoreApplication::setApplicationName("Roads Modelling");
-    QTranslator trans;
-    trans.load("translations/russian.qm");
-    a.installTranslator(&trans);
-    MainWindow w;
-    w.show();
+    QTranslator ts;
+    ts.load("translations/russian.qm");
+    app.installTranslator(&ts);
+    MainWindow window;
+    window.show();
 //    QProcess* model = new QProcess(&w);
 //    QStringList l = QStringList("/home/dmitry/Courseproject-Modelling-road-traffic/test.mdl");
 //    model->setProgram("/home/dmitry/Courseproject-Modelling-road-traffic/main");
 //    //model->setArguments(l);
 //    model->start();
-    return a.exec();
+    return app.exec();
 }

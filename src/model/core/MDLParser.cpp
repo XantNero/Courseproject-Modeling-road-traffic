@@ -92,8 +92,9 @@ std::vector<CarGenerator*> MDLParser::parseCarGenerators(std::ifstream& file)
             continue;
         int startID;
         float x, y;
-        sscanf(line.c_str(), "%d%f%f", &startID, &x, &y);
-        CarGenerator* generator = new CarGenerator(Vector(x, y));
+        unsigned int rate;
+        sscanf(line.c_str(), "%d%f%f%d", &startID, &x, &y, &rate);
+        CarGenerator* generator = new CarGenerator(Vector(x, y), rate);
         generator->setStartRoadID(startID);
         generators.push_back(generator);
     }
@@ -231,7 +232,8 @@ void MDLParser::connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry)
     for (unsigned int i = 0; i < graph.connections.size(); ++i) {
         if (graph.connections[i].size() > 1) {
             int x = i;
-            while (graph.back_connections[x].size() == 1)
+            x = graph.back_connections[x][0];
+            while (graph.back_connections[x].size() == 1 && graph.connections[x].size() == 1)
                 x = graph.back_connections[x][0];
             if (roadRegistry->getRoad(i) != nullptr)
                 //roadRegistry->connectRoads(x, i);

@@ -4,17 +4,16 @@
 #include <memory>
 #include <unordered_map>
 #include "Vector.h"
-//#include "TrafficLight.h"
 class Road
 {
 public:
-    Road(unsigned int id, bool main = true) : points(), radius(0), m_ID(id), m_Main(false) { }
+    Road(unsigned int id, bool main = true) : m_Points(), m_Radius(0), m_ID(id), m_Main(false) { }
     ~Road() { }
-    inline void addPoint(double x, double y) { points.push_back(Vector(x, y)); }
-    inline int getRoadSize() const { return points.size(); }
+    inline void addPoint(double x, double y) { m_Points.push_back(Vector(x, y)); }
+    inline int getRoadSize() const { return m_Points.size(); }
     //TODO: EXEPTION 
-    inline Vector getPoint(int i) const { return points[i]; }
-    inline double getRadius() const { return radius; }
+    inline Vector getPoint(int i) const { return m_Points[i]; }
+    inline double getRadius() const { return m_Radius; }
     inline unsigned int getID() const { return m_ID; }
     inline bool isMain() const { return m_Main; }
     inline void setMain(bool value) { m_Main = value; }
@@ -22,9 +21,9 @@ public:
     // inline const std::vector<std::shared_ptr<TrafficLight>>& getTrafficLights() const
     //     { return m_TrafficLights; }
 private:
-    std::vector <Vector> points;
+    std::vector <Vector> m_Points;
     //std::vector<std::shared_ptr<TrafficLight>> m_TrafficLights;
-    double radius;
+    double m_Radius;
     unsigned int m_ID;
     bool m_Main;
 };
@@ -32,8 +31,8 @@ private:
 class RoadRegistry
 {
 public:
-    RoadRegistry();
-    ~RoadRegistry();
+    RoadRegistry() : connections(), roads(), m_hash() { }
+    ~RoadRegistry() { }
 
     const Road* getRoad(const unsigned int roadID) const;
     const std::vector<const Road*> getRoads() const;

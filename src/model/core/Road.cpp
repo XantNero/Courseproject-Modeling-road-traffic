@@ -14,15 +14,6 @@
 ----------------------------------------------------------------------
 */
 
-RoadRegistry::RoadRegistry()
-    :connections(), roads(), m_hash()
-{
-
-}
-RoadRegistry::~RoadRegistry()
-{
-}
-
 const Road* RoadRegistry::getRoad(const unsigned int roadID) const
 {
     if (m_hash.find(roadID) != m_hash.end())

@@ -2,11 +2,6 @@
 
 #include "Vector.h"
 
-inline Vector::Vector(double x /*= .0*/, double y /*= .0*/)
-: x(x), y(y){ }
-
-inline Vector::~Vector() { }
-
 Vector::Vector(const Vector &obj)
 {
     x = obj.getX();
@@ -117,4 +112,13 @@ double Vector::getAngle(const Vector& v)
     if (angle < -1.0f)
         angle ==-1.0f;
     return acos(angle);
+}
+
+Vector getNormalPoint(Vector&p, Vector&a, Vector&b) 
+{
+    Vector ap = p - a;
+    Vector ab = b - a;
+    ab.normalize();
+    ab *= ab * ap;
+    return ab + a;
 }

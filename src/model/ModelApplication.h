@@ -44,6 +44,8 @@ private:
     std::unique_ptr<CarRegistry> m_CarRegistry;
     std::vector<std::unique_ptr<CarGenerator>> m_CarGenerators;
     std::vector<std::unique_ptr<TrafficLight>> m_TrafficLights;
+
+    float m_LastFrameTime = 0.0f;
 };
 
 void cursor_position_callback(Window* window, double xpos, double ypos);

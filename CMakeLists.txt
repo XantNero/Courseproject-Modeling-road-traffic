@@ -2,6 +2,21 @@ cmake_minimum_required(VERSION 3.16)
 
 project(CourseWork)
 
+set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE RelWithDebInfo)
+
+#ad_subdirectory(src/vendor/glew-2.1.0/build/cmake)
+
+add_subdirectory(src/vendor/glfw-3.3.2)
+include_directories(src/vendor/glfw-3.3.2/include)
+
+add_subdirectory(src/vendor/glew-2.1.0/build/cmake)
+include_directories(src/vendor/glew-2.1.0/include)
+
+#find_package(GLEW REQUIRED PATHS src/vendor/glew-2.1.0)
+#message(STATUS "Found GLEW in ${GLEW_INCLUDE_DIR}")
+
+
 add_executable(main
     src/model/main.cpp
     src/model/pch.h src/model/pch.cpp
@@ -42,19 +57,10 @@ add_executable(main
     src/vendor/imgui/imstb_textedit.h
     src/vendor/imgui/imstb_truetype.h
 )
-#ad_subdirectory(src/vendor/glew-2.1.0/build/cmake)
 
-add_subdirectory(src/vendor/glfw-3.3.2)
-include_directories(src/vendor/glfw-3.3.2/include)
-
-add_subdirectory(src/vendor/glew-2.1.0/build/cmake)
-include_directories(src/vendor/glew-2.1.0/include)
-
-#find_package(GLEW REQUIRED PATHS src/vendor/glew-2.1.0)
-#message(STATUS "Found GLEW in ${GLEW_INCLUDE_DIR}")
 target_link_libraries(main glfw ${GLFW_LIBRARIES} glew)
 
-set(CMAKE_CXX_FLAGS "-g")
+
 
 
 project(QtApp LANGUAGES CXX)
@@ -84,8 +90,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
     src/gui/WorkspaceScene.cpp
     src/gui/Item.h
     src/gui/Item.cpp
-    src/gui/TrafficlightWindow.h
-    src/gui/TrafficlightWindow.cpp
+    src/gui/ItemWindow.h
+    src/gui/ItemWindow.cpp
   )
 
 target_link_libraries(gui PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

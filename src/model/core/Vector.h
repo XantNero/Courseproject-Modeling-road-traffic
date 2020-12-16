@@ -7,8 +7,8 @@ private:
     double x;
     double y;
 public:
-    Vector(double x = .0, double y = .0);
-    ~Vector();
+    Vector(double x = .0, double y = .0) : x(x), y(y){ }
+    ~Vector() {} 
     Vector(const Vector&);
     Vector& operator=(const Vector&);
     Vector& operator+=(const Vector&);
@@ -48,6 +48,7 @@ public:
     inline void setY(double value) { y = value; }
     double distance(const Vector &);
     double getAngle(const Vector &);
+    friend Vector getNormalPoint(Vector& point, Vector& a, Vector& b);
 };
 
 

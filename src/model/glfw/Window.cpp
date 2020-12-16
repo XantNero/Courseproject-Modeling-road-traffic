@@ -4,43 +4,6 @@
 #include <GLFW/glfw3.h>
 #include "Window.h"
 
-Window::Window() 
-{
-    WindowProps props;
-    m_data.Title = props.Title;
-    m_data.Height = props.Height;
-    m_data.Width = props.Width;
-    m_data.WindowPointer = this;
-
-    if (!glfwInit()) {
-        assert(false);  
-    }
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  
-
-    m_Window = glfwCreateWindow(m_data.Width, m_data.Height, m_data.Title.c_str(), NULL, NULL);
-    if (!m_Window) {
-        glfwTerminate();
-        assert(false);
-    }
-
-     glfwMakeContextCurrent(m_Window);
-
-    if(glewInit() != GLEW_OK) {
-        assert(false);
-    }   
-
-    glfwSetWindowUserPointer(m_Window, &m_data);
-    glfwSetWindowSizeCallback(m_Window, WindowSizeCallback);
-    glfwSetKeyCallback(m_Window, KeyCallback);
-    glfwSetCharCallback(m_Window, CharCallback);
-    glfwSetMouseButtonCallback(m_Window, MouseButtonCallback);
-    glfwSetScrollCallback(m_Window, ScrollCallback);
-    glfwSetCursorPosCallback(m_Window, CursorPosCallback);
-}
-
 Window::Window(const WindowProps& props)
 {
     m_data.Title = props.Title;
@@ -88,49 +51,9 @@ void Window::onUpdate()
     glfwSwapBuffers(m_Window);
 }
 
-void Window::setWindowSizeCallback(void (*callback)(Window* window, int width, int height)) 
+unsigned int Window::getMouseButton(unsigned int button) const
 {
-    m_data.WindowSizeCallback = callback;
-}
-
-void Window::setKeyCallback(void (*callback)(Window* window, int key, int scancode, int action, int mods)) 
-{
-    m_data.KeyCallback = callback;
-}
-
-void Window::setCharCallback(void (*callback)(Window* window, unsigned int keycode)) 
-{
-    m_data.CharCallback = callback;
-}
-
-void Window::setMouseButtonCallback(void (*callback)(Window* window, int button, int action, int mods)) 
-{
-    m_data.MouseButtonCallback = callback;
-}
-
-void Window::setScrollCallback(void (*callback)(Window* window, double xOffset, double yOffset)) 
-{
-    m_data.ScrollCallback = callback;
-}
-
-void Window::setCursorPosCallback(void (*callback)(Window* window, double xPos, double yPos)) 
-{
-    m_data.CursorPosCallback = callback;
-}
-
-unsigned int Window::getMouseButton(unsigned int button) 
-{
-    return glfwGetMouseButton(m_Window, button);
-}
-
-unsigned int Window::getWidth() const
-{
-    return m_data.Width;
-}
-
-unsigned int Window::getHeight() const
-{
-    return m_data.Height;
+    return glfwGetMouseButton(m_Window, button); 
 }
 
 bool Window::shouldClose() const
@@ -143,9 +66,9 @@ void Window::setVSync(bool mode)
     glfwSwapInterval(mode ? 1 : 0);
 }
 
-void Window::shutDown() 
+inline void Window::shutDown() 
 {
-        glfwTerminate();
+     glfwTerminate(); 
 }
 
 void WindowSizeCallback(GLFWwindow* window, int width, int height) 

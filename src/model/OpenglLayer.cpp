@@ -219,14 +219,9 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
         
         float circlePoints[] = {
             0.0f, 0.0f, lightColor.r, lightColor.g, lightColor.b,
-            //-1.0f, -1.0f,
             1.0f, 0.0f, lightColor.r, lightColor.g, lightColor.b,
-            //-1.0f, 1.0f,
             sqrt(3.0f) / 2.0f, 0.5f, lightColor.r, lightColor.g, lightColor.b,
-            //1.0f, 1.0f,
             0.5f, sqrt(3.0f) / 2.0f, lightColor.r, lightColor.g, lightColor.b,
-            //1.0f, -1.0f,
-            //0.5f, sqrt(3.0f) / 2.0f,
             0.0f, 1.0f, lightColor.r, lightColor.g, lightColor.b,
             -0.5f, sqrt(3.0f) / 2.0f, lightColor.r, lightColor.g, lightColor.b,
             -sqrt(3.0f) / 2.0f, 0.5f, lightColor.r, lightColor.g, lightColor.b,
@@ -261,29 +256,7 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
         };
 
          lightBuffer->addData(sizeof(circlePoints), circlePoints);
-        lightIBO->addData(sizeof(circleIndex) / sizeof(unsigned int), circleIndex);               
-        //      float carTrig[] = {
-        //     -10.0f, -20.0f,
-        //     -10.0f, 20.0f,
-        //     10.0f, 20.0f,
-        //     10.0f, -20.0f,
-        // };
-
-        // for (int j = 0; j < 4; ++j) {
-        //     glm::vec4 position = ModelMatrix * glm::vec4(carTrig[2 * j], carTrig[2 * j + 1], 0.0f, 1.0f);
-        //     carTrig[2 * j] = position.x;
-        //     carTrig[2 * j + 1] = position.y; 
-        // }
-
-
-        // unsigned int carIn[] = {
-        //     0 + i * 4, 1 + i * 4, 2 + i * 4,
-        //     2 + i * 4, 3 + i * 4, 0 + i * 4
-        // }; 
-
-        // lightBuffer->addData(4 * 2 * sizeof(float), carTrig);
-        // lightIBO->addData(6, carIn);        
-
+        lightIBO->addData(sizeof(circleIndex) / sizeof(unsigned int), circleIndex);                     
     }
     
     m_Shader->bind();

@@ -4,7 +4,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneEvent>
 #include <QMenu>
-#include "TrafficlightWindow.h"
+#include "ItemWindow.h"
+#include "Item.h"
 
 class WorkspaceScene : public QGraphicsScene
 {
@@ -12,7 +13,7 @@ class WorkspaceScene : public QGraphicsScene
 public:
     enum class ActionType
     {
-        None = 0, AddRoad, AddCarGenerator, AddTrafficlight, Move, Connect, Disconnect, Delete
+        None = 0, AddRoidPoint, AddRoad, AddCarGenerator, AddTrafficlight, Move, ConnectMainRoad, ConnectNotMainRoad, Disconnect, Delete
     };
 public:
     WorkspaceScene(QMenu* itemMenu, QObject *parent = nullptr);
@@ -22,7 +23,8 @@ public:
 public slots:
     void slotSetAction(ActionType);
     void slotDelete();
-    void slotConnect();
+    void slotConnectMainRoad();
+    void slotConnectNotMainRoad();
     void slotDisconnect();
     void slotAddDockWidget(QWidget* widget);
     void slotRemoveDockWidget(QWidget* widget);
@@ -35,8 +37,9 @@ protected:
     void setState(ActionType type) { m_ActionType = type; }
     void addCarGenerator(QGraphicsSceneMouseEvent *mouseEvent);
     void addRoad(QGraphicsSceneMouseEvent *mouseEvent);
+    void addRoadPoint(QGraphicsSceneMouseEvent *mouseEvent);
     void addTrafficlight(QGraphicsSceneMouseEvent *mouseEvent);
-    void connect(QGraphicsSceneMouseEvent *mouseEvent);
+    void connect(QGraphicsSceneMouseEvent *mouseEvent, Road::Type roadType);
     void disconnect(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
     virtual void keyPressEvent(QKeyEvent *event) override;
