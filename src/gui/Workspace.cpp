@@ -4,7 +4,8 @@
 Workspace::Workspace(WorkspaceScene* scene, QWidget *parent)
     :QGraphicsView(scene, parent), m_IsUpdated(false), rubberBand(nullptr)
 {
-    connect(scene, &WorkspaceScene::isModified, this, &Workspace::slotSceneUpdated);
+    connect(scene, &WorkspaceScene::isModified,
+            this, &Workspace::slotSceneUpdated);
 }
 
 void Workspace::mousePressEvent(QMouseEvent *event)

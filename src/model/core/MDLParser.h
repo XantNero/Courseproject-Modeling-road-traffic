@@ -30,8 +30,14 @@ private:
     static std::vector<CarGenerator*> parseCarGenerators(std::ifstream& file);
     static std::vector<Vector> parsePoints(std::ifstream& file);
     static RoadGraph parseConnections(std::ifstream& file);
-    static std::vector<TrafficLight* > parseTrafficLights(std::ifstream& file, std::vector<int> &lightsConnections);
-    static void constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool> &vis);
+    static std::vector<TrafficLight*> 
+    parseTrafficLights(std::ifstream& file,
+                       std::vector<int> &lightsConnections);
+    static void constructRoads(RoadGraph& graph,
+                               int x,
+                               RoadRegistry* roadRegistry,
+                               std::vector<Vector>& points,
+                               std::vector<bool> &vis);
     static void connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry);
 };
 

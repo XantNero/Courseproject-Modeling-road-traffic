@@ -15,7 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     m_itemMenu = createItemMenu();
-    m_Scene = new WorkspaceScene(m_itemMenu, QGuiApplication::screens()[0]->geometry(), this);
+    m_Scene = new WorkspaceScene(m_itemMenu,
+                                 QGuiApplication::screens()[0]->geometry(),
+                                 this);
     //m_Scene->addRect(QRectF(0.0f, 0.0f, 100.0f, 100.0f), QPen(QColor(Qt::yellow)), QBrush(Qt::yellow));
     m_View = new Workspace(m_Scene, this);
     setCentralWidget(m_View);
@@ -27,9 +29,12 @@ MainWindow::MainWindow(QWidget *parent)
     createStatusBar();
     createItemMenuActions();
     readSettings();
-    connect(m_View, &Workspace::signalModified, this, &MainWindow::slotWorkspaceIsModified);
-    connect(this, &MainWindow::signalAction, m_Scene, &WorkspaceScene::slotSetAction);
-    connect(m_Scene, &WorkspaceScene::signalAddDockWidget, this, &MainWindow::slotAddDockWidget);
+    connect(m_View, &Workspace::signalModified,
+            this, &MainWindow::slotWorkspaceIsModified);
+    connect(this, &MainWindow::signalAction,
+            m_Scene, &WorkspaceScene::slotSetAction);
+    connect(m_Scene, &WorkspaceScene::signalAddDockWidget,
+            this, &MainWindow::slotAddDockWidget);
 
     setCurrentFile(QString());
     setUnifiedTitleAndToolBarOnMac(true);
@@ -48,23 +53,30 @@ void MainWindow::createToolBarActions()
     toolsToolBar->addAction(moveAct);
 
     const QIcon addRoadPointIcon("res/textures/point.png");
-    QAction *addRoadPointAct = new QAction(addRoadPointIcon, tr("Add road point"));
-    connect(addRoadPointAct, &QAction::triggered, this, &MainWindow::slotAddRoadPoint);
+    QAction *addRoadPointAct = 
+        new QAction(addRoadPointIcon, tr("Add road point"));
+    connect(addRoadPointAct, &QAction::triggered,
+            this, &MainWindow::slotAddRoadPoint);
     toolsToolBar->addAction(addRoadPointAct);
 
     const QIcon addRoadIcon("res/textures/road.png");
-    QAction *addRoadAct = new QAction(addRoadIcon, tr("Add road"), toolsToolBar);
+    QAction *addRoadAct = 
+        new QAction(addRoadIcon, tr("Add road"), toolsToolBar);
     connect(addRoadAct, &QAction::triggered, this, &MainWindow::slotAddRoad);
     toolsToolBar->addAction(addRoadAct);
 
     const QIcon addCarGeneratorIcon("res/textures/carIcon.png");
-    QAction *addCarGeneratorAct = new QAction(addCarGeneratorIcon, tr("Add car generator"), toolsToolBar);
-    connect(addCarGeneratorAct, &QAction::triggered, this, &MainWindow::slotAddCarGenerator);
+    QAction *addCarGeneratorAct = 
+        new QAction(addCarGeneratorIcon, tr("Add car generator"), toolsToolBar);
+    connect(addCarGeneratorAct, &QAction::triggered,
+            this, &MainWindow::slotAddCarGenerator);
     toolsToolBar->addAction(addCarGeneratorAct);
 
     const QIcon lightIcon("res/textures/traffic-light-icon.png");
-    QAction *trafficlightAct = new QAction(lightIcon, tr("Add trafficlight"), toolsToolBar);
-    connect(trafficlightAct, &QAction::triggered, this, &MainWindow::slotAddTrafficlight);
+    QAction *trafficlightAct =
+        new QAction(lightIcon, tr("Add trafficlight"), toolsToolBar);
+    connect(trafficlightAct, &QAction::triggered,
+        this, &MainWindow::slotAddTrafficlight);
     toolsToolBar->addAction(trafficlightAct);
 }
 
@@ -84,27 +96,34 @@ void MainWindow::createScaleAction()
 
 void MainWindow::createItemMenuActions()
 {
-    const QIcon deleteIcon = QIcon::fromTheme("edit-delete", QIcon("res/textures/edit-delete.svg"));
+    const QIcon deleteIcon =
+        QIcon::fromTheme("edit-delete", QIcon("res/textures/edit-delete.svg"));
     QAction* deleteAction = new QAction(deleteIcon, tr("&Delete"), m_itemMenu);
     deleteAction->setShortcut(QKeySequence::Delete);
     deleteAction->setToolTip(tr("Delete selected items"));
-    connect(deleteAction, &QAction::triggered, m_Scene, &WorkspaceScene::slotDelete);
+    connect(deleteAction, &QAction::triggered,
+        m_Scene, &WorkspaceScene::slotDelete);
     m_itemMenu->addAction(deleteAction);
 
-    QAction* connectMainAction = new QAction(tr("Connect main road"), m_itemMenu);
+    QAction* connectMainAction =
+        new QAction(tr("Connect main road"), m_itemMenu);
     connectMainAction->setToolTip(tr("Connect items"));
-    connect(connectMainAction, &QAction::triggered, m_Scene, &WorkspaceScene::slotConnectMainRoad);
+    connect(connectMainAction, &QAction::triggered,
+            m_Scene, &WorkspaceScene::slotConnectMainRoad);
     m_itemMenu->addAction(connectMainAction);
 
 
-    QAction* connectNotMainAction = new QAction(tr("Connect not main road"), m_itemMenu);
+    QAction* connectNotMainAction =
+        new QAction(tr("Connect not main road"), m_itemMenu);
     connectNotMainAction->setToolTip(tr("Connect items"));
-    connect(connectNotMainAction, &QAction::triggered, m_Scene, &WorkspaceScene::slotConnectNotMainRoad);
+    connect(connectNotMainAction, &QAction::triggered,
+            m_Scene, &WorkspaceScene::slotConnectNotMainRoad);
     m_itemMenu->addAction(connectNotMainAction);
 
     QAction* disconnectAct = new QAction(tr("&Disconnect"), m_itemMenu);
     disconnectAct->setToolTip(tr("Disconnect items"));
-    connect(disconnectAct, &QAction::triggered, m_Scene, &WorkspaceScene::slotDisconnect);
+    connect(disconnectAct, &QAction::triggered,
+            m_Scene, &WorkspaceScene::slotDisconnect);
     m_itemMenu->addAction(disconnectAct);
 }
 
@@ -113,7 +132,9 @@ void MainWindow::createMenuBarActions()
     QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
     QToolBar *fileToolBar = addToolBar(tr("File"));
 
-    const QIcon newIcon = QIcon::fromTheme("document-new", QIcon("res/textures/document-new.svg"));
+    const QIcon newIcon =
+        QIcon::fromTheme("document-new",
+                         QIcon("res/textures/document-new.svg"));
     QAction *newAct = new QAction(newIcon, tr("&New"), this);
     newAct->setShortcut(QKeySequence::New);
     newAct->setToolTip(tr("Create a new file"));
@@ -121,7 +142,9 @@ void MainWindow::createMenuBarActions()
     fileMenu->addAction(newAct);
     fileToolBar->addAction(newAct);
 
-    const QIcon openIcon = QIcon::fromTheme("document-open", QIcon("res/textures/document-open.svg"));
+    const QIcon openIcon =
+        QIcon::fromTheme("document-open",
+                         QIcon("res/textures/document-open.svg"));
     QAction *openAct = new QAction(openIcon, tr("&Open"), this);
     openAct->setShortcut(QKeySequence::Open);
     openAct->setToolTip(tr("Open a file"));
@@ -129,7 +152,9 @@ void MainWindow::createMenuBarActions()
     fileMenu->addAction(openAct);
     fileToolBar->addAction(openAct);
 
-    const QIcon saveIcon = QIcon::fromTheme("document-save", QIcon("res/textures/document-save.svg"));
+    const QIcon saveIcon =
+        QIcon::fromTheme("document-save",
+                         QIcon("res/textures/document-save.svg"));
     QAction *saveAct = new QAction(saveIcon, tr("&Save"), this);
     saveAct->setShortcut(QKeySequence::Save);
     saveAct->setToolTip(tr("Save a file"));
@@ -137,7 +162,9 @@ void MainWindow::createMenuBarActions()
     fileMenu->addAction(saveAct);
     fileToolBar->addAction(saveAct);
 
-    const QIcon saveAsIcon = QIcon::fromTheme("document-save-as", QIcon("res/textures/document-save-as.svg"));
+    const QIcon saveAsIcon =
+        QIcon::fromTheme("document-save-as",
+                         QIcon("res/textures/document-save-as.svg"));
     QAction *saveAsAct = new QAction(saveAsIcon, tr("&Save As"), this);
     saveAsAct->setShortcut(QKeySequence::SaveAs);
     saveAsAct->setToolTip(tr("Save a file as"));
@@ -147,8 +174,11 @@ void MainWindow::createMenuBarActions()
 
     fileMenu->addSeparator();
 
-    const QIcon exitIcon = QIcon::fromTheme("application-exit", QIcon("res/textures/application-exit.svg"));
-    QAction *exitAct = fileMenu->addAction(exitIcon, tr("&Exit"), this, &QWidget::close);
+    const QIcon exitIcon =
+        QIcon::fromTheme("application-exit",
+                         QIcon("res/textures/application-exit.svg"));
+    QAction *exitAct = fileMenu->addAction(exitIcon, tr("&Exit"),
+                                           this, &QWidget::close);
     exitAct->setShortcut(QKeySequence::Quit);
     exitAct->setToolTip(tr("Exit the program"));
 
@@ -190,10 +220,12 @@ void MainWindow::createMenuBarActions()
     menuBar()->addSeparator();
 
     QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
-    QAction *aboutAct = helpMenu->addAction(tr("&About"), this, &MainWindow::slotAbout);
+    QAction *aboutAct = helpMenu->addAction(tr("&About"),
+                                            this, &MainWindow::slotAbout);
     aboutAct->setToolTip(tr("Show the application's about box"));
 
-    QAction *aboutQtAct = helpMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
+    QAction *aboutQtAct = helpMenu->addAction(tr("About &Qt"),
+                                              qApp, &QApplication::aboutQt);
     aboutQtAct->setToolTip(tr("Show the Qt about box"));
 
 //    cutAct->setEnabled(false);
@@ -213,7 +245,9 @@ void MainWindow::slotOpen()
 {
     m_View->hide();
     if (maybeSave()) {
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::currentPath(), tr("MDL (*.mdl)"));
+        QString fileName =
+            QFileDialog::getOpenFileName(this, tr("Open file"),
+                                        QDir::currentPath(), tr("MDL (*.mdl)"));
         if (!fileName.isEmpty())
             loadFile(fileName);
     }
@@ -228,7 +262,9 @@ bool MainWindow::slotSave()
 bool MainWindow::slotSaveAs()
 {
     m_View->hide();
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file"), QDir::currentPath(), tr("MDL (*.mdl)"));
+    QString fileName =
+        QFileDialog::getSaveFileName(this, tr("Save file"),
+                                     QDir::currentPath(), tr("MDL (*.mdl)"));
     m_View->show();
     if (fileName.isEmpty())
         return false;
@@ -237,9 +273,12 @@ bool MainWindow::slotSaveAs()
 void MainWindow::slotAbout()
 {
     QMessageBox::about(this, tr("About application"),
-                       tr("Object of my cursework is \"Modelling road traffic\"."
-                          "This project is gui-application with tool for making model of"
-                          "road traffic. This model can be simulated with animation."));
+                       tr("Object of my cursework is "
+                          "\"Modelling road traffic\". "
+                          "This project is gui-application "
+                           "with tool for making model of "
+                          "road traffic. This model can be "
+                           "simulated with animation."));
 }
 void MainWindow::slotWorkspaceIsModified()
 {
@@ -264,7 +303,8 @@ void MainWindow::slotWorkspaceIsModified()
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         QMessageBox::warning(this, tr("Application"),
                              tr("Cannot read file %1:\n%2.")
-                             .arg(QDir::toNativeSeparators(fileName), file.errorString()));
+                             .arg(QDir::toNativeSeparators(fileName),
+                             file.errorString()));
         return;
     }
     QList<QGraphicsItem*> items = m_Scene->items();
@@ -297,8 +337,10 @@ void MainWindow::slotWorkspaceIsModified()
  }
  void MainWindow::readSettings()
  {
-    QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
-    const QByteArray geometry = settings.value("geometry", QByteArray()).toByteArray();
+    QSettings settings(QCoreApplication::organizationName(),
+                       QCoreApplication::applicationName());
+    const QByteArray geometry =
+        settings.value("geometry", QByteArray()).toByteArray();
     if (geometry.isEmpty()) {
         QSize availableGeometry = qApp->screens()[0]->size();
         resize(availableGeometry.width() / 3, availableGeometry.height() / 2);
@@ -312,7 +354,8 @@ void MainWindow::slotWorkspaceIsModified()
  }
  void MainWindow::writeSettings()
  {
-    QSettings settings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
+    QSettings settings(QCoreApplication::organizationName(),
+                       QCoreApplication::applicationName());
     settings.setValue("geometry", saveGeometry());
  }
  bool MainWindow::maybeSave()
@@ -320,8 +363,11 @@ void MainWindow::slotWorkspaceIsModified()
      if (!m_View->isUpdated())
         return true;
     const QMessageBox::StandardButton ret =
-            QMessageBox::warning(this, tr("Application"), tr("Do you want save your changes?"),
-                                 QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+            QMessageBox::warning(this,
+                                 tr("Application"),
+                                tr("Do you want save your changes?"),
+                                 QMessageBox::Save |
+                                 QMessageBox::Discard | QMessageBox::Cancel);
     switch (ret) {
         case QMessageBox::Save:
             return slotSave();
@@ -333,7 +379,10 @@ void MainWindow::slotWorkspaceIsModified()
     return true;
  }
 
- bool MainWindow::loadCarGenerators(QTextStream &in, int &lineCount, QVector<CarGenerator*> &carGenerators, QVector<int> &carGeneratorsConnections)
+ bool MainWindow::loadCarGenerators(QTextStream &in,
+                                    int &lineCount,
+                                    QVector<CarGenerator*> &carGenerators,
+                                    QVector<int> &carGeneratorsConnections)
  {
      QString line;
 
@@ -348,11 +397,14 @@ void MainWindow::slotWorkspaceIsModified()
      ++lineCount;
      while (line != "}") {
          int valueCount = 0;
-         valueCount = sscanf(line.toStdString().c_str(), "%d%f%f%d", &connectionID, &posX, &posY, &rate);
+         valueCount = sscanf(line.toStdString().c_str(),
+                              "%d%f%f%d",
+                               &connectionID, &posX, &posY, &rate);
          if (valueCount != 4) {
              return false;
          }
-         carGenerators.push_back(new CarGenerator(m_itemMenu, QPointF(posX, posY), rate));
+         carGenerators.push_back(new CarGenerator(m_itemMenu,
+                                                  QPointF(posX, posY), rate));
          carGeneratorsConnections.push_back(connectionID);
          line = in.readLine();
          ++lineCount;
@@ -360,7 +412,9 @@ void MainWindow::slotWorkspaceIsModified()
      return true;
  }
 
- bool MainWindow::loadPoints(QTextStream &in, int &lineCount, QVector<RoadPoint*> &points)
+ bool MainWindow::loadPoints(QTextStream &in,
+                             int &lineCount,
+                             QVector<RoadPoint*> &points)
  {
      QString line;
      while (line != "{") {
@@ -373,7 +427,9 @@ void MainWindow::slotWorkspaceIsModified()
      ++lineCount;
      while (line != "}") {
          int valueCount = 0;
-         valueCount = sscanf(line.toStdString().c_str(), "%d%f%f", &pointID, &posX, &posY);
+         valueCount = sscanf(line.toStdString().c_str(),
+                             "%d%f%f",
+                              &pointID, &posX, &posY);
          if (valueCount != 3) {
             return false;
          }
@@ -388,7 +444,9 @@ void MainWindow::slotWorkspaceIsModified()
      return true;
  }
 
- bool MainWindow::loadConnections(QTextStream &in, int &lineCount, QVector<QVector<QPair<int, int>>> &conn)
+ bool MainWindow::loadConnections(QTextStream &in,
+                                  int &lineCount,
+                                  QVector<QVector<QPair<int, int>>> &conn)
  {
      QString line;
      while (line != "{") {
@@ -400,7 +458,9 @@ void MainWindow::slotWorkspaceIsModified()
      ++lineCount;
      while (line != "}") {
          int valueCount = 0;
-         valueCount = sscanf(line.toStdString().c_str(), "%d%d%d", &from, &to, &roadType);
+         valueCount = sscanf(line.toStdString().c_str(),
+                             "%d%d%d",
+                              &from, &to, &roadType);
          if (valueCount != 3) {
              return false;
          }
@@ -414,7 +474,10 @@ void MainWindow::slotWorkspaceIsModified()
      return true;
  }
 
- bool MainWindow::loadTrafficLights(QTextStream &in, int &lineCount, QVector<Trafficlight*> &trafficLights, QVector<int> &trafficlightConnections)
+ bool MainWindow::loadTrafficLights(QTextStream &in,
+                                    int &lineCount,
+                                    QVector<Trafficlight*> &trafficLights,
+                                    QVector<int> &trafficlightConnections)
  {
      QString line;
      while (line != "{") {
@@ -427,11 +490,15 @@ void MainWindow::slotWorkspaceIsModified()
      ++lineCount;
      while (line != "}") {
          int valueCount = 0;
-         valueCount = sscanf(line.toStdString().c_str(), "%d%f%f%d%d%d", &id, &x, &y, &green, &yellow, &red);
+         valueCount = sscanf(line.toStdString().c_str(),
+                             "%d%f%f%d%d%d",
+                             &id, &x, &y, &green, &yellow, &red);
          if (valueCount != 6) {
              return false;
          }
-         trafficLights.push_back(new Trafficlight(m_itemMenu, QPointF(x, y), {green, yellow, red}));
+         trafficLights.push_back(new Trafficlight(m_itemMenu,
+                                                  QPointF(x, y),
+                                                  {green, yellow, red}));
          trafficlightConnections.push_back(id);
          line = in.readLine();
          ++lineCount;
@@ -447,7 +514,9 @@ void MainWindow::slotWorkspaceIsModified()
          line = in.readLine();
          ++lineCount;
          if (line == "#CarGenerators") {
-             if (!loadCarGenerators(in, lineCount, data.carGenerators, data.carGeneratorsConnections)) {
+             if (!loadCarGenerators(in, lineCount,
+                                    data.carGenerators,
+                                    data.carGeneratorsConnections)) {
                   return false;
              }
          }
@@ -462,7 +531,8 @@ void MainWindow::slotWorkspaceIsModified()
              }
          }
          else if (line == "#TrafficLights") {
-             if (!loadTrafficLights(in, lineCount, data.trafficLights, data.trafficlightConnections)) {
+             if (!loadTrafficLights(in, lineCount, data.trafficLights,
+                                    data.trafficlightConnections)) {
                  return false;
              }
          }
@@ -480,23 +550,41 @@ void MainWindow::slotWorkspaceIsModified()
      data.conn.resize(data.points.size());
      for (int i = 0; i < data.carGenerators.size(); ++i) {
          m_View->scene()->addItem(data.carGenerators[i]);
-         Road* road = new Road(m_itemMenu, data.carGenerators[i], data.points[data.carGeneratorsConnections[i]], Road::Connection);
-         data.carGenerators[i]->connect(data.points[data.carGeneratorsConnections[i]], road);
-         data.points[data.carGeneratorsConnections[i]]->connected(data.carGenerators[i], road);
+         Road* road = 
+            new Road(m_itemMenu,
+                     data.carGenerators[i],
+                     data.points[data.carGeneratorsConnections[i]],
+                     Road::Connection);
+         data.carGenerators[i]->
+            connect(data.points[data.carGeneratorsConnections[i]], road);
+         data.points[data.carGeneratorsConnections[i]]->
+            connected(data.carGenerators[i], road);
      }
      for (int i = 0; i < data.points.size(); ++i) {
          m_View->scene()->addItem(data.points[i]);
          for (int j = 0; j < data.conn[i].size(); ++j) {
-             Road* road = new Road(m_itemMenu, data.points[i], data.points[data.conn[i][j].first], data.conn[i][j].second == 1 ? Road::Main : Road::NotMain);
+             Road* road = 
+                new Road(m_itemMenu,
+                         data.points[i],
+                         data.points[data.conn[i][j].first],
+                         data.conn[i][j].second == 1 ?
+                            Road::Main : Road::NotMain);
              data.points[i]->connect(data.points[data.conn[i][j].first], road);
-             data.points[data.conn[i][j].first]->connected(data.points[i], road);
+             data.points[data.conn[i][j].first]->
+                connected(data.points[i], road);
          }
      }
      for (int i = 0; i < data.trafficLights.size(); ++i) {
          m_View->scene()->addItem(data.trafficLights[i]);
-         Road* road = new Road(m_itemMenu, data.trafficLights[i], data.points[data.trafficlightConnections[i]], Road::Connection);
-         data.trafficLights[i]->connect(data.points[data.trafficlightConnections[i]], road);
-         data.points[data.trafficlightConnections[i]]->connected(data.trafficLights[i], road);
+         Road* road = 
+            new Road(m_itemMenu,
+                     data.trafficLights[i],
+                     data.points[data.trafficlightConnections[i]],
+                     Road::Connection);
+         data.trafficLights[i]->
+            connect(data.points[data.trafficlightConnections[i]], road);
+         data.points[data.trafficlightConnections[i]]->
+            connected(data.trafficLights[i], road);
      }
  }
  bool MainWindow::saveFile(const QString &fileName)
@@ -517,12 +605,14 @@ void MainWindow::slotWorkspaceIsModified()
 
         if (!file.commit()) {
             errorMessage = tr("Cannot write file %1:\n%2")
-                            .arg(QDir::toNativeSeparators(fileName), file.errorString());
+                            .arg(QDir::toNativeSeparators(fileName),
+                             file.errorString());
         }
     }
     else {
         errorMessage = tr("Cannot open file %1 for writing:\n%2")
-                        .arg(QDir::toNativeSeparators(fileName), file.errorString());
+                        .arg(QDir::toNativeSeparators(fileName),
+                         file.errorString());
     }
     QGuiApplication::restoreOverrideCursor();
     if (!errorMessage.isEmpty()) {
@@ -565,15 +655,18 @@ void MainWindow::slotWorkspaceIsModified()
      }
  }
 
- void MainWindow::saveCarGenerators(QTextStream &out, QVector<CarGenerator *> &carGenerators, QHash<RoadPoint*, int> &hash)
+ void MainWindow::saveCarGenerators(QTextStream &out,
+                                    QVector<CarGenerator *> &carGenerators,
+                                    QHash<RoadPoint*, int> &hash)
  {
      out << "#CarGenerators\n{\n";
      for (int i = 0; i < carGenerators.size(); ++i) {
          QList<RoadPoint*>conn =  carGenerators[i]->getConnections();
          //TODO: error
          QString str = QString("\t%1 %2 %3 %4\n").arg(hash[conn[0]])
-                 .arg(carGenerators[i]->scenePos().x()).arg(carGenerators[i]->scenePos().y()).
-                 arg(carGenerators[i]->getRate());
+                       .arg(carGenerators[i]->scenePos().x())
+                       .arg(carGenerators[i]->scenePos().y())
+                       .arg(carGenerators[i]->getRate());
          out << str;
      }
      out << "}\n";
@@ -583,20 +676,26 @@ void MainWindow::slotWorkspaceIsModified()
  {
      out << "#Points\n{\n";
      for (int i = 0; i < points.size(); ++i) {
-         QString str = QString("\t%1 %2 %3\n").arg(i).arg(points[i]->getPoint().x()).arg(points[i]->getPoint().y());
+         QString str = QString("\t%1 %2 %3\n")
+                        .arg(i).arg(points[i]->getPoint().x())
+                        .arg(points[i]->getPoint().y());
          out << str;
      }
      out << "}\n";
  }
 
- void MainWindow::saveConnections(QTextStream &out, QVector<RoadPoint*> points, QVector<QList<RoadPoint*>> conn, QHash<RoadPoint*, int> &hash)
+ void MainWindow::saveConnections(QTextStream &out,
+                                  QVector<RoadPoint*> points,
+                                  QVector<QList<RoadPoint*>> conn,
+                                 QHash<RoadPoint*, int> &hash)
  {
      out << "#Connections\n{\n";
      for (int i = 0; i < conn.size(); ++i) {
          for (int j = 0; j < conn[i].size(); ++j) {
               Road::Type connectionType = points[i]->getRoadType(conn[i][j]);
              int fl_mainRoad = connectionType == Road::Main ? 1 : 0;
-             QString str = QString("\t%1 %2 %3\n").arg(i).arg(hash[conn[i][j]]).arg(fl_mainRoad);
+             QString str = QString("\t%1 %2 %3\n")
+                            .arg(i).arg(hash[conn[i][j]]).arg(fl_mainRoad);
              out << str;
          }
 
@@ -604,14 +703,21 @@ void MainWindow::slotWorkspaceIsModified()
      out << "}\n";
  }
 
- void MainWindow::saveTrafficLights(QTextStream &out, QVector<Trafficlight *> &trafficlights, QHash<RoadPoint*, int> hash)
+ void MainWindow::saveTrafficLights(QTextStream &out,
+                                    QVector<Trafficlight *> &trafficlights,
+                                    QHash<RoadPoint*, int> hash)
  {
      out << "#TrafficLights\n{\n";
      //TODO:errror
      for (int i = 0; i < trafficlights.size(); ++i) {
          LightTimings time = trafficlights[i]->getTimings();
-         QString str = QString("\t%1 %2 %3 %4 %5 %6\n").arg(hash[trafficlights[i]->getConnections()[0]]).arg(trafficlights[i]->getPoint().x()).arg(trafficlights[i]->getPoint().y())
-                                                     .arg(time.green).arg(time.yellow).arg(time.red);
+         QString str = QString("\t%1 %2 %3 %4 %5 %6\n")
+                        .arg(hash[trafficlights[i]->getConnections()[0]])
+                        .arg(trafficlights[i]->getPoint().x())
+                        .arg(trafficlights[i]->getPoint().y())
+                        .arg(time.green)
+                        .arg(time.yellow)
+                        .arg(time.red);
          out << str;
      }
      out << "}\n";

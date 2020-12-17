@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(CourseWork)
 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 #set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 #ad_subdirectory(src/vendor/glew-2.1.0/build/cmake)

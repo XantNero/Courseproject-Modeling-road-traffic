@@ -7,9 +7,11 @@
 class Road
 {
 public:
-    Road(unsigned int id, bool main = true) : m_Points(), m_Radius(0), m_ID(id), m_Main(false) { }
+    Road(unsigned int id, bool main = true)
+        : m_Points(), m_Radius(0), m_ID(id), m_Main(false) { }
     ~Road() { }
-    inline void addPoint(double x, double y) { m_Points.push_back(Vector(x, y)); }
+    inline void addPoint(double x, double y) 
+        { m_Points.push_back(Vector(x, y)); }
     inline int getRoadSize() const { return m_Points.size(); }
     //TODO: EXEPTION 
     inline Vector getPoint(int i) const { return m_Points[i]; }
@@ -38,7 +40,8 @@ public:
     const std::vector<const Road*> getRoads() const;
     void addRoad(std::unique_ptr<Road> road);
     void connectRoads(const unsigned int ID_from, const unsigned int ID_to);
-    const std::vector<unsigned int>& getRoadConnections(const unsigned int roadID) const;
+    const std::vector<unsigned int>& 
+    getRoadConnections(const unsigned int roadID) const;
     unsigned int getRoadsCount() const;
 private:
     std::vector<std::vector<unsigned int>> connections;

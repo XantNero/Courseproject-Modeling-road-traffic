@@ -86,7 +86,8 @@ void cursor_position_callback(Window* window, double xpos, double ypos)
 {
     static double CursorX = xpos;
     static double CursorY = ypos;
-    OrtographicCamera* camera = ModelApplication::getApp()->getOpenglLayer()->getCamera();
+    OrtographicCamera* camera =
+        ModelApplication::getApp()->getOpenglLayer()->getCamera();
     if (window->getMouseButton(MOUSE_BUTTON_LEFT) == PRESS) {
         //std::cout << xpos << ' ' << ypos << '\n';
         double deltaX =  CursorX - xpos;
@@ -104,9 +105,14 @@ void window_resize_callback(Window* window, int width, int height)
     static int prevWidth = width;
     static int prevHeight = height;
     //camera.setPosition(camera.getPosition() + glm::vec3((float)(width - prevWidth), (float)(height - prevHeight), 0.0f));
-    ModelApplication::getApp()->getOpenglLayer()->getCamera()->setProjectionMatrix(glm::ortho(0.0f, ratio * (float)width, ratio * (float)height, 0.0f, -1.0f, 1.0f));
+    ModelApplication::getApp()->
+        getOpenglLayer()->
+            getCamera()->
+                setProjectionMatrix(glm::ortho(0.0f,
+                                              ratio * (float)width,
+                                              ratio * (float)height,
+                                               0.0f, -1.0f, 1.0f));
     Renderer::viewport(0, 0, width, height);
-    //glViewport(0, 0, width, height);
     prevWidth = width;
     prevHeight = height;
 }
@@ -115,25 +121,43 @@ void window_resize_callback(Window* window, int width, int height)
 void scroll_callback(Window* window, double xOffset, double yOffset)
 {
 
-    OrtographicCamera* camera =  ModelApplication::getApp()->getOpenglLayer()->getCamera();
+    OrtographicCamera* camera =
+        ModelApplication::getApp()->getOpenglLayer()->getCamera();
     float scale = 1.25f;
     if (yOffset == 0)
         return;
     if (yOffset < 0) {
-        camera->setPosition(camera->getPosition() + glm::vec3((scale - 1) * (float)window->getWidth() * ratio / (2 * scale), (scale - 1) * (float)window->getHeight() * ratio / (2 * scale), 0.0f));
+        camera->setPosition(camera->getPosition() + glm::vec3((scale - 1)
+                                * (float)window->getWidth()
+                                * ratio / (2 * scale),
+                            (scale - 1)
+                                * (float)window->getHeight()
+                                *  ratio / (2 * scale),
+                            0.0f));
         ratio /= -1 * scale * yOffset;
     }
     else {
         ratio *= scale * yOffset;
-        camera->setPosition(camera->getPosition() - glm::vec3((scale - 1) * (float)window->getWidth() * ratio / (2 * scale), (scale - 1) * (float)window->getHeight() * ratio / (2 * scale), 0.0f));
+        camera->setPosition(camera->getPosition() - glm::vec3((scale - 1) 
+                                * (float)window->getWidth()
+                                *  ratio / (2 * scale),
+                            (scale - 1)
+                                * (float)window->getHeight()
+                                *  ratio / (2 * scale), 
+                            0.0f));
         
         //camera.setPosition(camera.getPosition() + glm::vec3((scale - 1) *(float)window->getWidth() * ratio / scale, (scale - 1) * (float)window->getHeight() * ratio / scale, 0.0f));
     }
-    glm::vec4 p = camera->getViewProjectionMatrix() * glm::vec4(540.0f, 0.0f, 0.0f, 1.0f);
+    glm::vec4 p = 
+        camera->getViewProjectionMatrix() * glm::vec4(540.0f, 0.0f, 0.0f, 1.0f);
     //std::cout << p.x << ' ' << p.y << ' ';
     
-    camera->setProjectionMatrix(glm::ortho(0.0f, (float)window->getWidth() * ratio, (float)window->getHeight() * ratio, 0.0f, -1.0f, 1.0f));
-    glm::vec4 z = camera->getViewProjectionMatrix() * glm::vec4(540.0f, 0.0f, 0.0f, 1.0f);
+    camera->setProjectionMatrix(glm::ortho(0.0f,
+                                            (float)window->getWidth() * ratio,
+                                            (float)window->getHeight() * ratio, 
+                                            0.0f, -1.0f, 1.0f));
+    glm::vec4 z = camera->getViewProjectionMatrix() 
+                  * glm::vec4(540.0f, 0.0f, 0.0f, 1.0f);
     //std::cout << z.x << ' ' << z.y << ' ' <<'\n';
 }
 

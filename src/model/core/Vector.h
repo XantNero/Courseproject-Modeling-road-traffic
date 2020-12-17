@@ -13,14 +13,18 @@ public:
     Vector& operator=(const Vector&);
     Vector& operator+=(const Vector&);
     Vector& operator+=(const double);
-    inline Vector operator+(const Vector& v) { return Vector(getX() + v.getX(), getY() + v.getY()); }
+    inline Vector operator+(const Vector& v)
+        { return Vector(getX() + v.getX(), getY() + v.getY()); }
     inline friend Vector operator+(const double value, const Vector& right)
       { return Vector(value + right.getX(), value + right.getY()); }
-    inline Vector operator+(const double value) { return Vector(getX() + value, getY() + value); }
+    inline Vector operator+(const double value)
+        { return Vector(getX() + value, getY() + value); }
     Vector& operator-=(const Vector&);
     Vector& operator-=(const double);
-    inline Vector operator-(const Vector& v) { return Vector(getX() - v.getX(), getY() - v.getY()); }
-    inline Vector operator-(const double value) { return Vector(getX() - value, getY() - value); }
+    inline Vector operator-(const Vector& v)
+        { return Vector(getX() - v.getX(), getY() - v.getY()); }
+    inline Vector operator-(const double value)
+        { return Vector(getX() - value, getY() - value); }
     Vector& operator/=(const double);
     Vector& operator/(const double);
     Vector& operator*=(const double);
@@ -34,8 +38,10 @@ public:
     inline friend bool operator==(const Vector& left, const Vector& right)
         { return (left.getX() == right.getX() && left.getY() == right.getY()); }
 
-    inline double getMagnitude() const { double s = getSquareMagnitude(); if (s < 0) s = 0; return sqrt(s); }
-    inline double getSquareMagnitude() const { return getX() * getX() + getY() * getY(); }
+    inline double getMagnitude() const
+        { double s = getSquareMagnitude(); if (s < 0) s = 0; return sqrt(s); }
+    inline double getSquareMagnitude() const
+        { return getX() * getX() + getY() * getY(); }
     inline void normalize() { (*this) /= getMagnitude(); }
     inline void setMagnitude(double magnitude)
         { normalize(); (*this) *= magnitude; }

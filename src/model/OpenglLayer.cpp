@@ -21,76 +21,29 @@ OpenglLayer::~OpenglLayer()
 
 void OpenglLayer::onAttach() 
 {
- 
-
-
-    {
-    const Window* window = ModelApplication::getApp()->getWindow();
-    m_Camera = std::make_unique<OrtographicCamera>(0.0f, (float)window->getWidth(), (float)window->getHeight(), 0.0f);
-    m_Camera->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    }
-
-    m_RoadVAO = std::make_unique<VertexArray>();
-    m_RoadVAO->bind();
-    std::shared_ptr<VertexBuffer> roadBuffer = std::make_shared<VertexBuffer>(MaxVertexBufferSize, nullptr);
-    VertexBufferLayout layout;
-    layout.push(GL_FLOAT, 2, 2 * sizeof(float));
-    layout.push(GL_FLOAT, 3, 3 * sizeof(float));
-    m_RoadVAO->addVertexBuffer(roadBuffer, layout);
-    std::shared_ptr<IndexBuffer> roadIBO = std::make_shared<IndexBuffer>(MaxIndexBufferCount, nullptr);
-    m_RoadVAO->setIndexBuffer(roadIBO);
-    m_RoadVAO->unbind();
-
-    m_Shader = std::make_unique<Shader>("res/shaders/main.shader");
-
-    m_CarVAO = std::make_unique<VertexArray>();
-    m_CarVAO->bind();
-
-    std::shared_ptr<VertexBuffer> carBuffer = std::make_shared<VertexBuffer>(MaxVertexBufferSize, nullptr);
-    m_CarVAO->addVertexBuffer(carBuffer, layout);
-    
-    std::shared_ptr<IndexBuffer> carIBO = std::make_shared<IndexBuffer>(MaxIndexBufferCount, nullptr);
-    m_CarVAO->setIndexBuffer(carIBO);
-
-
-    m_CarVAO->unbind();
-
-
-
-    // m_Texture = std::make_unique<Texture>("res/textures/c.png");
-    // m_Texture->bind(0);
-    // m_CarShader = std::make_unique<Shader>("res/shaders/car.shader");
-    // m_CarShader->bind();
-
-    //m_CarShader->setUniform1i("u_Texture", 0);
-    //m_CarShader->unbind();
-    
-    m_LightsVAO = std::make_unique<VertexArray>();
-    m_LightsVAO->bind();
-    std::shared_ptr<VertexBuffer> lightBuffer = std::make_shared<VertexBuffer>(MaxVertexBufferSize, nullptr);
-
-    m_LightsVAO->addVertexBuffer(lightBuffer, layout);
-    std::shared_ptr<IndexBuffer> lightIBO = std::make_shared<IndexBuffer>(MaxIndexBufferCount, nullptr);
-    m_LightsVAO->setIndexBuffer(lightIBO);
-    m_LightsVAO->unbind();
-
+    setCamera();
+    setCarVAO();
+    setRoadVAO();
+    setLightVAO();
+    setShader();
     Renderer::enableBlending();
-}
-
-void OpenglLayer::onDetach() 
-{
-    
 }
 
 void OpenglLayer::onUpdate(const ModelInformation& information) 
 {
-
     Renderer::setClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     Renderer::clear();
 
+    drawRoads(information.roads);
+    drawCars(information.cars);
+    drawTrafficlights(information.lights);
+}
 
+void OpenglLayer::drawRoads(const std::vector<const Road*> &roads) 
+{
     m_RoadVAO->bind();
-    std::shared_ptr<VertexBuffer> RoadBuffer = m_RoadVAO->getVertexBufferArray()[0];
+    std::shared_ptr<VertexBuffer> RoadBuffer =
+        m_RoadVAO->getVertexBufferArray()[0];
     RoadBuffer->resetData();
     std::shared_ptr<IndexBuffer> RoadIBO = m_RoadVAO->getIndexBuffer();
     RoadIBO->ResetData();
@@ -99,8 +52,8 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
     unsigned int roadsVertivesIndex = 0;
     unsigned int roadsIndicesIndex = 0;
     glm::vec3 roadColor(1.0f, 1.0f, 1.0f);
-    for (unsigned int i = 0; i < information.roads.size(); ++i) {
-        const Road* road = information.roads[i];
+    for (unsigned int i = 0; i < roads.size(); ++i) {
+        const Road* road = roads[i];
         for (unsigned int j = 0; j < road->getRoadSize(); ++j) {
             Vector position = road->getPoint(j);
             roadsVertices[5 * roadsVertivesIndex] = (float)position.getX();
@@ -128,11 +81,17 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
     // RoadIBO->addData(2 * 4, roadIndices);
 
     m_Shader->bind();
-    m_Shader->setUnifromMat4f("u_ViewProjectionMatrix", m_Camera->getViewProjectionMatrix());
+    m_Shader->setUnifromMat4f("u_ViewProjectionMatrix",
+                               m_Camera->getViewProjectionMatrix());
     Renderer::draw(GL_LINES, *m_RoadVAO, *m_Shader);
      //m_RoadShader->unbind();
+}
+
+void OpenglLayer::drawCars(const std::vector<Car> &cars) 
+{
     m_CarVAO->bind();
-    std::shared_ptr<VertexBuffer> CarBuffer = m_CarVAO->getVertexBufferArray()[0];
+    std::shared_ptr<VertexBuffer> CarBuffer =
+        m_CarVAO->getVertexBufferArray()[0];
     CarBuffer->bind();
     CarBuffer->resetData();
 
@@ -147,9 +106,9 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
         {0.8f, 0.1f, 0.1f}
     };
     glm::vec3 carColor;
-    for (unsigned int i = 0; i < information.cars.size(); ++i) {
-        Car car = information.cars[i];
-        carColor = carColors[((int)car.getMaxPossibleSpeed() + 3) % 4];
+    for (unsigned int i = 0; i < cars.size(); ++i) {
+        Car car = cars[i];
+        carColor = carColors[(int)car.getMaxPossibleSpeed() % 4];
         Vector pos = car.getPosition();
 
         Vector vel = car.getVelocity();
@@ -157,19 +116,23 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
         float angle = vel.getAngle(normal);
         if (scalarDotProduct(vel, normal) > 0)
             angle *= -1;
-        glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(pos.getX(), pos.getY(), 0.0f))
-                                * glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 0.0f, 1.0f))
-                                * glm::scale(glm::mat4(1.0f), glm::vec3(0.8f, 0.8f, 0.0f));
+        glm::mat4 ModelMatrix =
+            glm::translate(glm::mat4(1.0f),
+                           glm::vec3(pos.getX(), pos.getY(), 0.0f))
+            * glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 0.0f, 1.0f))
+            * glm::scale(glm::mat4(1.0f), glm::vec3(0.8f, 0.8f, 0.0f));
         
             float carTrig[] = {
             -10.0f, -20.0f, carColor.r, carColor.g, carColor.b,
             -10.0f, 20.0f,  carColor.r, carColor.g, carColor.b,
-            10.0f, 20.0f,  carColor.r, carColor.g, carColor.b,
-            10.0f, -20.0f,  carColor.r, carColor.g, carColor.b,
+             10.0f, 20.0f,  carColor.r, carColor.g, carColor.b,
+             10.0f, -20.0f, carColor.r, carColor.g, carColor.b,
         };
 
         for (int j = 0; j < 4; ++j) {
-            glm::vec4 position = ModelMatrix * glm::vec4(carTrig[5 * j], carTrig[5 * j + 1], 0.0f, 1.0f);
+            glm::vec4 position = 
+                ModelMatrix 
+                * glm::vec4(carTrig[5 * j], carTrig[5 * j + 1], 0.0f, 1.0f);
             carTrig[5 * j] = position.x;
             carTrig[5 * j + 1] = position.y; 
         }
@@ -188,9 +151,13 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
     //m_CarShader->setUniform1i("u_Texture", 0);
     Renderer::draw(GL_TRIANGLES, *m_CarVAO, *m_Shader);
     //m_CarShader->unbind();
+}
 
+void OpenglLayer::drawTrafficlights(const std::vector<const TrafficLight*> &lights) 
+{
     m_LightsVAO->bind();
-    std::shared_ptr<VertexBuffer> lightBuffer = m_LightsVAO->getVertexBufferArray()[0];
+    std::shared_ptr<VertexBuffer> lightBuffer =
+        m_LightsVAO->getVertexBufferArray()[0];
     lightBuffer->bind();
     lightBuffer->resetData();
 
@@ -198,50 +165,54 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
     lightBuffer->bind();
     lightIBO->ResetData();
 
-    for (unsigned int i = 0; i < information.lights.size(); ++i) {
+    for (unsigned int i = 0; i < lights.size(); ++i) {
 
-        Vector pos = information.lights[i]->getPosition();
+        Vector pos = lights[i]->getPosition();
 
-        glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(pos.getX(), pos.getY(), 0.0f))
-                                * glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 0.0f));
+        glm::mat4 ModelMatrix =
+            glm::translate(glm::mat4(1.0f), glm::vec3(pos.getX(), pos.getY(), 0.0f))
+            * glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 0.0f));
         glm::vec3 colors[] = {
             {0.0f, 1.0f, 0.0f},
             {1.0f, 0.0f, 0.0f},
             {1.0f, 1.0f, 0.0f}
         };
         glm::vec3 lightColor;
-        if (information.lights[i]->getState() == TrafficLight::State::Green)
+        if (lights[i]->getState() == TrafficLight::State::Green)
             lightColor = colors[0];
-        else if (information.lights[i]->getState() == TrafficLight::State::Red)
+        else if (lights[i]->getState() == TrafficLight::State::Red)
             lightColor = colors[1];
-        else if (information.lights[i]->getState() == TrafficLight::State::Yellow)
+        else if (lights[i]->getState() == TrafficLight::State::Yellow)
             lightColor = colors[2];
         
         float circlePoints[] = {
-            0.0f, 0.0f, lightColor.r, lightColor.g, lightColor.b,
-            1.0f, 0.0f, lightColor.r, lightColor.g, lightColor.b,
-            sqrt(3.0f) / 2.0f, 0.5f, lightColor.r, lightColor.g, lightColor.b,
-            0.5f, sqrt(3.0f) / 2.0f, lightColor.r, lightColor.g, lightColor.b,
-            0.0f, 1.0f, lightColor.r, lightColor.g, lightColor.b,
-            -0.5f, sqrt(3.0f) / 2.0f, lightColor.r, lightColor.g, lightColor.b,
-            -sqrt(3.0f) / 2.0f, 0.5f, lightColor.r, lightColor.g, lightColor.b,
-            -1.0f, 0.0f, lightColor.r, lightColor.g, lightColor.b,
+            0.0f, 0.0f,                lightColor.r, lightColor.g, lightColor.b,
+            1.0f, 0.0f,                lightColor.r, lightColor.g, lightColor.b,
+            sqrt(3.0f) / 2.0f, 0.5f,   lightColor.r, lightColor.g, lightColor.b,
+            0.5f, sqrt(3.0f) / 2.0f,   lightColor.r, lightColor.g, lightColor.b,
+            0.0f, 1.0f,                lightColor.r, lightColor.g, lightColor.b,
+            -0.5f, sqrt(3.0f) / 2.0f,  lightColor.r, lightColor.g, lightColor.b,
+            -sqrt(3.0f) / 2.0f, 0.5f,  lightColor.r, lightColor.g, lightColor.b,
+            -1.0f, 0.0f,               lightColor.r, lightColor.g, lightColor.b,
             -sqrt(3.0f) / 2.0f, -0.5f, lightColor.r, lightColor.g, lightColor.b,
             -0.5f, -sqrt(3.0f) / 2.0f, lightColor.r, lightColor.g, lightColor.b,
-            0.0f, -1.0f, lightColor.r, lightColor.g, lightColor.b,
-            0.5f, -sqrt(3.0f) / 2.0f, lightColor.r, lightColor.g, lightColor.b,
-            sqrt(3.0f) / 2.0f, -0.5f, lightColor.r, lightColor.g, lightColor.b
+            0.0f, -1.0f,               lightColor.r, lightColor.g, lightColor.b,
+            0.5f, -sqrt(3.0f) / 2.0f,  lightColor.r, lightColor.g, lightColor.b,
+            sqrt(3.0f) / 2.0f, -0.5f,  lightColor.r, lightColor.g, lightColor.b
         };
 
         for (int j = 0; j < sizeof(circlePoints) / (5 * sizeof(float)); ++j) {
-            glm::vec4 position = ModelMatrix * glm::vec4(circlePoints[5 * j], circlePoints[5 * j + 1], 0.0f, 1.0f);
+            glm::vec4 position =
+                ModelMatrix
+                * glm::vec4(circlePoints[5 * j],
+                            circlePoints[5 * j + 1], 0.0f, 1.0f);
             circlePoints[5 * j] = position.x;
             circlePoints[5 * j + 1] = position.y; 
         }
 
 
         unsigned int circleIndex[] = {
-           0 + i * 13, 1 + i * 13, 2 + i * 13,
+            0 + i * 13, 1 + i * 13, 2 + i * 13,
             0 + i * 13, 2 + i * 13, 3 + i * 13,
             0 + i * 13, 3 + i * 13, 4 + i * 13,
             0 + i * 13, 4 + i * 13, 5 + i * 13,
@@ -255,12 +226,95 @@ void OpenglLayer::onUpdate(const ModelInformation& information)
             0 + i * 13, 12 + i * 13, 1 + i * 13
         };
 
-         lightBuffer->addData(sizeof(circlePoints), circlePoints);
-        lightIBO->addData(sizeof(circleIndex) / sizeof(unsigned int), circleIndex);                     
+        lightBuffer->addData(sizeof(circlePoints), circlePoints);
+        lightIBO->addData(sizeof(circleIndex) / sizeof(unsigned int),
+                          circleIndex);                     
     }
     
     m_Shader->bind();
     // m_RoadShader->setUniform4f("u_Color", color.r, color.g, color.b, 1.0f);
     // m_RoadShader->setUnifromMat4f("u_ViewProjectionMatrix", m_Camera->getViewProjectionMatrix());
     Renderer::draw(GL_TRIANGLES, *m_LightsVAO, *m_Shader);
+}
+
+void OpenglLayer::setCamera() 
+{
+    const Window* window = ModelApplication::getApp()->getWindow();
+    m_Camera = 
+        std::make_unique<OrtographicCamera>(0.0f,
+                                            (float)window->getWidth(),
+                                            (float)window->getHeight(),
+                                            0.0f);
+    m_Camera->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void OpenglLayer::setRoadVAO() 
+{
+    m_RoadVAO = std::make_unique<VertexArray>();
+    m_RoadVAO->bind();
+    std::shared_ptr<VertexBuffer> roadBuffer =
+        std::make_shared<VertexBuffer>(MaxVertexBufferSize, nullptr);
+    VertexBufferLayout layout;
+    layout.push(GL_FLOAT, 2, 2 * sizeof(float));
+    layout.push(GL_FLOAT, 3, 3 * sizeof(float));
+    m_RoadVAO->addVertexBuffer(roadBuffer, layout);
+    std::shared_ptr<IndexBuffer> roadIBO = 
+        std::make_shared<IndexBuffer>(MaxIndexBufferCount, nullptr);
+    m_RoadVAO->setIndexBuffer(roadIBO);
+    m_RoadVAO->unbind();
+}
+
+void OpenglLayer::setShader() 
+{
+    m_Shader = std::make_unique<Shader>("res/shaders/main.shader");
+}
+
+void OpenglLayer::setCarVAO() 
+{
+    m_CarVAO = std::make_unique<VertexArray>();
+    m_CarVAO->bind();
+
+    std::shared_ptr<VertexBuffer> carBuffer = 
+        std::make_shared<VertexBuffer>(MaxVertexBufferSize, nullptr);
+    VertexBufferLayout layout;
+    layout.push(GL_FLOAT, 2, 2 * sizeof(float));
+    layout.push(GL_FLOAT, 3, 3 * sizeof(float));
+    m_CarVAO->addVertexBuffer(carBuffer, layout);
+    
+    std::shared_ptr<IndexBuffer> carIBO = 
+        std::make_shared<IndexBuffer>(MaxIndexBufferCount, nullptr);
+    m_CarVAO->setIndexBuffer(carIBO);
+
+
+    m_CarVAO->unbind();
+}
+
+void OpenglLayer::setLightVAO() 
+{
+    
+    m_LightsVAO = std::make_unique<VertexArray>();
+    m_LightsVAO->bind();
+    std::shared_ptr<VertexBuffer> lightBuffer = 
+        std::make_shared<VertexBuffer>(MaxVertexBufferSize, nullptr);
+    VertexBufferLayout layout;
+    layout.push(GL_FLOAT, 2, 2 * sizeof(float));
+    layout.push(GL_FLOAT, 3, 3 * sizeof(float));
+
+    m_LightsVAO->addVertexBuffer(lightBuffer, layout);
+    std::shared_ptr<IndexBuffer> lightIBO = 
+        std::make_shared<IndexBuffer>(MaxIndexBufferCount, nullptr);
+    m_LightsVAO->setIndexBuffer(lightIBO);
+    m_LightsVAO->unbind();
+
+}
+
+void OpenglLayer::setTexture() 
+{
+    // m_Texture = std::make_unique<Texture>("res/textures/c.png");
+    // m_Texture->bind(0);
+    // m_CarShader = std::make_unique<Shader>("res/shaders/car.shader");
+    // m_CarShader->bind();
+
+    //m_CarShader->setUniform1i("u_Texture", 0);
+    //m_CarShader->unbind();
 }

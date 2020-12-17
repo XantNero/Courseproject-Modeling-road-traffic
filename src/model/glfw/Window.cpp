@@ -19,7 +19,8 @@ Window::Window(const WindowProps& props)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  
 
-    m_Window = glfwCreateWindow(m_data.Width, m_data.Height, m_data.Title.c_str(), NULL, NULL);
+    m_Window = glfwCreateWindow(m_data.Width, m_data.Height,
+                                 m_data.Title.c_str(), NULL, NULL);
     if (!m_Window) {
         glfwTerminate();
         assert(false);

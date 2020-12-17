@@ -26,14 +26,14 @@ class BrakeForceGenerator : public ForceGenerator
 {
 public: 
     BrakeForceGenerator();
-    BrakeForceGenerator(const Vector& desired, const float distance);
+    BrakeForceGenerator(const Vector& desired,  float distance);
     ~BrakeForceGenerator() {}
-    void init(const Vector& desired, const float distance);
+    void init(const Vector& desired,  float distance);
     inline void setDesiredVelocity(const Vector& desired) { m_Desired = desired; }
     inline Vector getDesiredVelocity() const { return m_Desired; }
-    inline void setDistance(const float distance) { m_Distance = distance; }
+    inline void setDistance( float distance) { m_Distance = distance; }
     inline float getDistance() const { return m_Distance; }
-    virtual void updateForce(Particle2D* Particle2D, const float duration) override;
+    virtual void updateForce(Particle2D* Particle2D,  float duration) override;
 private:
     Vector m_Desired;
     float m_Distance;

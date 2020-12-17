@@ -25,23 +25,28 @@ public:
     Car(float x, float y);
     ~Car() {}
     Car(const Car& );
-    inline virtual void applyForce(const Vector &force) override { m_ForceAccumulator += force; }
+    inline virtual void applyForce(const Vector &force) override
+        { m_ForceAccumulator += force; }
     virtual void move(float time) override;
     bool followPath(const Road* , Vector*);
     inline virtual Vector getPosition() const override { return m_Position; }
     inline virtual Vector getVelocity() const override { return m_Velocity; }
-    inline virtual Vector getAcceleration() const override { return m_Acceleration; }
+    inline virtual Vector getAcceleration() const override
+        { return m_Acceleration; }
     inline State getState() const { return m_State; }
     void setState(State state, bool value);
     double getMaxSpeed() const;
     inline double getMaxPossibleSpeed() const { return m_MaxSpeed; }
-    bool view(const Car &car, double startAngle, double endAngle, double dist) const;
-    bool view(const TrafficLight &light, double startAngle, double endAngle, double dist) const;
-    inline virtual Vector getForceAccumulator() const override { return m_ForceAccumulator; }
+    bool view(const Car &car,
+              double startAngle, double endAngle, double dist) const;
+    bool view(const TrafficLight &light,
+              double startAngle, double endAngle, double dist) const;
+    inline virtual Vector getForceAccumulator() const override
+        { return m_ForceAccumulator; }
     // inline void setVel(const Vector& vel) {velocity = vel;}
     // inline void setMaxSpeed(const double spe) { maxSpeed = spe; }
 private:
-    inline virtual void clearAccumulator() override { m_ForceAccumulator *= 0; };
+    inline virtual void clearAccumulator() override { m_ForceAccumulator *= 0;};
     virtual float getMass() const override { return 0; }
     virtual float getInverseMass() const override { return 0;}
     virtual bool hasFiniteMass() const override { return 0;}
@@ -83,14 +88,22 @@ public:
     ~CarRegistry() {}
 
     void addCar(const Car &car, const unsigned int start_roadID);
-    void update(const RoadRegistry &roads, const std::vector<const TrafficLight*>& lights, float time);
+    void update(const RoadRegistry &roads,
+                const std::vector<const TrafficLight*>& lights,
+                float time);
     std::vector<Car> getCars();
 private:
-    void interectLights(std::list<CarInformation>::iterator& it, const std::vector<const TrafficLight*> &lights);
-    void yieldInterect(std::list<CarInformation>::iterator& it, const RoadRegistry &roads);
-    void turn(std::list<CarInformation>::iterator& it, const RoadRegistry &roads);
-    void interectFollow(std::list<CarInformation>::iterator& it, const RoadRegistry &roads);
-    void applySteerForce(Car &car, SteerForceGenerator& steerForceGenerator, const Road* road);
+    void interectLights(std::list<CarInformation>::iterator& it,
+                        const std::vector<const TrafficLight*> &lights);
+    void yieldInterect(std::list<CarInformation>::iterator& it,
+                       const RoadRegistry &roads);
+    void turn(std::list<CarInformation>::iterator& it,
+              const RoadRegistry &roads);
+    void interectFollow(std::list<CarInformation>::iterator& it,
+                        const RoadRegistry &roads);
+    void applySteerForce(Car &car,
+                         SteerForceGenerator& steerForceGenerator,
+                         const Road* road);
     void applyBrakeForce(Car &car, BrakeForceGenerator& brakeForceGenerator);
 private:
     std::list<CarInformation> m_Cars;

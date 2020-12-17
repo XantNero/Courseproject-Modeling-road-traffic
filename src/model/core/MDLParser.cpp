@@ -38,7 +38,8 @@ const ParseInformation MDLParser::parseFile(const std::string& filePath)
     vis.resize(points.size(), false);
     info.roadRegistry = new RoadRegistry();
     for (int i = 0; i < info.CarGenerators.size(); ++i) {
-        info.CarGenerators[i]->setPosition(points[info.CarGenerators[i]->getStartRoadId()]);
+        info.CarGenerators[i]->
+            setPosition(points[info.CarGenerators[i]->getStartRoadId()]);
     }
     for (int i = 0; i < points.size(); ++i) {
         if (!vis[i])
@@ -118,7 +119,9 @@ std::vector<Vector> MDLParser::parsePoints(std::ifstream& file)
     return points;
 }
 
-std::vector<TrafficLight*> MDLParser::parseTrafficLights(std::ifstream& file, std::vector<int>& lightsConnections) 
+std::vector<TrafficLight*>
+MDLParser::parseTrafficLights(std::ifstream& file,
+                              std::vector<int>& lightsConnections) 
 {
     std::string line;
     std::vector<TrafficLight*> lights;
@@ -130,7 +133,8 @@ std::vector<TrafficLight*> MDLParser::parseTrafficLights(std::ifstream& file, st
         int ConnectionID;
         float x, y;
         int green, yellow, red;
-        sscanf(line.c_str(), "%d%f%f%d%d%d", &ConnectionID, &x, &y, &green, &yellow, &red);
+        sscanf(line.c_str(), "%d%f%f%d%d%d",
+               &ConnectionID, &x, &y, &green, &yellow, &red);
         TrafficLight::State state;
         if (green <= yellow) {
             if (green <= red)
@@ -141,7 +145,9 @@ std::vector<TrafficLight*> MDLParser::parseTrafficLights(std::ifstream& file, st
         else {
             state = TrafficLight::State::Yellow;
         }
-        TrafficLight* light = new TrafficLight(Vector(x, y), state, green * 1000, yellow * 1000, red * 1000);
+        TrafficLight* light =
+            new TrafficLight(Vector(x, y), state,
+            green * 1000, yellow * 1000, red * 1000);
         lights.push_back(light);
         lightsConnections.push_back(ConnectionID);
     }
@@ -172,33 +178,42 @@ RoadGraph MDLParser::parseConnections(std::ifstream& file)
         graph.back_connections[IDto].push_back(IDfrom);
     }
     if (graph.connections.size() != graph.back_connections.size()) {
-        graph.connections.resize(std::max(graph.connections.size(), graph.back_connections.size()));
-        graph.back_connections.resize(std::max(graph.connections.size(), graph.back_connections.size()));
+        graph.connections.resize(std::max(graph.connections.size(),
+                                          graph.back_connections.size()));
+        graph.back_connections.resize(std::max(graph.connections.size(),
+                                               graph.back_connections.size()));
     }
     return graph;
 }
 
-void MDLParser::constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegistry, std::vector<Vector>& points, std::vector<bool>& vis) 
+void MDLParser::constructRoads(RoadGraph& graph,
+                               int x, RoadRegistry* roadRegistry,
+                               std::vector<Vector>& points,
+                               std::vector<bool>& vis) 
 {
     static unsigned int lastID = points.size();
-    while (graph.back_connections[x].size() == 1 && graph.connections[x].size() <= 1) {
+    while (graph.back_connections[x].size() == 1 &&
+           graph.connections[x].size() <= 1) {
         x = graph.back_connections[x][0];
     }
     vis[x] = true;
     bool road_value = false;
     for (unsigned int i = 0; i < graph.connections[x].size(); ++i) {
-        std::unique_ptr<Road> road = std::make_unique<Road>(i == 0 ? x : lastID++);
+        std::unique_ptr<Road> road=
+            std::make_unique<Road>(i == 0 ? x : lastID++);
         road_value = false;
         road->addPoint(points[x].getX(), points[x].getY());
         std::queue<int> queue;
         int it = graph.connections[x][i];
         queue.push(it);
-        while (graph.back_connections[it].size() == 1 && graph.connections[it].size() == 1) {
+        while (graph.back_connections[it].size() == 1 &&
+               graph.connections[it].size() == 1) {
             vis[it] = true;
             it = graph.connections[it][0];
             queue.push(it);
         }
-         if (graph.back_connections[it].size() == 1 && graph.connections[it].size() == 0)
+         if (graph.back_connections[it].size() == 1 &&
+             graph.connections[it].size() == 0)
             vis[it] = true;
           if (i != 0)
             m.insert({x, {lastID - 1, it}});
@@ -207,7 +222,8 @@ void MDLParser::constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegist
         std::pair<int, int> key;
         key.first = x;
         while (!queue.empty()) {
-            road->addPoint(points[queue.front()].getX(), points[queue.front()].getY());
+            road->addPoint(points[queue.front()].getX(),
+                           points[queue.front()].getY());
             key.second = queue.front();
             if (!roadType.count(key))
                 road_value = true;
@@ -227,14 +243,17 @@ void MDLParser::constructRoads(RoadGraph& graph, int x, RoadRegistry* roadRegist
 
 void MDLParser::connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry) 
 {
-    std::pair<std::unordered_multimap<int, std::pair<int, int>>::iterator, std::unordered_multimap<int, std::pair<int, int>>::iterator> result;
+    std::pair<std::unordered_multimap<int, std::pair<int, int>>::iterator,
+            std::unordered_multimap<int, std::pair<int, int>>::iterator> result;
     std::unordered_multimap<int, std::pair<int, int>>::iterator it;
     for (unsigned int i = 0; i < graph.connections.size(); ++i) {
         if (graph.connections[i].size() > 1) {
             int x = i;
             x = graph.back_connections[x][0];
-            while (graph.back_connections[x].size() == 1 && graph.connections[x].size() == 1)
+            while (graph.back_connections[x].size() == 1 &&
+                   graph.connections[x].size() == 1) {
                 x = graph.back_connections[x][0];
+            }
             if (roadRegistry->getRoad(i) != nullptr)
                 //roadRegistry->connectRoads(x, i);
                 result = m.equal_range(i);
@@ -252,19 +271,24 @@ void MDLParser::connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry)
             // }
         }
         else if (graph.back_connections[i].size() > 1) {
-            for (unsigned int j = 0; j < graph.back_connections[i].size(); ++j) {
+            for (unsigned int j = 0;
+                 j < graph.back_connections[i].size();
+                 ++j) {
                 int x = graph.back_connections[i][j];
                 // if (graph.connections[x].size() != 1)
                 //     continue;
-                while (graph.back_connections[x].size() == 1 && graph.connections[x].size() == 1) {
+                while (graph.back_connections[x].size() == 1 && 
+                       graph.connections[x].size() == 1) {
                     x = graph.back_connections[x][0];
                 }
                 // if (graph.connections[x].size() != 1)
                 //     continue;
                 result = m.equal_range(x);
                 for (it = result.first; it != result.second; ++it) {
-                        if (roadRegistry->getRoad(i) != nullptr && i == it->second.second)
+                    if (roadRegistry->getRoad(i) != nullptr &&
+                        i == it->second.second) {
                         roadRegistry->connectRoads(it->second.first, i);
+                    }
                 }
                 // if (roadRegistry->getRoad(i) != nullptr)
                 //     roadRegistry->connectRoads(x, i);

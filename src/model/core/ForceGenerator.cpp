@@ -1,5 +1,6 @@
 #include "ForceGenerator.h"
 #include "Car.h"
+#include "./../pch.h"
 
 /*
 ----------------------------------------------------------------------
@@ -17,13 +18,13 @@ SteerForceGenerator::SteerForceGenerator(const Vector &target)
 {
 }
 
-void SteerForceGenerator::updateForce(Particle2D* particle, const float time)
+void SteerForceGenerator::updateForce(Particle2D* particle,  float time)
 {
     Car* car = dynamic_cast<Car*>(particle);
     Vector desired = m_Target - car->getPosition();
     if (desired.getMagnitude() == 0)  
         return;
-    double lim = 1000 * car->getMaxSpeed();
+    double lim = car->getMaxSpeed();
     desired.setMagnitude(lim);
     Vector steer = desired - car->getVelocity()/* - car->getAcceleration()*/;
     steer.limitMagnitude(lim);
@@ -40,18 +41,19 @@ BrakeForceGenerator::BrakeForceGenerator()
     : m_Desired(), m_Distance(0)
 {
 }
-BrakeForceGenerator::BrakeForceGenerator(const Vector& desired, const float distance)
+BrakeForceGenerator::BrakeForceGenerator(const Vector& desired,
+                                         float distance)
     : m_Desired(desired), m_Distance(distance)
 {
 }
 
-void BrakeForceGenerator::init(const Vector& desired, const float distance)
+void BrakeForceGenerator::init(const Vector& desired, float distance)
 {
     m_Desired = desired;
     m_Distance = distance;
 }
 
-void BrakeForceGenerator::updateForce(Particle2D* particle, const float duration) 
+void BrakeForceGenerator::updateForce(Particle2D* particle, float duration) 
 {
     Car* car = dynamic_cast<Car*>(particle);
     Vector desiredBrake = car->getVelocity();
@@ -59,7 +61,7 @@ void BrakeForceGenerator::updateForce(Particle2D* particle, const float duration
     Vector desVel = car->getVelocity();
     desVel.setMagnitude(m_Desired.getMagnitude());
     Vector brake(0.0f, 0.0f);
-    if (m_Desired.getSquareMagnitude() < vel.getSquareMagnitude()) {
+    if (m_Desired.getSquareMagnitude() <= vel.getSquareMagnitude()) {
         brake = desVel - vel;
     }
     car->applyForce(brake);

@@ -13,7 +13,8 @@ public:
         Red    = 2
     };
 public:
-    TrafficLight(Vector position, State startState, int greenTime, int yellowTime, int redTime);
+    TrafficLight(Vector position, State startState,
+                 int greenTime, int yellowTime, int redTime);
     ~TrafficLight() { }
     void update();
     inline State getState() const { return m_State; }

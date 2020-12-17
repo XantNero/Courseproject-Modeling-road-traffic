@@ -9,8 +9,10 @@ class LightSlider : public QSpinBox
 public:
     LightSlider(QWidget *parent = nullptr) : QSpinBox(parent) { }
 public slots:
-    void slotKeepInterval(int val) { if (val > value()) { setValue(val); emit valueChanged(val); } }
-    void slotBackKeepInterval(int val) { if (val < value()) { setValue(val); emit valueChanged(val); } }
+    void slotKeepInterval(int val) { if (val > value())
+        { setValue(val); emit valueChanged(val); } }
+    void slotBackKeepInterval(int val) { if (val < value())
+        { setValue(val); emit valueChanged(val); } }
 };
 
 struct LightTimings{
@@ -23,7 +25,9 @@ class TrafficlightWindow : public QWidget
 {
     Q_OBJECT
 public:
-    TrafficlightWindow(LightTimings timings, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
+    TrafficlightWindow(LightTimings timings,
+                       QWidget *parent = nullptr,
+                       Qt::WindowFlags flags = Qt::WindowFlags());
     LightTimings getTimings() const;
 private:
     void setSliders();
@@ -39,7 +43,9 @@ class CarGeneratorWindow : public QWidget
 {
     Q_OBJECT
 public:
-    CarGeneratorWindow(int timing, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
+    CarGeneratorWindow(int timing,
+                       QWidget *parent = nullptr,
+                       Qt::WindowFlags flags = Qt::WindowFlags());
     unsigned int getRate() const { return m_Box->value(); }
 private:
     QSpinBox *m_Box;

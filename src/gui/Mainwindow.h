@@ -67,18 +67,34 @@ private:
     void readSettings();
     void writeSettings();
     bool maybeSave();
-    bool loadCarGenerators(QTextStream &in, int &line, QVector<CarGenerator*> &carGenerators, QVector<int> &carGeneratorsConnections);
-    bool loadPoints(QTextStream &in, int &lineCount, QVector<RoadPoint*> &points);
-    bool loadConnections(QTextStream &in, int &lineCount, QVector<QVector<QPair<int, int>>> &conn);
-    bool loadTrafficLights(QTextStream &in, int &lineCount, QVector<Trafficlight*> &trafficLights, QVector<int> &trafficlightConnections);
+    bool loadCarGenerators(QTextStream &in,
+                           int &line,
+                           QVector<CarGenerator*> &carGenerators,
+                           QVector<int> &carGeneratorsConnections);
+    bool loadPoints(QTextStream &in,
+                    int &lineCount, QVector<RoadPoint*> &points);
+    bool loadConnections(QTextStream &in,
+                         int &lineCount,
+                         QVector<QVector<QPair<int, int>>> &conn);
+    bool loadTrafficLights(QTextStream &in,
+                           int &lineCount,
+                           QVector<Trafficlight*> &trafficLights,
+                           QVector<int> &trafficlightConnections);
     bool loadData(QFile* file, LoadFileData &data, int &lineCount);
     void handleData(LoadFileData &data);
     bool saveFile(const QString &fileName);
     void writeSaveData(SaveFileData &data);
-    void saveCarGenerators(QTextStream &out, QVector<CarGenerator*> &carGenerators, QHash<RoadPoint*, int> &hash);
+    void saveCarGenerators(QTextStream &out,
+                           QVector<CarGenerator*> &carGenerators,
+                           QHash<RoadPoint*, int> &hash);
     void savePoints(QTextStream &out, QVector<RoadPoint*> &points);
-    void saveConnections(QTextStream &out, QVector<RoadPoint*> points, QVector<QList<RoadPoint*>> conn, QHash<RoadPoint*, int> &hash);
-    void saveTrafficLights(QTextStream &out, QVector<Trafficlight*> &trafficLights, QHash<RoadPoint*, int> hash);
+    void saveConnections(QTextStream &out,
+                         QVector<RoadPoint*> points,
+                         QVector<QList<RoadPoint*>> conn,
+                         QHash<RoadPoint*, int> &hash);
+    void saveTrafficLights(QTextStream &out,
+                           QVector<Trafficlight*> &trafficLights,
+                           QHash<RoadPoint*, int> hash);
     void setCurrentFile(const QString &fileName);
     QString strippedName(const QString &fileName);
     QMenu* createItemMenu();

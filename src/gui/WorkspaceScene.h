@@ -13,12 +13,23 @@ class WorkspaceScene : public QGraphicsScene
 public:
     enum class ActionType
     {
-        None = 0, AddRoidPoint, AddRoad, AddCarGenerator, AddTrafficlight, Move, ConnectMainRoad, ConnectNotMainRoad, Disconnect, Delete
+        None = 0,
+        AddRoidPoint,
+        AddRoad,
+        AddCarGenerator,
+        AddTrafficlight,
+        Move,
+        ConnectMainRoad,
+        ConnectNotMainRoad,
+        Disconnect,
+        Delete
     };
 public:
     WorkspaceScene(QMenu* itemMenu, QObject *parent = nullptr);
-    WorkspaceScene(QMenu* itemMenu, const QRectF &sceneRect, QObject *parent = nullptr);
-    WorkspaceScene(QMenu* itemMenu, qreal x, qreal y, qreal width, qreal height, QObject *parent = nullptr);
+    WorkspaceScene(QMenu* itemMenu, const QRectF &sceneRect,
+                   QObject *parent = nullptr);
+    WorkspaceScene(QMenu* itemMenu, qreal x, qreal y, qreal width, qreal height,
+                   QObject *parent = nullptr);
     inline ActionType getState() { return m_ActionType; }
 public slots:
     void slotSetAction(ActionType);

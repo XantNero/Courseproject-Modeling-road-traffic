@@ -7,12 +7,15 @@ WorkspaceScene::WorkspaceScene(QMenu* itemMenu, QObject *parent)
 {
     init();
 }
-WorkspaceScene::WorkspaceScene(QMenu* itemMenu, const QRectF &sceneRect, QObject *parent)
+WorkspaceScene::WorkspaceScene(QMenu* itemMenu,
+                               const QRectF &sceneRect, QObject *parent)
     :QGraphicsScene(sceneRect, parent), m_ItemMenu(itemMenu)
 {
     init();
 }
-WorkspaceScene::WorkspaceScene(QMenu* itemMenu, qreal x, qreal y, qreal width, qreal height, QObject *parent)
+WorkspaceScene::WorkspaceScene(QMenu* itemMenu,
+                               qreal x, qreal y, qreal width, qreal height,
+                               QObject *parent)
     :QGraphicsScene(x, y, width, height, parent), m_ItemMenu(itemMenu)
 {
     init();
@@ -24,7 +27,8 @@ void WorkspaceScene::init()
 
 void WorkspaceScene::addCarGenerator(QGraphicsSceneMouseEvent *mouseEvent)
 {
-     CarGenerator* carGeneratorItem = new CarGenerator(m_ItemMenu, mouseEvent->scenePos());
+    CarGenerator* carGeneratorItem = 
+        new CarGenerator(m_ItemMenu, mouseEvent->scenePos());
     addItem(carGeneratorItem);
     QGraphicsScene::mousePressEvent(mouseEvent);
     emit isModified();
@@ -33,7 +37,8 @@ void WorkspaceScene::addCarGenerator(QGraphicsSceneMouseEvent *mouseEvent)
 void WorkspaceScene::addRoad(QGraphicsSceneMouseEvent *mouseEvent)
 {
     QList<QGraphicsItem*> list = selectedItems();
-    RoadPoint* roadPointItem = new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
+    RoadPoint* roadPointItem =
+        new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
     addItem(roadPointItem);
     for (auto item : list) {
         if (item->type() == (int)ModelTypes::RoadPoint) {
@@ -66,7 +71,8 @@ void WorkspaceScene::addRoad(QGraphicsSceneMouseEvent *mouseEvent)
 
 void WorkspaceScene::addRoadPoint(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    RoadPoint* roadPointItem = new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
+    RoadPoint* roadPointItem =
+        new RoadPoint(m_ItemMenu, mouseEvent->scenePos());
     addItem(roadPointItem);
     QGraphicsScene::mousePressEvent(mouseEvent);
     emit isModified();
@@ -74,26 +80,36 @@ void WorkspaceScene::addRoadPoint(QGraphicsSceneMouseEvent *mouseEvent)
 
 void WorkspaceScene::addTrafficlight(QGraphicsSceneMouseEvent *mouseEvent)
 {
-   Trafficlight* trafficlightItem = new Trafficlight(m_ItemMenu, mouseEvent->scenePos());
+   Trafficlight* trafficlightItem =
+    new Trafficlight(m_ItemMenu, mouseEvent->scenePos());
    addItem(trafficlightItem);
    QGraphicsScene::mousePressEvent(mouseEvent);
    emit isModified();
 }
 
-void WorkspaceScene::connect(QGraphicsSceneMouseEvent *mouseEvent, Road::Type roadType)
+void WorkspaceScene::connect(QGraphicsSceneMouseEvent *mouseEvent,
+                            Road::Type roadType)
 {
     QList<QGraphicsItem*> list = selectedItems();
     QGraphicsItem* item;
-    if((item = itemAt(mouseEvent->scenePos(), QTransform())) && item->type() == (int)ModelTypes::RoadPoint) {
+    if((item = itemAt(mouseEvent->scenePos(), QTransform())) &&
+        item->type() == (int)ModelTypes::RoadPoint) {
         RoadPoint* roadPointItem = dynamic_cast<RoadPoint*>(item);
         for (auto to_connect : list) {
-            if (to_connect->type() == (int)ModelTypes::RoadPoint || to_connect->type() == (int)ModelTypes::CarGenerator || to_connect->type() == (int)ModelTypes::Trafficlight) {
-                Road::Type type = to_connect->type() == (int)ModelTypes::RoadPoint ? roadType : Road::Connection;
+            if (to_connect->type() == (int)ModelTypes::RoadPoint ||
+                to_connect->type() == (int)ModelTypes::CarGenerator ||
+                to_connect->type() == (int)ModelTypes::Trafficlight) {
+                Road::Type type = 
+                    to_connect->type() == (int)ModelTypes::RoadPoint ?
+                        roadType : Road::Connection;
                 RoadPoint* roadPoint = dynamic_cast<RoadPoint*>(to_connect);
-                Road* roadItem = new Road(m_ItemMenu, roadPoint, roadPointItem, type);
-                if (to_connect->type() == (int)ModelTypes::CarGenerator || to_connect->type() == (int)ModelTypes::Trafficlight) {
+                Road* roadItem = 
+                    new Road(m_ItemMenu, roadPoint, roadPointItem, type);
+                if (to_connect->type() == (int)ModelTypes::CarGenerator ||
+                    to_connect->type() == (int)ModelTypes::Trafficlight) {
                     if (roadPoint->getConnections().size() == 1)
-                        roadPoint->deleteConnection(roadPoint->getConnections()[0]);
+                        roadPoint->
+                            deleteConnection(roadPoint->getConnections()[0]);
                 }
                 roadPoint->connect(roadPointItem, roadItem);
                 roadPointItem->connected(roadPoint, roadItem);
@@ -117,10 +133,13 @@ void WorkspaceScene::disconnect(QGraphicsSceneMouseEvent *mouseEvent)
 {
     QList<QGraphicsItem*> list; list = selectedItems();
     QGraphicsItem* item;
-    if((item = itemAt(mouseEvent->scenePos(), QTransform())) && item->type() == (int)ModelTypes::RoadPoint) {
+    if((item = itemAt(mouseEvent->scenePos(), QTransform())) && 
+        item->type() == (int)ModelTypes::RoadPoint) {
          RoadPoint* roadPointItem = dynamic_cast<RoadPoint*>(item);
         for (auto to_disconnect : list) {
-            if (to_disconnect->type() == (int)ModelTypes::RoadPoint || to_disconnect->type() == (int)ModelTypes::CarGenerator || to_disconnect->type() == (int)ModelTypes::Trafficlight) {
+            if (to_disconnect->type() == (int)ModelTypes::RoadPoint ||
+                to_disconnect->type() == (int)ModelTypes::CarGenerator ||
+                to_disconnect->type() == (int)ModelTypes::Trafficlight) {
                 RoadPoint* roadPoint = dynamic_cast<RoadPoint*>(to_disconnect);
                 roadPoint->deleteConnection(roadPointItem);
                 roadPointItem->deleteConnected(roadPoint);

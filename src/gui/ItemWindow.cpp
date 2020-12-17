@@ -1,7 +1,9 @@
 #include "ItemWindow.h"
 #include <QtWidgets>
 
-TrafficlightWindow::TrafficlightWindow(LightTimings lighttimings, QWidget *parent, Qt::WindowFlags flags)
+TrafficlightWindow::TrafficlightWindow(LightTimings lighttimings,
+                                       QWidget *parent,
+                                        Qt::WindowFlags flags)
     :QWidget(parent, flags), m_StartLight(0)
 {
 
@@ -25,11 +27,17 @@ TrafficlightWindow::TrafficlightWindow(LightTimings lighttimings, QWidget *paren
     }
 
     QLabel* greenLabel = new QLabel();
-    greenLabel->setStyleSheet("QLabel { background-color : green; color : blue; }");
+    greenLabel->setStyleSheet("QLabel"
+                              "{ background-color : green; "
+                              "color : blue; }");
     QLabel* yellowLabel = new QLabel();
-    yellowLabel->setStyleSheet("QLabel { background-color : yellow; color : blue; }");
+    yellowLabel->setStyleSheet("QLabel"
+                                "{ background-color : yellow; "
+                                "color : blue; }");
     QLabel* redLabel = new QLabel();
-    redLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
+    redLabel->setStyleSheet("QLabel"
+                            "{ background-color : red; "
+                            "color : blue; }");
 
     leftLayout->addWidget(redLabel);
     leftLayout->addWidget(yellowLabel);
@@ -49,10 +57,14 @@ TrafficlightWindow::TrafficlightWindow(LightTimings lighttimings, QWidget *paren
 
 LightTimings TrafficlightWindow::getTimings() const
 {
-    int timings[sizeof(m_Sliders) / sizeof(LightSlider*) / 2];
+    unsigned int slidersCount = sizeof(m_Sliders) / sizeof(LightSlider*);
+    int timings[slidersCount / 2];
     LightTimings result;
-    for (int i = 2 * m_StartLight + 1, cnt = 0; cnt < sizeof(m_Sliders) / sizeof(LightSlider*) / 2; ++cnt, i += 2) {
-        timings[(i % (sizeof(m_Sliders) / sizeof(LightSlider*))) / 2] = m_Sliders[i % (sizeof(m_Sliders) / sizeof(LightSlider*))]->value();
+    for (int i = 2 * m_StartLight + 1, cnt = 0;
+        cnt < slidersCount / 2;
+        ++cnt, i += 2) {
+        timings[(i % slidersCount) / 2] = 
+            m_Sliders[i % slidersCount]->value();
     }
     result.green = timings[0];
     result.yellow = timings[1];
@@ -62,20 +74,30 @@ LightTimings TrafficlightWindow::getTimings() const
 
 void TrafficlightWindow::setSliders()
 {
-    for (int i = 0; i < sizeof(m_Sliders) / sizeof(LightSlider*); ++i)
+    unsigned int slidersCount = sizeof(m_Sliders) / sizeof(LightSlider*);
+    for (int i = 0; i < slidersCount; ++i)
         m_Sliders[i] = new LightSlider();
-    for (int i = 0; i < sizeof(m_Sliders) / sizeof(LightSlider*); i += 2) {
-        connect(m_Sliders[i], SIGNAL(valueChanged(int)), m_Sliders[i + 1], SLOT(slotKeepInterval(int)));
-        connect(m_Sliders[i + 1], SIGNAL(valueChanged(int)), m_Sliders[i], SLOT(slotBackKeepInterval(int)));
+    for (int i = 0; i < slidersCount; i += 2) {
+        connect(m_Sliders[i], SIGNAL(valueChanged(int)),
+                m_Sliders[i + 1], SLOT(slotKeepInterval(int)));
+        connect(m_Sliders[i + 1], SIGNAL(valueChanged(int)),
+                m_Sliders[i], SLOT(slotBackKeepInterval(int)));
     }
-    for (int i = 1; i < sizeof(m_Sliders) / sizeof(LightSlider*); i += 2) {
-        connect(m_Sliders[i], SIGNAL(valueChanged(int)), m_Sliders[(i + 1) % (sizeof(m_Sliders) / sizeof(LightSlider*))], SLOT(setValue(int)));
-        connect(m_Sliders[(i + 1) % (sizeof(m_Sliders) / sizeof(LightSlider*))], SIGNAL(valueChanged(int)), m_Sliders[i], SLOT(setValue(int)));
+    for (int i = 1; i < slidersCount; i += 2) {
+        connect(m_Sliders[i],
+                SIGNAL(valueChanged(int)),
+                m_Sliders[(i + 1) % slidersCount],
+                SLOT(setValue(int)));
+        connect(m_Sliders[(i + 1) % slidersCount],
+                SIGNAL(valueChanged(int)),
+                m_Sliders[i],
+                SLOT(setValue(int)));
     }
 }
 
 void TrafficlightWindow::setTimeings(LightTimings lighttimings)
 {
+    unsigned int slidersCount = sizeof(m_Sliders) / sizeof(LightSlider*);
     if (lighttimings.green <= lighttimings.yellow) {
         if (lighttimings.green <= lighttimings.red)
             m_StartLight = 0;
@@ -85,22 +107,25 @@ void TrafficlightWindow::setTimeings(LightTimings lighttimings)
     else {
         m_StartLight = 1;
     }
-    int timings[sizeof(m_Sliders) / sizeof(LightSlider*) / 2];
+    int timings[slidersCount / 2];
     timings[0] = lighttimings.green;
     timings[1] = lighttimings.yellow;
     timings[2] = lighttimings.red;
-    for (int i = 2 * m_StartLight + 1, cnt = 0; cnt < sizeof(m_Sliders) / sizeof(LightSlider*) / 2; ++cnt, i += 2) {
-        m_Sliders[i % (sizeof(m_Sliders) / sizeof(LightSlider*))]->setValue(timings[(i % (sizeof(m_Sliders) / sizeof(LightSlider*))) / 2]);
+    for (int i = 2 * m_StartLight + 1, cnt = 0;
+         cnt < slidersCount / 2;
+         ++cnt, i += 2) {
+        m_Sliders[i % slidersCount]->setValue(timings[(i % slidersCount) / 2]);
     }
     slotStartLight(m_StartLight);
 }
 
 void TrafficlightWindow::slotStartLight(int index)
 {
-    ;
+    unsigned int slidersCount = sizeof(m_Sliders) / sizeof(LightSlider*);
     m_Sliders[2 * m_StartLight]->setMinimum(0);
     m_Sliders[2 * m_StartLight]->setMaximum(99);
-    m_Sliders[(2 * m_StartLight - 1 + (sizeof(m_Sliders) / sizeof(LightSlider*))) % (sizeof(m_Sliders) / sizeof(LightSlider*))]->setValue(0);
+    m_Sliders[(2 * m_StartLight - 1 + slidersCount)
+              % slidersCount]->setValue(0);
 //    m_Sliders[2 * index]->setValue(0.1f);
 //    m_Sliders[2 * index]->setValue(0.0f);
 
@@ -112,7 +137,8 @@ void TrafficlightWindow::slotStartLight(int index)
     m_StartLight = index;
 }
 
-CarGeneratorWindow::CarGeneratorWindow(int timing, QWidget *parent, Qt::WindowFlags flags)
+CarGeneratorWindow::CarGeneratorWindow(int timing, QWidget *parent,
+                                       Qt::WindowFlags flags)
     :QWidget(parent, flags)
 {
     m_Box = new QSpinBox(this);

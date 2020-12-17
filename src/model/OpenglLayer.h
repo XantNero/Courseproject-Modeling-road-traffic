@@ -7,6 +7,13 @@
 #include "opengl/Texture.h"
 #include "opengl/Renderer.h"
 
+#include <vector>
+
+class Road;
+class Car;
+class TrafficLight;
+
+
 struct ModelInformation;
 
 class OpenglLayer
@@ -15,9 +22,19 @@ public:
     OpenglLayer();
     ~OpenglLayer();
     void onAttach();
-    void onDetach();
+    void onDetach() { }
     void onUpdate(const ModelInformation& information);
     OrtographicCamera* getCamera() const { return m_Camera.get(); }
+private:
+    void drawRoads(const std::vector<const Road*> &roads);
+    void drawCars(const std::vector<Car> & cars);
+    void drawTrafficlights(const std::vector<const TrafficLight*> &lights);
+    void setCamera();
+    void setRoadVAO();
+    void setShader();
+    void setCarVAO();
+    void setLightVAO();
+    void setTexture();
 private:
     std::unique_ptr<OrtographicCamera> m_Camera;
     std::unique_ptr<VertexArray> m_RoadVAO;

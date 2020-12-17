@@ -5,8 +5,10 @@
 #include <QMenu>
 #include <cmath>
 
-CarGenerator::CarGenerator(QMenu* contextMenu, const QPointF& pos, int timing, QGraphicsItem* parent)
-    :RoadPoint(contextMenu, pos, parent), m_Window(new CarGeneratorWindow(timing))
+CarGenerator::CarGenerator(QMenu* contextMenu, const QPointF& pos,
+                           int timing, QGraphicsItem* parent)
+    : RoadPoint(contextMenu, pos, parent)
+    , m_Window(new CarGeneratorWindow(timing))
 {
     QTransform transform;
     transform.translate(pos.x(), pos.y());
@@ -15,7 +17,8 @@ CarGenerator::CarGenerator(QMenu* contextMenu, const QPointF& pos, int timing, Q
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemIsFocusable, true);
 }
-void CarGenerator::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void CarGenerator::paint(QPainter *painter,
+                        const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pix("res/textures/font_car.png");
     pix.scaled(QSize(50, 50), Qt::KeepAspectRatio);
@@ -50,7 +53,8 @@ void CarGenerator::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 
-QVariant CarGenerator::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant CarGenerator::itemChange(QGraphicsItem::GraphicsItemChange change,
+                                 const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange) {
         WorkspaceScene* workspaceScene = dynamic_cast<WorkspaceScene*>(scene());
@@ -84,15 +88,18 @@ QVariant CarGenerator::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 //}
 
 
-Road::Road(QMenu* contextMenu, RoadPoint* start, RoadPoint* end, Type type, QGraphicsItem* parent)
-    :QGraphicsItem(parent), m_Start(start), m_End(end), m_ContextMenu(contextMenu), m_Type(type)
+Road::Road(QMenu* contextMenu, RoadPoint* start, RoadPoint* end,
+           Type type, QGraphicsItem* parent)
+    : QGraphicsItem(parent), m_Start(start), m_End(end)
+    , m_ContextMenu(contextMenu), m_Type(type)
 {
     setZValue(-1.0f);
     setFlag(QGraphicsItem::ItemIsMovable, false);
     setFlag(QGraphicsItem::ItemIsSelectable, false);
     setFlag(QGraphicsItem::ItemIsFocusable, false);
 }
-void Road::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Road::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                 QWidget *widget)
 {    
     prepareGeometryChange();
      QPen pen(Qt::black, 2);
@@ -130,8 +137,10 @@ void Road::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 }
 QRectF Road::boundingRect() const
 {
-    QPointF aleft(std::min(m_Start->getPoint().x(), m_End->getPoint().x()), std::min(m_Start->getPoint().y(), m_End->getPoint().y()));
-    QPointF aright(std::max(m_Start->getPoint().x(), m_End->getPoint().x()), std::max(m_Start->getPoint().y(), m_End->getPoint().y()));
+    QPointF aleft(std::min(m_Start->getPoint().x(), m_End->getPoint().x()),
+                  std::min(m_Start->getPoint().y(), m_End->getPoint().y()));
+    QPointF aright(std::max(m_Start->getPoint().x(), m_End->getPoint().x()),
+                   std::max(m_Start->getPoint().y(), m_End->getPoint().y()));
     return QRectF(aleft, aright);
 }
 
@@ -146,7 +155,8 @@ void Road::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     //m_ContextMenu->exec(event->screenPos());
 }
 
-RoadPoint::RoadPoint(QMenu* contextMenu, const QPointF& pos, QGraphicsItem* parent)
+RoadPoint::RoadPoint(QMenu* contextMenu, const QPointF& pos,
+                     QGraphicsItem* parent)
     : QGraphicsItem(parent), m_Connections(), m_ContextMenu(contextMenu)
 {
     QTransform transform;
@@ -169,7 +179,8 @@ RoadPoint::~RoadPoint()
     }
 }
 
-void RoadPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void RoadPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                      QWidget *widget)
 {
     QPen pen(Qt::red, 2);
     painter->setPen(pen);
@@ -195,7 +206,8 @@ QRectF RoadPoint::boundingRect() const
 }
 void RoadPoint::connect(RoadPoint* point, Road* road)
 {
-    QList<RoadPoint*>::iterator it = std::find(m_Connections.begin(), m_Connections.end(), point);
+    QList<RoadPoint*>::iterator it = 
+        std::find(m_Connections.begin(), m_Connections.end(), point);
     if (it != m_Connections.end())
         return;
     m_Connections.push_back(point);
@@ -209,8 +221,10 @@ int RoadPoint::type() const
 
 void RoadPoint::deleteConnection(RoadPoint *point)
 {
-    QList<RoadPoint*>::iterator it = std::find(m_Connections.begin(), m_Connections.end(), point);
-    QList<Road*>::iterator road = m_OutRoads.begin() + (it - m_Connections.begin());
+    QList<RoadPoint*>::iterator it =
+        std::find(m_Connections.begin(), m_Connections.end(), point);
+    QList<Road*>::iterator road =
+        m_OutRoads.begin() + (it - m_Connections.begin());
     if (it == m_Connections.end())
         return;
     m_Connections.erase(it);
@@ -223,8 +237,10 @@ void RoadPoint::deleteConnection(RoadPoint *point)
 
 void RoadPoint::deleteConnected(RoadPoint* point)
 {
-    QList<RoadPoint*>::iterator it = std::find(m_Connected.begin(), m_Connected.end(), point);
-    QList<Road*>::iterator road = m_InRoads.begin() + (it - m_Connected.begin());
+    QList<RoadPoint*>::iterator it =
+        std::find(m_Connected.begin(), m_Connected.end(), point);
+    QList<Road*>::iterator road = 
+        m_InRoads.begin() + (it - m_Connected.begin());
     if (it == m_Connected.end())
         return;
     m_Connected.erase(it);
@@ -233,7 +249,8 @@ void RoadPoint::deleteConnected(RoadPoint* point)
 
 void RoadPoint::connected(RoadPoint* point, Road* road)
 {
-    QList<RoadPoint*>::iterator it = std::find(m_Connected.begin(), m_Connected.end(), point);
+    QList<RoadPoint*>::iterator it =
+        std::find(m_Connected.begin(), m_Connected.end(), point);
     if (it != m_Connected.end())
         return;
     m_Connected.push_back(point);
@@ -259,14 +276,18 @@ const QList<RoadPoint*>& RoadPoint::getConnections() const
 
 Road::Type RoadPoint::getRoadType(RoadPoint *point)
 {
-    QList<RoadPoint*>::iterator it = std::find(m_Connections.begin(), m_Connections.end(), point);
-    QList<Road*>::iterator road = m_OutRoads.begin() + (it - m_Connections.begin());
+    QList<RoadPoint*>::iterator it =
+        std::find(m_Connections.begin(), m_Connections.end(), point);
+    QList<Road*>::iterator road =
+        m_OutRoads.begin() + (it - m_Connections.begin());
     return (*road)->getRoadType();
 }
 
 
-Trafficlight::Trafficlight(QMenu *contextMenu, const QPointF &pos, LightTimings timings, QGraphicsItem *parent)
-    :RoadPoint(contextMenu, pos, parent), m_Window(new TrafficlightWindow(timings))
+Trafficlight::Trafficlight(QMenu *contextMenu, const QPointF &pos,
+                           LightTimings timings, QGraphicsItem *parent)
+    : RoadPoint(contextMenu, pos, parent)
+    , m_Window(new TrafficlightWindow(timings))
 {
     QTransform transform;
     transform.translate(pos.x(), pos.y());
@@ -276,7 +297,8 @@ Trafficlight::Trafficlight(QMenu *contextMenu, const QPointF &pos, LightTimings 
     setFlag(QGraphicsItem::ItemIsFocusable, true);
 }
 
-void Trafficlight::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Trafficlight::paint(QPainter *painter,
+                        const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pix("res/textures/traffic-light.png");
     pix.scaled(QSize(32, 64), Qt::KeepAspectRatio);
@@ -325,7 +347,8 @@ void Trafficlight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     m_ContextMenu->exec(event->screenPos());
 }
 
-QVariant Trafficlight::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant Trafficlight::itemChange(QGraphicsItem::GraphicsItemChange change,
+                                  const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange) {
         WorkspaceScene* workspaceScene = dynamic_cast<WorkspaceScene*>(scene());
