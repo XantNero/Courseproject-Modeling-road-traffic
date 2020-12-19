@@ -20,7 +20,7 @@ TrafficlightWindow::TrafficlightWindow(LightTimings lighttimings,
     connect(comboBox, SIGNAL(activated(int)), this, SLOT(slotStartLight(int)));
 
     setSliders();
-    setTimeings(lighttimings);
+    setTimings(lighttimings);
 
     for (int i = sizeof(m_Sliders) / sizeof(LightSlider*) - 1; i >= 0; --i) {
         rightLayout->addWidget(m_Sliders[i]);
@@ -95,7 +95,7 @@ void TrafficlightWindow::setSliders()
     }
 }
 
-void TrafficlightWindow::setTimeings(LightTimings lighttimings)
+void TrafficlightWindow::setTimings(LightTimings lighttimings)
 {
     unsigned int slidersCount = sizeof(m_Sliders) / sizeof(LightSlider*);
     if (lighttimings.green <= lighttimings.yellow) {
@@ -107,6 +107,7 @@ void TrafficlightWindow::setTimeings(LightTimings lighttimings)
     else {
         m_StartLight = 1;
     }
+    slotStartLight(m_StartLight);
     int timings[slidersCount / 2];
     timings[0] = lighttimings.green;
     timings[1] = lighttimings.yellow;
@@ -116,7 +117,7 @@ void TrafficlightWindow::setTimeings(LightTimings lighttimings)
          ++cnt, i += 2) {
         m_Sliders[i % slidersCount]->setValue(timings[(i % slidersCount) / 2]);
     }
-    slotStartLight(m_StartLight);
+
 }
 
 void TrafficlightWindow::slotStartLight(int index)

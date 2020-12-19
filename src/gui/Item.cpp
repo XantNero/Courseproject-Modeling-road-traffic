@@ -158,6 +158,7 @@ void Road::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 RoadPoint::RoadPoint(QMenu* contextMenu, const QPointF& pos,
                      QGraphicsItem* parent)
     : QGraphicsItem(parent), m_Connections(), m_ContextMenu(contextMenu)
+    , m_Index(-1)
 {
     QTransform transform;
     transform.translate(pos.x(), pos.y());

@@ -244,55 +244,65 @@ void MDLParser::constructRoads(RoadGraph& graph,
 void MDLParser::connectRoads(RoadGraph& graph, RoadRegistry* roadRegistry) 
 {
     std::pair<std::unordered_multimap<int, std::pair<int, int>>::iterator,
-            std::unordered_multimap<int, std::pair<int, int>>::iterator> result;
+            std::unordered_multimap<int, std::pair<int, int>>::iterator> start;
+    std::pair<std::unordered_multimap<int, std::pair<int, int>>::iterator,
+            std::unordered_multimap<int, std::pair<int, int>>::iterator> end;
     std::unordered_multimap<int, std::pair<int, int>>::iterator it;
+    std::unordered_multimap<int, std::pair<int, int>>::iterator jt;
     for (unsigned int i = 0; i < graph.connections.size(); ++i) {
-        if (graph.connections[i].size() > 1) {
-            int x = i;
-            x = graph.back_connections[x][0];
-            while (graph.back_connections[x].size() == 1 &&
-                   graph.connections[x].size() == 1) {
-                x = graph.back_connections[x][0];
-            }
-            if (roadRegistry->getRoad(i) != nullptr)
-                //roadRegistry->connectRoads(x, i);
-                result = m.equal_range(i);
-                for (it = result.first; it != result.second; ++it) {
-                        if (roadRegistry->getRoad(it->second.first) != nullptr)
-                        roadRegistry->connectRoads(x, it->second.first);
-                }
-            // it = result.first;  
-            // if (roadRegistry->getRoad(graph.connections[i][0]) != nullptr)
-            //     roadRegistry->connectRoads(i, graph.connections[i][0]);
-            // for (unsigned int j = graph.connections[i].size() - 1; j > 0; --j) {
-            //     if (roadRegistry->getRoad(graph.connections[i][j]) != nullptr)
-            //         roadRegistry->connectRoads(it->second, graph.connections[i][j]);
-            //     ++it;
-            // }
-        }
-        else if (graph.back_connections[i].size() > 1) {
-            for (unsigned int j = 0;
-                 j < graph.back_connections[i].size();
-                 ++j) {
-                int x = graph.back_connections[i][j];
-                // if (graph.connections[x].size() != 1)
-                //     continue;
-                while (graph.back_connections[x].size() == 1 && 
-                       graph.connections[x].size() == 1) {
-                    x = graph.back_connections[x][0];
-                }
-                // if (graph.connections[x].size() != 1)
-                //     continue;
-                result = m.equal_range(x);
-                for (it = result.first; it != result.second; ++it) {
-                    if (roadRegistry->getRoad(i) != nullptr &&
-                        i == it->second.second) {
-                        roadRegistry->connectRoads(it->second.first, i);
-                    }
-                }
-                // if (roadRegistry->getRoad(i) != nullptr)
-                //     roadRegistry->connectRoads(x, i);
+        start = m.equal_range(i);
+        for (it = start.first; it != start.second; ++it) {
+            end = m.equal_range(it->second.second);
+            for (jt = end.first; jt != end.second; ++jt) {
+                roadRegistry->connectRoads(it->second.first, jt->second.first);
             }
         }
+        // if (graph.connections[i].size() > 1) {
+        //     int x = i;
+        //     x = graph.back_connections[x][0];
+        //     while (graph.back_connections[x].size() == 1 &&
+        //            graph.connections[x].size() == 1) {
+        //         x = graph.back_connections[x][0];
+        //     }
+        //     if (roadRegistry->getRoad(i) != nullptr)
+        //         //roadRegistry->connectRoads(x, i);
+        //         result = m.equal_range(i);
+        //         for (it = result.first; it != result.second; ++it) {
+        //                 if (roadRegistry->getRoad(it->second.first) != nullptr)
+        //                 roadRegistry->connectRoads(x, it->second.first);
+        //         }
+        //     // it = result.first;  
+        //     // if (roadRegistry->getRoad(graph.connections[i][0]) != nullptr)
+        //     //     roadRegistry->connectRoads(i, graph.connections[i][0]);
+        //     // for (unsigned int j = graph.connections[i].size() - 1; j > 0; --j) {
+        //     //     if (roadRegistry->getRoad(graph.connections[i][j]) != nullptr)
+        //     //         roadRegistry->connectRoads(it->second, graph.connections[i][j]);
+        //     //     ++it;
+        //     // }
+        // }
+        // else if (graph.back_connections[i].size() > 1) {
+        //     for (unsigned int j = 0;
+        //          j < graph.back_connections[i].size();
+        //          ++j) {
+        //         int x = graph.back_connections[i][j];
+        //         // if (graph.connections[x].size() != 1)
+        //         //     continue;
+        //         while (graph.back_connections[x].size() == 1 && 
+        //                graph.connections[x].size() == 1) {
+        //             x = graph.back_connections[x][0];
+        //         }
+        //         // if (graph.connections[x].size() != 1)
+        //         //     continue;
+        //         result = m.equal_range(x);
+        //         for (it = result.first; it != result.second; ++it) {
+        //             if (roadRegistry->getRoad(i) != nullptr &&
+        //                 i == it->second.second) {
+        //                 roadRegistry->connectRoads(it->second.first, i);
+        //             }
+        //         }
+        //         // if (roadRegistry->getRoad(i) != nullptr)
+        //         //     roadRegistry->connectRoads(x, i);
+        //     }
+        // }
     }
 }

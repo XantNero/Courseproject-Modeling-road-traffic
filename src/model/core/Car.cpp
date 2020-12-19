@@ -15,7 +15,7 @@ static struct
     double infinity = 1000000000000000.0f;
     double epsilon = 0.0000000000000000001f;
     angle lightViewAngle = {0.0f,  pi / 2.0f + 0.2};
-    unsigned int lightViewDistance = 75;
+    unsigned int lightViewDistance = 50;
     angle yieldViewAngle = {0.0f, pi / 3};
     unsigned int yieldViewDistance = 50;
     angle yieldSideViewAngle = {pi / 6, 4 * pi / 6};

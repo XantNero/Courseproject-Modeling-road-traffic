@@ -37,7 +37,6 @@ private:
     RoadPoint* m_End;
     QMenu* m_ContextMenu;
     Type m_Type;
-
 };
 
 
@@ -59,6 +58,8 @@ public:
     const QPointF getPoint() const;
     void deleteConnection(RoadPoint* point);
     void deleteConnected(RoadPoint* point);
+    inline void setIndex(int index) { m_Index = index; }
+    inline int getIndex() const { return m_Index; }
 protected:
    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *ev) override;
 protected:
@@ -67,6 +68,7 @@ protected:
     QList<Road*> m_OutRoads;
     QList<Road*> m_InRoads;
     QMenu* m_ContextMenu;
+    int m_Index;
 };
 
 class CarGenerator : public RoadPoint

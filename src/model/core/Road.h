@@ -8,7 +8,7 @@ class Road
 {
 public:
     Road(unsigned int id, bool main = true)
-        : m_Points(), m_Radius(0), m_ID(id), m_Main(false) { }
+        : m_Points(), m_Radius(5), m_ID(id), m_Main(false) { }
     ~Road() { }
     inline void addPoint(double x, double y) 
         { m_Points.push_back(Vector(x, y)); }

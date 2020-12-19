@@ -597,16 +597,23 @@ void MainWindow::slotWorkspaceIsModified()
         SaveFileData data;
         writeSaveData(data);
         QTextStream out(&file);
+        bool errorFlag = false;
 
-        saveCarGenerators(out, data.carGenerators, data.hash);
-        savePoints(out, data.points);
-        saveConnections(out, data.points, data.conn, data.hash);
-        saveTrafficLights(out, data.trafficlights, data.hash);
+        errorFlag |= !saveCarGenerators(out, data.carGenerators);
+        errorFlag |= !savePoints(out, data.points);
+        errorFlag |= !saveConnections(out, data.points, data.conn);
+        errorFlag |= !saveTrafficLights(out, data.trafficlights);
+
 
         if (!file.commit()) {
             errorMessage = tr("Cannot write file %1:\n%2")
                             .arg(QDir::toNativeSeparators(fileName),
                              file.errorString());
+        }
+        else if (errorFlag) {
+            errorMessage = tr("Cannot write file %1:\n%2")
+                            .arg(QDir::toNativeSeparators(fileName),
+                             "saving information is incorrect");
         }
     }
     else {
@@ -641,7 +648,7 @@ void MainWindow::slotWorkspaceIsModified()
              break;
              case (int)ModelTypes::RoadPoint:
                  pnt = dynamic_cast<RoadPoint*>(items[i]);
-                 data.hash.insert(pnt, data.points.size());
+                 pnt->setIndex(data.points.size());
                  data.points.push_back(pnt);
                  data.conn.push_back(pnt->getConnections());
              break;
@@ -655,24 +662,25 @@ void MainWindow::slotWorkspaceIsModified()
      }
  }
 
- void MainWindow::saveCarGenerators(QTextStream &out,
-                                    QVector<CarGenerator *> &carGenerators,
-                                    QHash<RoadPoint*, int> &hash)
+ bool MainWindow::saveCarGenerators(QTextStream &out,
+                                    QVector<CarGenerator *> &carGenerators)
  {
      out << "#CarGenerators\n{\n";
      for (int i = 0; i < carGenerators.size(); ++i) {
          QList<RoadPoint*>conn =  carGenerators[i]->getConnections();
-         //TODO: error
-         QString str = QString("\t%1 %2 %3 %4\n").arg(hash[conn[0]])
+         if (conn.size() == 0)
+             return false;
+         QString str = QString("\t%1 %2 %3 %4\n").arg(conn[0]->getIndex())
                        .arg(carGenerators[i]->scenePos().x())
                        .arg(carGenerators[i]->scenePos().y())
                        .arg(carGenerators[i]->getRate());
          out << str;
      }
      out << "}\n";
+     return true;
  }
 
- void MainWindow::savePoints(QTextStream &out, QVector<RoadPoint *> &points)
+ bool MainWindow::savePoints(QTextStream &out, QVector<RoadPoint *> &points)
  {
      out << "#Points\n{\n";
      for (int i = 0; i < points.size(); ++i) {
@@ -682,12 +690,12 @@ void MainWindow::slotWorkspaceIsModified()
          out << str;
      }
      out << "}\n";
+     return true;
  }
 
- void MainWindow::saveConnections(QTextStream &out,
+ bool MainWindow::saveConnections(QTextStream &out,
                                   QVector<RoadPoint*> points,
-                                  QVector<QList<RoadPoint*>> conn,
-                                 QHash<RoadPoint*, int> &hash)
+                                  QVector<QList<RoadPoint*>> conn)
  {
      out << "#Connections\n{\n";
      for (int i = 0; i < conn.size(); ++i) {
@@ -695,24 +703,27 @@ void MainWindow::slotWorkspaceIsModified()
               Road::Type connectionType = points[i]->getRoadType(conn[i][j]);
              int fl_mainRoad = connectionType == Road::Main ? 1 : 0;
              QString str = QString("\t%1 %2 %3\n")
-                            .arg(i).arg(hash[conn[i][j]]).arg(fl_mainRoad);
+                            .arg(i).arg(conn[i][j]->getIndex()).arg(fl_mainRoad);
              out << str;
          }
 
      }
      out << "}\n";
+     return true;
  }
 
- void MainWindow::saveTrafficLights(QTextStream &out,
-                                    QVector<Trafficlight *> &trafficlights,
-                                    QHash<RoadPoint*, int> hash)
+ bool MainWindow::saveTrafficLights(QTextStream &out,
+                                    QVector<Trafficlight *> &trafficlights)
  {
      out << "#TrafficLights\n{\n";
      //TODO:errror
      for (int i = 0; i < trafficlights.size(); ++i) {
+         QList<RoadPoint*> conn = trafficlights[i]->getConnections();
+         if (conn.size() == 0)
+             return false;
          LightTimings time = trafficlights[i]->getTimings();
          QString str = QString("\t%1 %2 %3 %4 %5 %6\n")
-                        .arg(hash[trafficlights[i]->getConnections()[0]])
+                        .arg(conn[0]->getIndex())
                         .arg(trafficlights[i]->getPoint().x())
                         .arg(trafficlights[i]->getPoint().y())
                         .arg(time.green)
@@ -721,6 +732,7 @@ void MainWindow::slotWorkspaceIsModified()
          out << str;
      }
      out << "}\n";
+     return true;
  }
  void MainWindow::setCurrentFile(const QString &fileName)
  {
@@ -741,7 +753,7 @@ void MainWindow::slotWorkspaceIsModified()
  {
      QProcess* model = new QProcess(this);
     QStringList l = QStringList(m_CurFile);
-     model->setProgram("main");
+     model->setProgram("model");
      model->setArguments(l);
      model->start();
  }

@@ -31,7 +31,7 @@ public:
     LightTimings getTimings() const;
 private:
     void setSliders();
-    void setTimeings(LightTimings timings);
+    void setTimings(LightTimings timings);
 private slots:
     void slotStartLight(int index);
 private:

@@ -36,8 +36,11 @@ void TrafficLight::update()
     int cnt = 4;
     while (cnt--) {
         if (dif >= milliseconds(m_Period[i % 4]) &&
-            dif <= milliseconds(m_Period[(i + 1) % 4]))
-            m_State = (State)i;
+            dif <= milliseconds(m_Period[(i + 1) % 4])) {
+                m_State = (State)(i % 3);
+                break;
+            }
+            
         ++i;
     }
 }

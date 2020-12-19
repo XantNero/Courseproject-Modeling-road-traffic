@@ -17,7 +17,7 @@ include_directories(src/vendor/glew-2.1.0/include)
 #message(STATUS "Found GLEW in ${GLEW_INCLUDE_DIR}")
 
 
-add_executable(main
+add_executable(model
     src/model/main.cpp
     src/model/pch.h src/model/pch.cpp
     src/model/core/Vector.h src/model/core/Vector.cpp
@@ -58,7 +58,7 @@ add_executable(main
     src/vendor/imgui/imstb_truetype.h
 )
 
-target_link_libraries(main glfw ${GLFW_LIBRARIES} glew)
+target_link_libraries(model glfw ${GLFW_LIBRARIES} glew)
 
 
 
