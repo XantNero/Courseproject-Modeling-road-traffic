@@ -311,8 +311,6 @@ void CarRegistry::update(const RoadRegistry &roads,
             it = m_Cars.erase(it);
             continue;
         }
-        if (it == m_Cars.end())
-            break;
         applySteerForce(it->car,
                         it->steerForceGenerator,
                         roads.getRoad(it->roadID));
